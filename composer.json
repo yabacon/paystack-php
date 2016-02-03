@@ -1,12 +1,12 @@
 {
-    "name": "Eidetic-Limited/paystack-php",
+    "name": "eidetic-limited/paystack-php",
     "type": "library",
     "description": "helps makes your Paystack API calls",
     "keywords": [
-        "Eidetic-Limited",
+        "eidetic-limited",
         "paystack-php"
     ],
-    "homepage": "https://github.com/Eidetic-Limited/paystack-php",
+    "homepage": "https://github.com/eidetic-limited/paystack-php",
     "license": "MIT",
     "authors": [
         {
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Eidetic-Limited\\paystack-php\\": "src"
+            "eidetic-limited\\paystack-php\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Eidetic-Limited\\paystack-php\\Test\\": "tests"
+            "eidetic-limited\\paystack-php\\Test\\": "tests"
         }
     },
     "scripts": {

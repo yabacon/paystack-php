@@ -10,7 +10,7 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Eidetic-Limited Test Suite">
+        <testsuite name="eidetic-limited Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

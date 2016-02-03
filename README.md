@@ -17,7 +17,7 @@ PSRs you support to avoid any confusion with users and contributors.
 Via Composer
 
 ``` bash
-$ composer require Eidetic-Limited/paystack-php
+$ composer require eidetic-limited/paystack-php
 ```
 
 ## Usage
@@ -54,17 +54,17 @@ If you discover any security related issues, please email info@eidetic.ng instea
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/Eidetic-Limited/paystack-php.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/eidetic-limited/paystack-php.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/Eidetic-Limited/paystack-php/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/Eidetic-Limited/paystack-php.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/Eidetic-Limited/paystack-php.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/Eidetic-Limited/paystack-php.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/eidetic-limited/paystack-php/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/eidetic-limited/paystack-php.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/eidetic-limited/paystack-php.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/eidetic-limited/paystack-php.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/Eidetic-Limited/paystack-php
-[link-travis]: https://travis-ci.org/Eidetic-Limited/paystack-php
-[link-scrutinizer]: https://scrutinizer-ci.com/g/Eidetic-Limited/paystack-php/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/Eidetic-Limited/paystack-php
-[link-downloads]: https://packagist.org/packages/Eidetic-Limited/paystack-php
-[link-author]: https://github.com/Eidetic-Limited
+[link-packagist]: https://packagist.org/packages/eidetic-limited/paystack-php
+[link-travis]: https://travis-ci.org/eidetic-limited/paystack-php
+[link-scrutinizer]: https://scrutinizer-ci.com/g/eidetic-limited/paystack-php/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/eidetic-limited/paystack-php
+[link-downloads]: https://packagist.org/packages/eidetic-limited/paystack-php
+[link-author]: https://github.com/eidetic-limited
 [link-contributors]: ../../contributors
