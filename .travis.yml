@@ -12,7 +12,8 @@ sudo: false
 
 matrix:
   include:
-    - env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
+    - php: 5.5
+      env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
 
 before_script:
   - travis_retry composer self-update
