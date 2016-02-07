@@ -3,4 +3,5 @@ composer.lock
 docs
 vendor
 /nbproject/private/
+/nbproject/
 /src/Routes/SkeletonClass.php

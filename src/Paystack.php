@@ -2,8 +2,6 @@
 
 namespace Paystack;
 
-error_reporting(-1);
-
 class Paystack
 {
 
