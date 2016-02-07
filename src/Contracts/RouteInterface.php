@@ -6,7 +6,8 @@
 
 namespace League\Paystack\Contracts;
 
-interface RouteInterface {
+interface RouteInterface
+{
 
     const METHOD_KEY = 'method';
     const ENDPOINT_KEY = 'endpoint';

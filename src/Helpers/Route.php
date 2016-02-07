@@ -33,7 +33,7 @@ class Route {
 //
 //     }
 
-    function call_via_curl($endpoint, $method, $payload = [], $args = []) {
+    private function callViaCurl($endpoint, $method, $payload = [], $args = []) {
         //substitute args in endpoint
         while (list($key, $value) = each($args)) {
             $endpoint = str_replace('{' . $key . '}', $value, $endpoint);
@@ -95,7 +95,7 @@ class Route {
 //                print_r($args);
                 $interface = call_user_func($this->route_class . '::' . $mtd);
                 // TODO: validate params and args against definitions
-                return $this->call_via_curl(
+                return $this->callViaCurl(
                     $interface[RouteInterface::ENDPOINT_KEY], $interface[RouteInterface::METHOD_KEY], $params, $args);
             };
             $this->methods[$mtd] = \Closure::bind($mtdFunc, $this, get_class());
