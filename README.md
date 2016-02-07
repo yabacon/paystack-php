@@ -20,7 +20,10 @@ $ composer require eidetic-limited/paystack-php
 ## Usage
 
 ``` php
-$paystack = new Paystack('secret_key');
+require 'src/Paystack.php';
+\Paystack\Paystack::registerAutoloader();
+
+$paystack = new \Paystack\Paystack('secret_key');
 
 // Make a call to the resource/method
 // paystack.{resource}.{method}
