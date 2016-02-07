@@ -2,6 +2,5 @@ build
 composer.lock
 docs
 vendor
-/nbproject/private/
-/nbproject/
-/src/Routes/SkeletonClass.php
+nbproject
+src/Routes/SkeletonClass.php
