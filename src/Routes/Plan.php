@@ -1,8 +1,8 @@
 <?php
 
-namespace League\Paystack\Routes;
+namespace Paystack\Routes;
 
-use League\Paystack\Contracts\RouteInterface;
+use Paystack\Contracts\RouteInterface;
 
 class Plan implements RouteInterface
 {
@@ -23,7 +23,17 @@ class Plan implements RouteInterface
     {
         return [RouteInterface::METHOD_KEY => 'post',
           RouteInterface::ENDPOINT_KEY => Plan::root(),
-          RouteInterface::PARAMS_KEY => ['name', 'description', 'amount', 'interval', 'send_invoices', 'send_sms', 'hosted_page', 'hosted_page_url', 'hosted_page_summary', 'currency']
+          RouteInterface::PARAMS_KEY => [
+            'name',
+            'description',
+            'amount',
+            'interval',
+            'send_invoices',
+            'send_sms',
+            'hosted_page',
+            'hosted_page_url',
+            'hosted_page_summary',
+            'currency']
         ];
     }
 
@@ -56,7 +66,17 @@ class Plan implements RouteInterface
     {
         return [RouteInterface::METHOD_KEY => 'put',
           RouteInterface::ENDPOINT_KEY => Plan::root() . '/{id}',
-          RouteInterface::PARAMS_KEY => ['name', 'description', 'amount', 'interval', 'send_invoices', 'send_sms', 'hosted_page', 'hosted_page_url', 'hosted_page_summary', 'currency'],
+          RouteInterface::PARAMS_KEY => [
+            'name',
+            'description',
+            'amount',
+            'interval',
+            'send_invoices',
+            'send_sms',
+            'hosted_page',
+            'hosted_page_url',
+            'hosted_page_summary',
+            'currency'],
           RouteInterface::ARGS_KEY => ['id']];
     }
 }

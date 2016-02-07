@@ -1,9 +1,9 @@
 <?php
 
-namespace League\Paystack\Helpers;
+namespace Paystack\Helpers;
 
 use \Closure;
-use \League\Paystack\Contracts\RouteInterface;
+use \Paystack\Contracts\RouteInterface;
 
 class Route
 {
@@ -74,7 +74,7 @@ class Route
         return [Route::HEADER_KEY => $header, Route::BODY_KEY => $body];
     }
 
-    function __call($method, $args)
+    public function __call($method, $args)
     {
         $method = ($method === 'list' ? 'getList' : $method);
         if (is_callable($this->methods[$method])) {
@@ -82,7 +82,7 @@ class Route
         }
     }
 
-    function __construct($route_class, $secret_key)
+    public function __construct($route_class, $secret_key)
     {
         $this->route_class = 'League\\Paystack\\Routes\\' . ucwords($route_class);
         $this->secret_key = $secret_key;

@@ -1,8 +1,8 @@
 <?php
 
-namespace League\Paystack\Routes;
+namespace Paystack\Routes;
 
-use League\Paystack\Contracts\RouteInterface;
+use Paystack\Contracts\RouteInterface;
 
 class Transaction implements RouteInterface
 {

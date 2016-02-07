@@ -1,14 +1,8 @@
 <?php
 
-namespace League\Paystack;
+namespace Paystack;
 
 error_reporting(-1);
-
-spl_autoload_register(
-    function ($class_name) {
-        include_once str_replace(['League\\Paystack\\', '\\'], ['', DIRECTORY_SEPARATOR], $class_name) . '.php';
-    }
-);
 
 class Paystack
 {
@@ -19,12 +13,12 @@ class Paystack
     /**
       Secret key
      */
-    function __construct($secret_key)
+    public function __construct($secret_key)
     {
         $this->secret_key = $secret_key;
     }
 
-    function __call($method, $args)
+    public function __call($method, $args)
     {
         //attempt to call getOne when the route is called directly
         // translates to /{root}/{get}/{id}
@@ -38,6 +32,15 @@ class Paystack
                 return $route->__call('getOne', $args);
             }
         }
+    }
+    
+    public static function registerAutoloader()
+    {
+        spl_autoload_register(
+            function ($class_name) {
+                include_once str_replace(['League\\Paystack\\', '\\'], ['', DIRECTORY_SEPARATOR], $class_name) . '.php';
+            }
+        );
     }
 
     public function __get($name)

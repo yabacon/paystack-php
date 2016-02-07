@@ -1,8 +1,8 @@
 <?php
 
-namespace League\Paystack\Routes;
+namespace Paystack\Routes;
 
-use League\Paystack\Contracts\RouteInterface;
+use Paystack\Contracts\RouteInterface;
 
 class Customer implements RouteInterface
 {
@@ -24,7 +24,7 @@ class Customer implements RouteInterface
      */
     public static function create()
     {
-        return [League\Paystack\RouteInterface::METHOD_KEY => 'post',
+        return [Paystack\RouteInterface::METHOD_KEY => 'post',
           RouteInterface::ENDPOINT_KEY => Customer::root(),
           RouteInterface::PARAMS_KEY => ['first_name', 'last_name', 'email', 'phone']
         ];

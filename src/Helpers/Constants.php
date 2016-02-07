@@ -1,3 +1,3 @@
 <?php
 
-namespace League\Paystack;
+namespace Paystack;
