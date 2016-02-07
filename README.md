@@ -53,7 +53,7 @@ If you discover any security related issues, please email info@eidetic.ng instea
 - [Eidetic Limited][link-author]
 - [Issa Jubril](https://github.com/masterp4dev)
 - [Ibrahim Lawal](https://github.com/ibrahimlawal)
-- [Opeyemi Obembe](https://github.com/kehers){:target="_blank"} - followed the style he employed in creating the [NodeJS Wrapper](https://github.com/kehers/paystack){:target="_blank"}
+- [Opeyemi Obembe](https://github.com/kehers) - followed the style he employed in creating the [NodeJS Wrapper](https://github.com/kehers/paystack)
 - [All Contributors][link-contributors]
 
 ## License

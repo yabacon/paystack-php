@@ -4,12 +4,14 @@ namespace League\Paystack\Routes;
 
 use League\Paystack\Contracts\RouteInterface;
 
-class Plan implements RouteInterface {
+class Plan implements RouteInterface
+{
 
     /**
       Root
      */
-    public static function root() {
+    public static function root() 
+    {
         return '/plan';
     }
 
@@ -17,7 +19,8 @@ class Plan implements RouteInterface {
       Create plan
      */
 
-    public static function create() {
+    public static function create() 
+    {
         return [RouteInterface::METHOD_KEY => 'post',
           RouteInterface::ENDPOINT_KEY => Plan::root(),
           RouteInterface::PARAMS_KEY => ['name', 'description', 'amount', 'interval', 'send_invoices', 'send_sms', 'hosted_page', 'hosted_page_url', 'hosted_page_summary', 'currency']
@@ -28,7 +31,8 @@ class Plan implements RouteInterface {
       Get plan
      */
 
-    public static function getOne() {
+    public static function getOne() 
+    {
         return [RouteInterface::METHOD_KEY => 'get',
           RouteInterface::ENDPOINT_KEY => Plan::root() . '/{id}',
           RouteInterface::ARGS_KEY => ['id']];
@@ -38,7 +42,8 @@ class Plan implements RouteInterface {
       List plan
      */
 
-    public static function getList() {
+    public static function getList() 
+    {
         return [RouteInterface::METHOD_KEY => 'get',
           RouteInterface::ENDPOINT_KEY => Plan::root()];
     }
@@ -47,7 +52,8 @@ class Plan implements RouteInterface {
       Update plan
      */
 
-    public static function update() {
+    public static function update() 
+    {
         return [RouteInterface::METHOD_KEY => 'put',
           RouteInterface::ENDPOINT_KEY => Plan::root() . '/{id}',
           RouteInterface::PARAMS_KEY => ['name', 'description', 'amount', 'interval', 'send_invoices', 'send_sms', 'hosted_page', 'hosted_page_url', 'hosted_page_summary', 'currency'],

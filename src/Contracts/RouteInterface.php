@@ -1,7 +1,7 @@
 <?php
 
 /**
- * A Route 
+ * A Route
  */
 
 namespace League\Paystack\Contracts;

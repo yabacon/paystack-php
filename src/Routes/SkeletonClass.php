@@ -2,12 +2,14 @@
 
 namespace League\Paystack;
 
-class SkeletonClass {
+class SkeletonClass
+{
 
     /**
      * Create a new Skeleton Instance
      */
-    public function __construct() {
+    public function __construct() 
+    {
         // constructor body
     }
 
@@ -18,7 +20,8 @@ class SkeletonClass {
      *
      * @return string Returns the phrase passed in
      */
-    public function echoPhrase($phrase) {
+    public function echoPhrase($phrase) 
+    {
         // oh
         return $phrase;
     }
