@@ -42,6 +42,3 @@ class Paystack {
     }
 
 }
-
-$paystack = new Paystack('R');
-print_r($paystack->plan(1));

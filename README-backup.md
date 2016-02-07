@@ -7,7 +7,10 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-A PHP API wrapper for [Paystack](https://paystack.co/).
+Still just a skeleton. 
+
+This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
+PSRs you support to avoid any confusion with users and contributors.
 
 ## Install
 
@@ -20,14 +23,8 @@ $ composer require eidetic-limited/paystack-php
 ## Usage
 
 ``` php
-$paystack = new League\Paystack('secret_key');
-
-// Make a call to the resource/method
-// paystack.{resource}.{method}
-list($headers, $body) = paystack->customer(12);
-list($headers, $body) = paystack->customer->list();
-list($headers, $body) = paystack->customer->create(['first_name'=>'Dafe', 'last_name'=>'Aba', 'email'=>"dafe@aba.c", 'phone'=>'08012345678']);
-list($headers, $body) = paystack->transaction->initialize(['reference'=>'unique_refencecode', 'amount'=>'120000', 'email'=>'dafe@aba.c');
+$skeleton = new League\Skeleton();
+echo $skeleton->echoPhrase('Hello, League!');
 ```
 
 ## Change log
@@ -51,9 +48,6 @@ If you discover any security related issues, please email info@eidetic.ng instea
 ## Credits
 
 - [Eidetic Limited][link-author]
-- [Issa Jubril](https://github.com/masterp4dev)
-- [Ibrahim Lawal](https://github.com/ibrahimlawal)
-- [Opeyemi Obembe](https://github.com/kehers){:target="_blank"} - followed the style he employed in creating the [NodeJS Wrapper](https://github.com/kehers/paystack){:target="_blank"}
 - [All Contributors][link-contributors]
 
 ## License
