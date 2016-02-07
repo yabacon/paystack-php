@@ -1,3 +1,3 @@
 <?php
 
-namespace Paystack;
+namespace Paystack\Helpers;

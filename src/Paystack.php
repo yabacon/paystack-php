@@ -28,6 +28,10 @@ class Paystack
                 // no params, just one arg... the id
                 $args = [[], [Helpers\Route::ID_KEY => $args[0]]];
                 return $route->__call('getOne', $args);
+            } elseif (count($args) === 2 && is_integer($args[0]) && is_array($args[1])) {
+                // there are params, and just one arg... the id
+                $args = [$args[1], [Helpers\Route::ID_KEY => $args[0]]];
+                return $route->__call('getOne', $args);
             }
         }
     }
@@ -36,7 +40,9 @@ class Paystack
     {
         spl_autoload_register(
             function ($class_name) {
-                include_once str_replace(['League\\Paystack\\', '\\'], ['', DIRECTORY_SEPARATOR], $class_name) . '.php';
+                $file = dirname(__FILE__) .DIRECTORY_SEPARATOR. str_replace(['Paystack\\', '\\'], ['', DIRECTORY_SEPARATOR], $class_name) . '.php';
+                // die();
+                include_once $file;
             }
         );
     }

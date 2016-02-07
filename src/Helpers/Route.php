@@ -17,10 +17,6 @@ class Route
     const HEADER_KEY = 'header';
     const BODY_KEY = 'body';
 
-    const POST_METHOD = 'post';
-    const PUT_METHOD = 'put';
-    const GET_METHOD = 'get';
-
     // public static function put_non_array_values_into_array(&$arr,$key=Route::ID_KEY){
     //     $argscount = count($arr);
     //     for($i=0;$i<$argscount;$i++){
@@ -44,15 +40,19 @@ class Route
         //open connection
         $ch = \curl_init();
 
-        //set the url, number of POST vars, POST data
-        \curl_setopt($ch, \CURLOPT_URL, Route::PAYSTACK_API_ROOT . $endpoint);
-
         $headers = ["Authorization: Bearer " . $this->secret_key];
-        if ($method === Route::POST_METHOD || $method === Route::PUT_METHOD) {
+        if ($method === RouteInterface::POST_METHOD || $method === RouteInterface::PUT_METHOD) {
+            //set the url
+            \curl_setopt($ch, \CURLOPT_URL, Route::PAYSTACK_API_ROOT . $endpoint);
+
             $headers[] = "Content-Type: application/json";
             //set number of POST vars, POST data
             \curl_setopt($ch, \CURLOPT_POST, true);
             \curl_setopt($ch, \CURLOPT_POSTFIELDS, json_encode($payload));
+        } else {
+            //set the url
+            \curl_setopt($ch, \CURLOPT_URL, Route::PAYSTACK_API_ROOT . $endpoint . '?' . http_build_query($payload));
+            
         }
         //set the headers
         \curl_setopt($ch, \CURLOPT_HTTPHEADER, $headers);
@@ -84,7 +84,7 @@ class Route
 
     public function __construct($route_class, $secret_key)
     {
-        $this->route_class = 'League\\Paystack\\Routes\\' . ucwords($route_class);
+        $this->route_class = 'Paystack\\Routes\\' . ucwords($route_class);
         $this->secret_key = $secret_key;
         // change method named list to getList
         $mets = get_class_methods($this->route_class);
