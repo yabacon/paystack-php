@@ -4,7 +4,7 @@ namespace League\Paystack\Routes;
 
 use League\Paystack\Contracts\RouteInterface;
 
-class Customer Implements RouteInterface
+class Customer implements RouteInterface
 {
 
     /**
@@ -12,7 +12,7 @@ class Customer Implements RouteInterface
      *
       @param=> first_name, last_name, email, phone
      */
-    public static function root() 
+    public static function root()
     {
         return '/customer';
     }
@@ -22,7 +22,7 @@ class Customer Implements RouteInterface
      *
       @param=> first_name, last_name, email, phone
      */
-    public static function create() 
+    public static function create()
     {
         return [League\Paystack\RouteInterface::METHOD_KEY => 'post',
           RouteInterface::ENDPOINT_KEY => Customer::root(),
@@ -33,7 +33,7 @@ class Customer Implements RouteInterface
     /**
       Get customer
      */
-    public static function getOne() 
+    public static function getOne()
     {
         return [ RouteInterface::METHOD_KEY => 'get',
           RouteInterface::ENDPOINT_KEY => Customer::root() . '/{id}',
@@ -43,7 +43,7 @@ class Customer Implements RouteInterface
     /**
       List customers
      */
-    public static function getList() 
+    public static function getList()
     {
         return [ RouteInterface::METHOD_KEY => 'get',
           RouteInterface::ENDPOINT_KEY => Customer::root()];
@@ -54,12 +54,11 @@ class Customer Implements RouteInterface
      *
       @param=> first_name, last_name, email, phone
      */
-    public static function update() 
+    public static function update()
     {
         return [ RouteInterface::METHOD_KEY => 'put',
           RouteInterface::ENDPOINT_KEY => Customer::root() . '/{id}',
           RouteInterface::PARAMS_KEY => ['first_name', 'last_name', 'email', 'phone'],
           RouteInterface::ARGS_KEY => ['id']];
     }
-
 }

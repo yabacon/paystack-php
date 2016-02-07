@@ -34,7 +34,7 @@ class Route
     //
     //     }
 
-    private function callViaCurl($endpoint, $method, $payload = [], $args = []) 
+    private function callViaCurl($endpoint, $method, $payload = [], $args = [])
     {
         //substitute args in endpoint
         while (list($key, $value) = each($args)) {
@@ -74,7 +74,7 @@ class Route
         return [Route::HEADER_KEY => $header, Route::BODY_KEY => $body];
     }
 
-    function __call($method, $args) 
+    function __call($method, $args)
     {
         $method = ($method === 'list' ? 'getList' : $method);
         if (is_callable($this->methods[$method])) {
@@ -82,7 +82,7 @@ class Route
         }
     }
 
-    function __construct($route_class, $secret_key) 
+    function __construct($route_class, $secret_key)
     {
         $this->route_class = 'League\\Paystack\\Routes\\' . ucwords($route_class);
         $this->secret_key = $secret_key;
@@ -94,17 +94,19 @@ class Route
                 // skip root method
                 continue;
             }
-            $mtdFunc = function (Array $params = [], Array $args = []) use ($mtd) {
+            $mtdFunc = function (array $params = [], array $args = []) use ($mtd) {
                 //                print_r($params);
                 //                print_r($args);
                 $interface = call_user_func($this->route_class . '::' . $mtd);
                 // TODO: validate params and args against definitions
                 return $this->callViaCurl(
-                    $interface[RouteInterface::ENDPOINT_KEY], $interface[RouteInterface::METHOD_KEY], $params, $args
+                    $interface[RouteInterface::ENDPOINT_KEY],
+                    $interface[RouteInterface::METHOD_KEY],
+                    $params,
+                    $args
                 );
             };
             $this->methods[$mtd] = \Closure::bind($mtdFunc, $this, get_class());
         }
     }
-
 }

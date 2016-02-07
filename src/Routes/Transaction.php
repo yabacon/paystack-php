@@ -10,7 +10,7 @@ class Transaction implements RouteInterface
     /**
       Root
      */
-    public static function root() 
+    public static function root()
     {
         return '/transaction';
     }
@@ -19,7 +19,7 @@ class Transaction implements RouteInterface
       Initialize transaction
      */
 
-    public static function initialize() 
+    public static function initialize()
     {
         return [RouteInterface::METHOD_KEY => 'post',
           RouteInterface::ENDPOINT_KEY => Transaction::root() . '/initialize',
@@ -31,7 +31,7 @@ class Transaction implements RouteInterface
       Charge authorization
      */
 
-    public static function charge() 
+    public static function charge()
     {
         return [RouteInterface::METHOD_KEY => 'post',
           RouteInterface::ENDPOINT_KEY => Transaction::root() . '/charge_authorization',
@@ -42,7 +42,7 @@ class Transaction implements RouteInterface
       Get transaction
      */
 
-    public static function getOne() 
+    public static function getOne()
     {
         return [RouteInterface::METHOD_KEY => 'get',
           RouteInterface::ENDPOINT_KEY => Transaction::root() . '/{id}',
@@ -53,7 +53,7 @@ class Transaction implements RouteInterface
       List transactions
      */
 
-    public static function getList() 
+    public static function getList()
     {
         return [ RouteInterface::METHOD_KEY => 'get',
           RouteInterface::ENDPOINT_KEY => Transaction::root()];
@@ -63,7 +63,7 @@ class Transaction implements RouteInterface
       Get totals
      */
 
-    public static function totals() 
+    public static function totals()
     {
         return [RouteInterface::METHOD_KEY => 'get',
           RouteInterface::ENDPOINT_KEY => Transaction::root() . '/totals'];
@@ -73,11 +73,10 @@ class Transaction implements RouteInterface
       Verify transaction
      */
 
-    public static function verify() 
+    public static function verify()
     {
         return [RouteInterface::METHOD_KEY => 'get',
           RouteInterface::ENDPOINT_KEY => Transaction::root() . '/verify/{reference}',
           RouteInterface::ARGS_KEY => ['reference']];
     }
-
 }

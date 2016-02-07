@@ -19,12 +19,12 @@ class Paystack
     /**
       Secret key
      */
-    function __construct($secret_key) 
+    function __construct($secret_key)
     {
         $this->secret_key = $secret_key;
     }
 
-    function __call($method, $args) 
+    function __call($method, $args)
     {
         //attempt to call getOne when the route is called directly
         // translates to /{root}/{get}/{id}
@@ -40,11 +40,10 @@ class Paystack
         }
     }
 
-    public function __get($name) 
+    public function __get($name)
     {
         if (in_array($name, $this->routes, true)) {
             return new Helpers\Route($name, $this->secret_key);
         }
     }
-
 }
