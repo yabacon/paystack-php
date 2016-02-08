@@ -1,13 +1,13 @@
 <?php
 
 require dirname(__FILE__) . '/../src/Paystack.php';
-\Paystack\Paystack\Paystack::registerAutoloader();
+\Eidetic\Paystack\Paystack::registerAutoloader();
 
-$paystack = new \Paystack\Paystack\Paystack('sk_test_40899660eac2be0a6a6915f6ba32f81bc8bac143');
+$paystack = new \Eidetic\Paystack\Paystack('sk_test_40899660eac2be0a6a6915f6ba32f81bc8bac143');
 
 // print_r($paystack->customer(12));
 // print_r($paystack->customer->list());
-// print_r($paystack->transaction->list(['perPage'=>5,'page'=>2]));
+print_r($paystack->transaction->list(['perPage'=>5,'page'=>2]));
 // print_r($paystack->customer->create([
 //   'first_name'=>'Dafe', 
 //   'last_name'=>'Aba', 

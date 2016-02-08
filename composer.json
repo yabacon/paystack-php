@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Paystack\\Paystack\\": "src"
+            "Eidetic\\Paystack\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Paystack\\Paystack\\Test\\": "tests"
+            "Eidetic\\Paystack\\Test\\": "tests"
         }
     },
     "scripts": {
@@ -40,6 +40,7 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.1-dev"
+            "master": "1.0.0"
         }
     }
 }

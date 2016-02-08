@@ -10,7 +10,7 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Paystack Test Suite">
+        <testsuite name="Eidetic Paystack Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

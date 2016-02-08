@@ -1,9 +1,9 @@
 <?php
 
-namespace Paystack\Paystack\Helpers;
+namespace Eidetic\Paystack\Helpers;
 
 use \Closure;
-use \Paystack\Paystack\Contracts\RouteInterface;
+use \Eidetic\Paystack\Contracts\RouteInterface;
 
 class Route
 {
@@ -85,7 +85,7 @@ class Route
 
     public function __construct($route_class, $secret_key)
     {
-        $this->route_class = 'Paystack\\Paystack\\Routes\\' . ucwords($route_class);
+        $this->route_class = 'Eidetic\\Paystack\\Routes\\' . ucwords($route_class);
         $this->secret_key = $secret_key;
         // change method named list to getList
         $mets = get_class_methods($this->route_class);

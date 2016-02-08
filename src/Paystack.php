@@ -1,6 +1,6 @@
 <?php
 
-namespace Paystack\Paystack;
+namespace Eidetic\Paystack;
 
 class Paystack
 {
@@ -41,7 +41,7 @@ class Paystack
         spl_autoload_register(
             function ($class_name) {
                 $file = dirname(__FILE__) .DIRECTORY_SEPARATOR;
-                $file .= str_replace(['Paystack\\', '\\'], ['', DIRECTORY_SEPARATOR], $class_name) . '.php';
+                $file .= str_replace(['Eidetic\\Paystack\\', '\\'], ['', DIRECTORY_SEPARATOR], $class_name) . '.php';
                 // die();
                 include_once $file;
             }
