@@ -7,7 +7,7 @@ $paystack = new \Eidetic\Paystack\Paystack('sk_test_40899660eac2be0a6a6915f6ba32
 
 // print_r($paystack->customer(12));
 // print_r($paystack->customer->list());
-print_r($paystack->transaction->list(['perPage'=>5,'page'=>2]));
+// print_r($paystack->transaction->list(['perPage'=>5,'page'=>2]));
 // print_r($paystack->customer->create([
 //   'first_name'=>'Dafe', 
 //   'last_name'=>'Aba', 
@@ -17,7 +17,7 @@ print_r($paystack->transaction->list(['perPage'=>5,'page'=>2]));
 //     'reference'=>'unique_refencecode', 
 //     'amount'=>'120000', 
 //     'email'=>'dafe@aba.c']));
-// print_r($paystack->transaction->verify([],['reference'=>'unique_refencecode']));
-// print_r($paystack->transaction(4538));
+// print_r($paystack->transaction->verify(['reference'=>'unique_refencecode','dummy'=>'dum','id'=>3]));
+print_r($paystack->transaction(4538));
 // 
 // print_r($paystack->transaction->totals());

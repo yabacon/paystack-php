@@ -30,10 +30,27 @@ class Router
     //
     //     }
 
-    private function callViaCurl($endpoint, $method, $payload = [], $args = [])
+    private function callViaCurl($interface, $payload = [], $sentargs = [])
     {
-        //substitute args in endpoint
-        while (list($key, $value) = each($args)) {
+        $endpoint = $interface[RouteInterface::ENDPOINT_KEY];
+        $method = $interface[RouteInterface::METHOD_KEY];
+        
+        if (array_key_exists(RouteInterface::ARGS_KEY, $interface)) {
+            // to allow args to be specified in the payload, filter them out and put them in sentargs
+            $sentargs = (!$sentargs) ? [] : $sentargs; // Make sure $sentargs is not null
+            $args = $interface[RouteInterface::ARGS_KEY];
+            while (list($key, $value) = each($payload)) {
+                // check that a value was specified
+                // with a key that was expected as an arg
+                if (in_array($key, $args)) {
+                    $sentargs[$key] = $value;
+                    unset($payload[$key]);
+                }
+            }
+        }
+        
+        // substitute sentargs in endpoint
+        while (list($key, $value) = each($sentargs)) {
             $endpoint = str_replace('{' . $key . '}', $value, $endpoint);
         }
 
@@ -75,11 +92,11 @@ class Router
         return [Router::HEADER_KEY => $header, Router::BODY_KEY => $body];
     }
 
-    public function __call($method, $args)
+    public function __call($method, $sentargs)
     {
         $method = ($method === 'list' ? 'getList' : $method);
         if (is_callable($this->methods[$method])) {
-            return call_user_func_array($this->methods[$method], $args);
+            return call_user_func_array($this->methods[$method], $sentargs);
         }
     }
 
@@ -89,22 +106,21 @@ class Router
         $this->secret_key = $secret_key;
         // change method named list to getList
         $mets = get_class_methods($this->route_class);
-        // add methods to this object for each, except the root
+        // add methods to this object for each method, except the root
         foreach ($mets as $mtd) {
             if ($mtd === 'root') {
                 // skip root method
                 continue;
             }
-            $mtdFunc = function (array $params = [], array $args = []) use ($mtd) {
+            $mtdFunc = function (array $params = [], array $sentargs = []) use ($mtd) {
                 //                print_r($params);
-                //                print_r($args);
+                //                print_r($sentargs);
                 $interface = call_user_func($this->route_class . '::' . $mtd);
-                // TODO: validate params and args against definitions
+                // TODO: validate params and sentargs against definitions
                 return $this->callViaCurl(
-                    $interface[RouteInterface::ENDPOINT_KEY],
-                    $interface[RouteInterface::METHOD_KEY],
+                    $interface,
                     $params,
-                    $args
+                    $sentargs
                 );
             };
             $this->methods[$mtd] = \Closure::bind($mtdFunc, $this, get_class());
