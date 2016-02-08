@@ -27,12 +27,12 @@ $paystack = new \Paystack\Paystack('secret_key');
 
 // Make a call to the resource/method
 // paystack.{resource}.{method}
-list($headers, $body) = paystack->customer(12);
-list($headers, $body) = paystack->customer->list();
-list($headers, $body) = paystack->customer->list(['perPage'=>20]);
-list($headers, $body) = paystack->customer->create(['first_name'=>'Dafe', 'last_name'=>'Aba', 'email'=>"dafe@aba.c", 'phone'=>'08012345678']);
-list($headers, $body) = paystack->transaction->initialize(['reference'=>'unique_refencecode', 'amount'=>'120000', 'email'=>'dafe@aba.c']);
-list($headers, $body) = paystack->transaction->verify(['reference'=>'refencecode']);
+list($headers, $body) = $paystack->customer(12);
+list($headers, $body) = $paystack->customer->list();
+list($headers, $body) = $paystack->customer->list(['perPage'=>20]);
+list($headers, $body) = $paystack->customer->create(['first_name'=>'Dafe', 'last_name'=>'Aba', 'email'=>"dafe@aba.c", 'phone'=>'08012345678']);
+list($headers, $body) = $paystack->transaction->initialize(['reference'=>'unique_refencecode', 'amount'=>'120000', 'email'=>'dafe@aba.c']);
+list($headers, $body) = $paystack->transaction->verify([],['reference'=>'refencecode']);
 ```
 
 ## Change log

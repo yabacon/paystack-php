@@ -1,8 +1,8 @@
 <?php
 
-namespace Paystack\Paystack\Routes;
+namespace Paystack\Routes;
 
-use Paystack\Paystack\Contracts\RouteInterface;
+use Paystack\Contracts\RouteInterface;
 
 class Customer implements RouteInterface
 {

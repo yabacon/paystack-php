@@ -4,7 +4,7 @@
  * A Route
  */
 
-namespace Paystack\Paystack\Contracts;
+namespace Paystack\Contracts;
 
 interface RouteInterface
 {

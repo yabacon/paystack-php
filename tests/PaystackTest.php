@@ -1,6 +1,6 @@
 <?php
 
-namespace Paystack\Paystack;
+namespace Paystack;
 
 class Paystack
 {

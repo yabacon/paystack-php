@@ -1,9 +1,9 @@
 <?php
 
-namespace Paystack\Paystack\Helpers;
+namespace Paystack\Helpers;
 
 use \Closure;
-use \Paystack\Paystack\Contracts\RouteInterface;
+use \Paystack\Contracts\RouteInterface;
 
 class Route
 {
@@ -52,8 +52,7 @@ class Route
         } else {
             //set the url
             \curl_setopt($ch, \CURLOPT_URL, Route::PAYSTACK_API_ROOT . $endpoint . '?' . http_build_query($payload));
-//             echo Route::PAYSTACK_API_ROOT . $endpoint . '?' . http_build_query($payload);
-//             die();
+            
         }
         //set the headers
         \curl_setopt($ch, \CURLOPT_HTTPHEADER, $headers);
@@ -85,7 +84,7 @@ class Route
 
     public function __construct($route_class, $secret_key)
     {
-        $this->route_class = 'Paystack\\Paystack\\Routes\\' . ucwords($route_class);
+        $this->route_class = 'Paystack\\Routes\\' . ucwords($route_class);
         $this->secret_key = $secret_key;
         // change method named list to getList
         $mets = get_class_methods($this->route_class);
