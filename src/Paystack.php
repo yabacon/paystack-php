@@ -8,7 +8,10 @@ class Paystack
 {
 
     private $secret_key;
-    private $routes = ['plan', 'transaction', 'customer'];
+    private $routes = ['plan',
+        'transaction',
+        'customer'
+    ];
 
     /**
       Secret key
@@ -20,33 +23,37 @@ class Paystack
 
     public function __call($method, $args)
     {
-        //attempt to call getOne when the route is called directly
-        // translates to /{root}/{get}/{id}
+//attempt to call getOne when the route is called directly
+// translates to /{root}/{get}/{id}
         if (in_array($method, $this->routes, true)) {
             $route = new Router($method, $this->secret_key);
-            // Router::put_non_array_values_into_array($args);
+// Router::put_non_array_values_into_array($args);
 
             if (count($args) === 1 && is_integer($args[0])) {
-                // no params, just one arg... the id
-                $args = [[], [Router::ID_KEY => $args[0]]];
+// no params, just one arg... the id
+                $args = [[],
+                    [ Router::ID_KEY => $args[0]]];
                 return $route->__call('getOne', $args);
             } elseif (count($args) === 2 && is_integer($args[0]) && is_array($args[1])) {
-                // there are params, and just one arg... the id
-                $args = [$args[1], [Router::ID_KEY => $args[0]]];
+// there are params, and just one arg... the id
+                $args = [$args[1],
+                    [ Router::ID_KEY => $args[0]]];
                 return $route->__call('getOne', $args);
             }
         }
     }
-    
+
     public static function registerAutoloader()
     {
         spl_autoload_register(
             function ($class_name) {
-                $file = dirname(__FILE__) .DIRECTORY_SEPARATOR;
-                $file .= str_replace(['Eidetic\\', '\\'], ['', DIRECTORY_SEPARATOR], $class_name) . '.php';
-                // die();
-                include_once $file;
-            }
+            $file = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+            $file .= str_replace([ 'Eidetic\\',
+                    '\\'], ['',
+                    DIRECTORY_SEPARATOR], $class_name) . '.php';
+            // die();
+            include_once $file;
+        }
         );
     }
 
