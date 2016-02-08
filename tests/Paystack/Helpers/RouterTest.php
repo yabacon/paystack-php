@@ -13,7 +13,6 @@ class Route
 
     const ID_KEY = 'id';
     const PAYSTACK_API_ROOT = 'https://api.paystack.co';
-
     const HEADER_KEY = 'header';
     const BODY_KEY = 'body';
 
@@ -30,7 +29,7 @@ class Route
     //
     //     }
 
-    private function callViaCurl($endpoint, $method, $payload = [], $args = [])
+    private function callViaCurl($endpoint, $method, $payload = [ ], $args = [ ])
     {
         //substitute args in endpoint
         while (list($key, $value) = each($args)) {
@@ -40,7 +39,7 @@ class Route
         //open connection
         $ch = \curl_init();
 
-        $headers = ["Authorization: Bearer " . $this->secret_key];
+        $headers = ["Authorization: Bearer " . $this->secret_key ];
         if ($method === RouteInterface::POST_METHOD || $method === RouteInterface::PUT_METHOD) {
             //set the url
             \curl_setopt($ch, \CURLOPT_URL, Route::PAYSTACK_API_ROOT . $endpoint);
@@ -51,8 +50,8 @@ class Route
             \curl_setopt($ch, \CURLOPT_POSTFIELDS, json_encode($payload));
         } else {
             //set the url
-            \curl_setopt($ch, \CURLOPT_URL, Route::PAYSTACK_API_ROOT . $endpoint . '?' . http_build_query($payload));
-            
+            \curl_setopt($ch, \CURLOPT_URL,
+                Route::PAYSTACK_API_ROOT . $endpoint . '?' . http_build_query($payload));
         }
         //set the headers
         \curl_setopt($ch, \CURLOPT_HTTPHEADER, $headers);
@@ -71,7 +70,8 @@ class Route
         //close connection
         \curl_close($ch);
 
-        return [Route::HEADER_KEY => $header, Route::BODY_KEY => $body];
+        return [Route::HEADER_KEY => $header,
+            Route::BODY_KEY   => $body ];
     }
 
     public function __call($method, $args)
@@ -94,16 +94,14 @@ class Route
                 // skip root method
                 continue;
             }
-            $mtdFunc = function (array $params = [], array $args = []) use ($mtd) {
+            $mtdFunc = function (array $params = [ ], array $args = [ ]) use ($mtd) {
                 //                print_r($params);
                 //                print_r($args);
                 $interface = call_user_func($this->route_class . '::' . $mtd);
                 // TODO: validate params and args against definitions
                 return $this->callViaCurl(
-                    $interface[RouteInterface::ENDPOINT_KEY],
-                    $interface[RouteInterface::METHOD_KEY],
-                    $params,
-                    $args
+                        $interface[RouteInterface::ENDPOINT_KEY],
+                        $interface[RouteInterface::METHOD_KEY], $params, $args
                 );
             };
             $this->methods[$mtd] = \Closure::bind($mtdFunc, $this, get_class());

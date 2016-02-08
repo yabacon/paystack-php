@@ -4,6 +4,20 @@ namespace Eidetic\Paystack\Routes;
 
 use Eidetic\Paystack\Contracts\RouteInterface;
 
+/**
+ * Customer
+ * Insert description here
+ *
+ * @category
+ * @package
+ * @author
+ * @copyright
+ * @license
+ * @version
+ * @link
+ * @see
+ * @since
+ */
 class Customer implements RouteInterface
 {
 
@@ -25,10 +39,17 @@ class Customer implements RouteInterface
     public static function create()
     {
         return [
-          RouteInterface::METHOD_KEY => RouteInterface::POST_METHOD,
-          RouteInterface::ENDPOINT_KEY => Customer::root(),
-          RouteInterface::PARAMS_KEY => ['first_name', 'last_name', 'email', 'phone'],
-          RouteInterface::REQUIRED_KEY => [RouteInterface::PARAMS_KEY => ['first_name', 'last_name', 'email']]
+            RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
+            RouteInterface::ENDPOINT_KEY => Customer::root(),
+            RouteInterface::PARAMS_KEY   => ['first_name',
+                'last_name',
+                'email',
+                'phone' ],
+            RouteInterface::REQUIRED_KEY => [
+                RouteInterface::PARAMS_KEY => ['first_name',
+                    'last_name',
+                    'email' ]
+            ]
         ];
     }
 
@@ -38,10 +59,10 @@ class Customer implements RouteInterface
     public static function getOne()
     {
         return [
-          RouteInterface::METHOD_KEY => RouteInterface::GET_METHOD,
-          RouteInterface::ENDPOINT_KEY => Customer::root() . '/{id}',
-          RouteInterface::ARGS_KEY => ['id'],
-          RouteInterface::REQUIRED_KEY => [RouteInterface::ARGS_KEY => ['id']]
+            RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
+            RouteInterface::ENDPOINT_KEY => Customer::root() . '/{id}',
+            RouteInterface::ARGS_KEY     => ['id' ],
+            RouteInterface::REQUIRED_KEY => [RouteInterface::ARGS_KEY => ['id' ] ]
         ];
     }
 
@@ -51,9 +72,10 @@ class Customer implements RouteInterface
     public static function getList()
     {
         return [
-          RouteInterface::METHOD_KEY =>  RouteInterface::GET_METHOD,
-          RouteInterface::ENDPOINT_KEY => Customer::root(),
-          RouteInterface::PARAMS_KEY => ['perPage', 'page']
+            RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
+            RouteInterface::ENDPOINT_KEY => Customer::root(),
+            RouteInterface::PARAMS_KEY   => ['perPage',
+                'page' ]
         ];
     }
 
@@ -65,14 +87,18 @@ class Customer implements RouteInterface
     public static function update()
     {
         return [
-          RouteInterface::METHOD_KEY =>  RouteInterface::PUT_METHOD,
-          RouteInterface::ENDPOINT_KEY => Customer::root() . '/{id}',
-          RouteInterface::PARAMS_KEY => ['first_name', 'last_name', 'email', 'phone'],
-          RouteInterface::ARGS_KEY => ['id'],
-          RouteInterface::REQUIRED_KEY => [
-            RouteInterface::ARGS_KEY => ['id'],
-            RouteInterface::PARAMS_KEY => ['first_name', 'last_name']
-          ]
+            RouteInterface::METHOD_KEY   => RouteInterface::PUT_METHOD,
+            RouteInterface::ENDPOINT_KEY => Customer::root() . '/{id}',
+            RouteInterface::PARAMS_KEY   => ['first_name',
+                'last_name',
+                'email',
+                'phone' ],
+            RouteInterface::ARGS_KEY     => ['id' ],
+            RouteInterface::REQUIRED_KEY => [
+                RouteInterface::ARGS_KEY   => ['id' ],
+                RouteInterface::PARAMS_KEY => ['first_name',
+                    'last_name' ]
+            ]
         ];
     }
 }

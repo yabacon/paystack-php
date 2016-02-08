@@ -14,69 +14,68 @@ class Transaction implements RouteInterface
     {
         return '/transaction';
     }
-
     /*
       Initialize transaction
      */
 
     public static function initialize()
     {
-        return [RouteInterface::METHOD_KEY =>  RouteInterface::POST_METHOD,
-          RouteInterface::ENDPOINT_KEY => Transaction::root() . '/initialize',
-          RouteInterface::PARAMS_KEY => ['reference', 'amount', 'email', 'plan']
+        return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
+            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/initialize',
+            RouteInterface::PARAMS_KEY   => ['reference',
+                'amount',
+                'email',
+                'plan' ]
         ];
     }
-
     /*
       Charge authorization
      */
 
     public static function charge()
     {
-        return [RouteInterface::METHOD_KEY =>  RouteInterface::POST_METHOD,
-          RouteInterface::ENDPOINT_KEY => Transaction::root() . '/charge_authorization',
-          RouteInterface::PARAMS_KEY => ['authorization_code', 'email', 'amount']];
+        return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
+            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/charge_authorization',
+            RouteInterface::PARAMS_KEY   => ['authorization_code',
+                'email',
+                'amount' ] ];
     }
-
     /*
       Get transaction
      */
 
     public static function getOne()
     {
-        return [RouteInterface::METHOD_KEY => RouteInterface::GET_METHOD,
-          RouteInterface::ENDPOINT_KEY => Transaction::root() . '/{id}',
-          RouteInterface::ARGS_KEY => ['id']];
+        return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
+            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/{id}',
+            RouteInterface::ARGS_KEY     => ['id' ] ];
     }
-
     /*
       List transactions
      */
 
     public static function getList()
     {
-        return [ RouteInterface::METHOD_KEY => RouteInterface::GET_METHOD,
-          RouteInterface::ENDPOINT_KEY => Transaction::root()];
+        return [ RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
+            RouteInterface::ENDPOINT_KEY => Transaction::root() ];
     }
-
     /*
       Get totals
      */
 
     public static function totals()
     {
-        return [RouteInterface::METHOD_KEY => RouteInterface::GET_METHOD,
-          RouteInterface::ENDPOINT_KEY => Transaction::root() . '/totals'];
+        return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
+            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/totals' ];
     }
-
     /*
       Verify transaction
      */
 
     public static function verify()
     {
-        return [RouteInterface::METHOD_KEY => RouteInterface::GET_METHOD,
-          RouteInterface::ENDPOINT_KEY => Transaction::root() . '/verify/{reference}',
-          RouteInterface::ARGS_KEY => ['reference']];
+        return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
+            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/verify/{reference}',
+            RouteInterface::ARGS_KEY     => ['reference' ] ];
     }
 }
