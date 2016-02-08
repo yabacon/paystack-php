@@ -22,22 +22,34 @@ Via download
 Download a release version from the [releases page](https://github.com/eidetic-limited/paystack-php/releases). Extract, then:
 ``` php
 require 'src/Paystack.php';
-\Eidetic\Paystack\Paystack::registerAutoloader();
+\Eidetic\Paystack::registerAutoloader();
 ```
 
 ## Usage
 
 ``` php
-$paystack = new \Eidetic\Paystack\Paystack('secret_key');
+$paystack = new \Eidetic\Paystack('secret_key');
 
 // Make a call to the resource/method
 // paystack.{resource}.{method}
 list($headers, $body) = $paystack->customer(12);
 list($headers, $body) = $paystack->customer->list();
-list($headers, $body) = $paystack->customer->list(['perPage'=>20]);
-list($headers, $body) = $paystack->customer->create(['first_name'=>'Dafe', 'last_name'=>'Aba', 'email'=>"dafe@aba.c", 'phone'=>'08012345678']);
-list($headers, $body) = $paystack->transaction->initialize(['reference'=>'unique_refencecode', 'amount'=>'120000', 'email'=>'dafe@aba.c']);
-list($headers, $body) = $paystack->transaction->verify([],['reference'=>'refencecode']);
+list($headers, $body) = $paystack->customer->list(['perPage'=>5,'page'=>2]); // list 5 customers per page
+
+list($headers, $body) = $paystack->customer->create([
+                          'first_name'=>'Dafe', 
+                          'last_name'=>'Aba', 
+                          'email'=>"dafe@aba.c", 
+                          'phone'=>'08012345678'
+                        ]);
+list($headers, $body) = $paystack->transaction->initialize([
+                          'reference'=>'unique_refencecode', 
+                          'amount'=>'120000', 
+                          'email'=>'dafe@aba.c'
+                        ]);
+list($headers, $body) = $paystack->transaction->verify([
+                          'reference'=>'refencecode'
+                        ]);
 ```
 
 ## Change log

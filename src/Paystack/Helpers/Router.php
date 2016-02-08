@@ -8,6 +8,7 @@ use \Eidetic\Paystack\Contracts\RouteInterface;
 class Router
 {
 
+    private $route;
     private $route_class;
     private $secret_key;
 
@@ -16,25 +17,10 @@ class Router
 
     const HEADER_KEY = 'header';
     const BODY_KEY = 'body';
-
-    // public static function put_non_array_values_into_array(&$arr,$key=Router::ID_KEY){
-    //     $argscount = count($arr);
-    //     for($i=0;$i<$argscount;$i++){
-    //
-    //     if(!is_array($arr[$i])){
-    //       $arr[$i] = [$key=>$arr[$i]];
-    //     }
-    //
-    //
-    //     }
-    //
-    //     }
-
-    private function callViaCurl($interface, $payload = [], $sentargs = [])
+    
+    private function move_args_to_sentargs($interface, &$payload, &$sentargs)
     {
-        $endpoint = $interface[RouteInterface::ENDPOINT_KEY];
-        $method = $interface[RouteInterface::METHOD_KEY];
-        
+        // check if interface supports args
         if (array_key_exists(RouteInterface::ARGS_KEY, $interface)) {
             // to allow args to be specified in the payload, filter them out and put them in sentargs
             $sentargs = (!$sentargs) ? [] : $sentargs; // Make sure $sentargs is not null
@@ -48,12 +34,24 @@ class Router
                 }
             }
         }
-        
+    }
+    
+    private function put_args_into_endpoint(&$endpoint, $sentargs)
+    {
         // substitute sentargs in endpoint
         while (list($key, $value) = each($sentargs)) {
             $endpoint = str_replace('{' . $key . '}', $value, $endpoint);
         }
+    }
 
+    private function callViaCurl($interface, $payload = [], $sentargs = [])
+    {
+        $endpoint = $interface[RouteInterface::ENDPOINT_KEY];
+        $method = $interface[RouteInterface::METHOD_KEY];
+        
+        $this->move_args_to_sentargs($interface, $payload, $sentargs);
+        $this->put_args_into_endpoint($endpoint, $sentargs);
+        
         //open connection
         $ch = \curl_init();
 
@@ -63,8 +61,11 @@ class Router
             \curl_setopt($ch, \CURLOPT_URL, Router::PAYSTACK_API_ROOT . $endpoint);
 
             $headers[] = "Content-Type: application/json";
-            //set number of POST vars, POST data
-            \curl_setopt($ch, \CURLOPT_POST, true);
+            ($method === RouteInterface::POST_METHOD) && \curl_setopt($ch, \CURLOPT_POST, true);
+            ($method === RouteInterface::PUT_METHOD) && \curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+            ;
+//             echo Router::PAYSTACK_API_ROOT . $endpoint . '?' . http_build_query($payload);
+//             die();
             \curl_setopt($ch, \CURLOPT_POSTFIELDS, json_encode($payload));
         } else {
             //set the url
@@ -95,14 +96,18 @@ class Router
     public function __call($method, $sentargs)
     {
         $method = ($method === 'list' ? 'getList' : $method);
-        if (is_callable($this->methods[$method])) {
+        if (array_key_exists($method, $this->methods) && is_callable($this->methods[$method])) {
             return call_user_func_array($this->methods[$method], $sentargs);
+        } else {
+            // User attempted to call a function that does not exist
+            throw new \Exception('Function "'.$method.'" does not exist for "'.$this->route."'.");
         }
     }
 
-    public function __construct($route_class, $secret_key)
+    public function __construct($route, $secret_key)
     {
-        $this->route_class = 'Eidetic\\Paystack\\Routes\\' . ucwords($route_class);
+        $this->route = strtolower($route);
+        $this->route_class = 'Eidetic\\Paystack\\Routes\\' . ucwords($route);
         $this->secret_key = $secret_key;
         // change method named list to getList
         $mets = get_class_methods($this->route_class);

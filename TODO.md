@@ -2,6 +2,6 @@
 
 * Proper resource examples
 * Tests
-* Other options than lib_curl for making request
+* Change to Guzzle, allowing obect-oriented responses, and avoiding dependency on curl
 
 
