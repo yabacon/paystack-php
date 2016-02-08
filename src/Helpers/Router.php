@@ -5,7 +5,7 @@ namespace Eidetic\Paystack\Helpers;
 use \Closure;
 use \Eidetic\Paystack\Contracts\RouteInterface;
 
-class Route
+class Router
 {
 
     private $route_class;
@@ -17,7 +17,7 @@ class Route
     const HEADER_KEY = 'header';
     const BODY_KEY = 'body';
 
-    // public static function put_non_array_values_into_array(&$arr,$key=Route::ID_KEY){
+    // public static function put_non_array_values_into_array(&$arr,$key=Router::ID_KEY){
     //     $argscount = count($arr);
     //     for($i=0;$i<$argscount;$i++){
     //
@@ -43,7 +43,7 @@ class Route
         $headers = ["Authorization: Bearer " . $this->secret_key];
         if ($method === RouteInterface::POST_METHOD || $method === RouteInterface::PUT_METHOD) {
             //set the url
-            \curl_setopt($ch, \CURLOPT_URL, Route::PAYSTACK_API_ROOT . $endpoint);
+            \curl_setopt($ch, \CURLOPT_URL, Router::PAYSTACK_API_ROOT . $endpoint);
 
             $headers[] = "Content-Type: application/json";
             //set number of POST vars, POST data
@@ -51,8 +51,8 @@ class Route
             \curl_setopt($ch, \CURLOPT_POSTFIELDS, json_encode($payload));
         } else {
             //set the url
-            \curl_setopt($ch, \CURLOPT_URL, Route::PAYSTACK_API_ROOT . $endpoint . '?' . http_build_query($payload));
-//             echo Route::PAYSTACK_API_ROOT . $endpoint . '?' . http_build_query($payload);
+            \curl_setopt($ch, \CURLOPT_URL, Router::PAYSTACK_API_ROOT . $endpoint . '?' . http_build_query($payload));
+//             echo Router::PAYSTACK_API_ROOT . $endpoint . '?' . http_build_query($payload);
 //             die();
         }
         //set the headers
@@ -72,7 +72,7 @@ class Route
         //close connection
         \curl_close($ch);
 
-        return [Route::HEADER_KEY => $header, Route::BODY_KEY => $body];
+        return [Router::HEADER_KEY => $header, Router::BODY_KEY => $body];
     }
 
     public function __call($method, $args)
