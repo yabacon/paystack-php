@@ -35,7 +35,18 @@ class Transaction implements RouteInterface
     {
         return [RouteInterface::METHOD_KEY =>  RouteInterface::POST_METHOD,
           RouteInterface::ENDPOINT_KEY => Transaction::root() . '/charge_authorization',
-          RouteInterface::PARAMS_KEY => ['authorization_code', 'email', 'amount']];
+          RouteInterface::PARAMS_KEY => ['reference', 'authorization_code', 'email', 'amount']];
+    }
+
+    /*
+      Charge token
+     */
+
+    public static function charge_token()
+    {
+        return [RouteInterface::METHOD_KEY =>  RouteInterface::POST_METHOD,
+          RouteInterface::ENDPOINT_KEY => Transaction::root() . '/charge_token',
+          RouteInterface::PARAMS_KEY => ['reference', 'token', 'email', 'amount']];
     }
 
     /*
