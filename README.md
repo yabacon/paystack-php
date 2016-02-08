@@ -17,13 +17,18 @@ Via Composer
 $ composer require eidetic-limited/paystack-php
 ```
 
+Via download
+
+Download a release version from the [releases page](https://github.com/eidetic-limited/paystack-php/releases). Extract, then:
+``` php
+require 'src/Paystack.php';
+\Eidetic\Paystack\Paystack::registerAutoloader();
+```
+
 ## Usage
 
 ``` php
-require 'src/Paystack.php';
-\Paystack\Paystack::registerAutoloader();
-
-$paystack = new \Paystack\Paystack('secret_key');
+$paystack = new \Eidetic\Paystack\Paystack('secret_key');
 
 // Make a call to the resource/method
 // paystack.{resource}.{method}
