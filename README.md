@@ -9,7 +9,7 @@
 
 A PHP API wrapper for [Paystack](https://paystack.co/).
 
-![Paystack](img/paystack.png?raw=true "[Paystack](https://paystack.co/)")
+[![Paystack](img/paystack.png?raw=true "Paystack")](https://paystack.co/)
 
 ## Install
 
