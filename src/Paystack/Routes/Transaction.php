@@ -42,7 +42,7 @@ class Transaction implements RouteInterface
       Charge token
      */
 
-    public static function charge_token()
+    public static function chargeToken()
     {
         return [RouteInterface::METHOD_KEY =>  RouteInterface::POST_METHOD,
           RouteInterface::ENDPOINT_KEY => Transaction::root() . '/charge_token',

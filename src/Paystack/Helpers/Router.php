@@ -18,7 +18,7 @@ class Router
     const HEADER_KEY = 'header';
     const BODY_KEY = 'body';
     
-    private function move_args_to_sentargs($interface, &$payload, &$sentargs)
+    private function moveArgsToSentargs($interface, &$payload, &$sentargs)
     {
         // check if interface supports args
         if (array_key_exists(RouteInterface::ARGS_KEY, $interface)) {
@@ -36,7 +36,7 @@ class Router
         }
     }
     
-    private function put_args_into_endpoint(&$endpoint, $sentargs)
+    private function putArgsIntoEndpoint(&$endpoint, $sentargs)
     {
         // substitute sentargs in endpoint
         while (list($key, $value) = each($sentargs)) {
@@ -49,8 +49,8 @@ class Router
         $endpoint = $interface[RouteInterface::ENDPOINT_KEY];
         $method = $interface[RouteInterface::METHOD_KEY];
         
-        $this->move_args_to_sentargs($interface, $payload, $sentargs);
-        $this->put_args_into_endpoint($endpoint, $sentargs);
+        $this->moveArgsToSentargs($interface, $payload, $sentargs);
+        $this->putArgsIntoEndpoint($endpoint, $sentargs);
         
         //open connection
         $ch = \curl_init();
