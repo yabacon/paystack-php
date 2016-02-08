@@ -9,6 +9,8 @@
 
 A PHP API wrapper for [Paystack](https://paystack.co/).
 
+![Paystack](https://avatars1.githubusercontent.com/u/14998667?v=3&s=200)
+
 ## Install
 
 Via Composer
