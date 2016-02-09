@@ -23,7 +23,7 @@ class Paystack
         
         if (!is_string($secret_key) || !(substr($secret_key, 0, 3)==='sk_')) {
         // Should never get here
-            throw new \InvalidArgumentException('A Valid Pastack Secret Key must be a string that starts with \'sk_\'.');
+            throw new \InvalidArgumentException('A Valid Paystack Secret Key must start with \'sk_\'.');
    
         }
          $this->secret_key = $secret_key;
@@ -96,7 +96,9 @@ class Paystack
             }
         }
    // Should never get here
-        throw new \InvalidArgumentException('Route "' . $method . '" only accepts an integer id and an optional array of paging arguments.');
+        throw new \InvalidArgumentException('Route "' .
+        $method .
+         '" only accepts an integer id and an optional array of paging arguments.');
     }
 
  /**

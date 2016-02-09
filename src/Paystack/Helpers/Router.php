@@ -162,7 +162,7 @@ class Router
         // Then, after your \curl_exec call:
             $header_size = \ curl_getinfo($ch, CURLINFO_HEADER_SIZE);
             $header = substr($response, 0, $header_size);
-            $header = $this->headers_from_lines(explode("\n", trim($header)));
+            $header = $this->headersFromLines(explode("\n", trim($header)));
             $body = substr($response, $header_size);
             $body = json_decode($body, true);
             
@@ -176,7 +176,7 @@ class Router
 
     }
     
-    function headers_from_lines($lines)
+    private function headersFromLines($lines)
     {
         $headers = [];
         foreach ($lines as $line) {
