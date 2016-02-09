@@ -23,6 +23,7 @@ class Paystack
     public function __construct($secret_key)
     {
         $this->secret_key = $secret_key;
+//         require __DIR__ . '/../vendor/autoload.php';
     }
 
     /**

@@ -110,6 +110,11 @@ class Router
      */
     private function callViaCurl($interface, $payload = [ ], $sentargs = [ ])
     {
+         $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET', 'https://api.github.com/user', [
+        'auth' => ['user', 'pass']
+        ]);
+        die();
         $endpoint = $interface[RouteInterface::ENDPOINT_KEY];
         $method = $interface[RouteInterface::METHOD_KEY];
 

@@ -11,13 +11,20 @@
     "authors": [
         {
             "name": "YabaCon",
-            "email": "info@eidetic.ng",
-            "homepage": "https://www.eidetic.ng",
+            "email": "yabacon.valley@gmail.com",
+            "homepage": "https://github.com/yabacon",
+            "role": "Owner"
+        },
+        {
+            "name": "Ibrahim Lawal",
+            "email": "ibrahim@lawal.me",
+            "homepage": "http://ibrahim.lawal.me",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "~5.5|~7.0"
+        "php": "~5.5|~7.0",
+        "guzzlehttp/guzzle": "^6.1"
     },
     "require-dev": {
         "phpunit/phpunit": "4.*",

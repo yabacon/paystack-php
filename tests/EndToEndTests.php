@@ -1,12 +1,12 @@
 <?php
 require dirname(__FILE__) . '/../src/Paystack.php';
-\YabaCon\Paystack::registerAutoloader();
+// \YabaCon\Paystack::registerAutoloader();
 
 $paystack = new \YabaCon\Paystack('sk_test_40899660eac2be0a6a6915f6ba32f81bc8bac143');
 //if (true) {
 //    die();
 //}
-print_r($paystack->customer());
+print_r($paystack->customer(1));
 //print_r($paystack->ff(3447));
 // print_r($paystack->customer->dontlist());
 // print_r($paystack->customer->update(['id'=>3447,'first_name'=>'Gopher']));
