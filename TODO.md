@@ -1,7 +1,6 @@
 # TODOs
 
-* Proper resource examples
+* Proper resource examples - [SAMPLES.md](SAMPLES.md)
 * Tests
-* Change to Guzzle, allowing obect-oriented responses, and avoiding dependency on curl
-
+* Sample open source code that uses library - [ibrahimlawal/paystack-php-sample](https://github.com/ibrahimlawal/paystack-php-sample)
 

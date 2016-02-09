@@ -28,21 +28,12 @@ class Transaction implements RouteInterface
     {
         return '/transaction';
     }
-    /*
-      Initialize transaction
-     */
-
     /**
-     * initialize
-     * Insert description here
+     * Initialize transaction
      *
+     * @return array - definition for this route
      *
-     * @return
-     *
-     * @access
      * @static
-     * @see
-     * @since
      */
     public static function initialize()
     {
@@ -54,21 +45,9 @@ class Transaction implements RouteInterface
                 'plan' ]
         ];
     }
-    /*
-      Charge authorization
-     */
-
     /**
-     * charge
-     * Insert description here
-     *
-     *
-     * @return
-     *
-     * @access
+     * Charge authorization
      * @static
-     * @see
-     * @since
      */
     public static function charge()
     {
@@ -79,21 +58,10 @@ class Transaction implements RouteInterface
                 'email',
                 'amount' ] ];
     }
-    /*
-      Charge token
-     */
-
     /**
-     * chargeToken
-     * Insert description here
+     * Charge token
      *
-     *
-     * @return
-     *
-     * @access
      * @static
-     * @see
-     * @since
      */
     public static function chargeToken()
     {
@@ -104,21 +72,10 @@ class Transaction implements RouteInterface
                 'email',
                 'amount' ] ];
     }
-    /*
-      Get transaction
-     */
-
     /**
-     * getOne
-     * Insert description here
+     * Get transaction by ID
      *
-     *
-     * @return
-     *
-     * @access
      * @static
-     * @see
-     * @since
      */
     public static function getOne()
     {
@@ -126,18 +83,10 @@ class Transaction implements RouteInterface
             RouteInterface::ENDPOINT_KEY => Transaction::root() . '/{id}',
             RouteInterface::ARGS_KEY     => ['id' ] ];
     }
-    /*
-      List transactions
-     */
-
+    
     /**
-     * getList
-     * Insert description here
+     * List transactions
      *
-     *
-     * @return
-     *
-     * @access
      * @static
      * @see
      * @since

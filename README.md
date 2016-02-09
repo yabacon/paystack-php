@@ -102,6 +102,8 @@ $response = $paystack->transaction->verify([
 
 Check [SAMPLES](SAMPLES.md) for more sample calls
 
+Check [ibrahimlawal/paystack-php-sample](https://github.com/ibrahimlawal/paystack-php-sample) for a sample donation page that uses this library
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.

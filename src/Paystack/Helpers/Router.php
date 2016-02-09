@@ -25,6 +25,7 @@ class Router
     private $route;
     private $route_class;
     private $secret_key;
+    private $methods;
     private $use_guzzle=false;
 
     const ID_KEY = 'id';
@@ -119,13 +120,13 @@ class Router
         $this->putArgsIntoEndpoint($endpoint, $sentargs);
  
         $headers = ["Authorization"=>"Bearer " . $this->secret_key ];
+        $body = '';
         if (($method === RouteInterface::POST_METHOD)||
         ($method === RouteInterface::PUT_METHOD)) {
             $headers["Content-Type"] = "application/json";
             $body = json_encode($payload);
         } elseif ($method === RouteInterface::GET_METHOD) {
             $endpoint = $endpoint . '?' . http_build_query($payload);
-            $body='';
         }
     // Use Guzzle if found, else use Curl
         if ($this->use_guzzle && class_exists('\\GuzzleHttp\\Client') && class_exists('\\GuzzleHttp\\Psr7\\Request')) {
@@ -213,18 +214,10 @@ class Router
     }
 
  /**
- * __construct
- * Insert description here
+ * A magic resource object that can make method calls to API
  *
  * @param $route
- * @param $secret_key
- *
- * @return
- *
- * @access
- * @static
- * @see
- * @since
+ * @param $paystackObj - A YabaCon\Paystack Object
  */
     public function __construct($route, $paystackObj)
     {
