@@ -43,20 +43,33 @@ class Paystack
     {
 //attempt to call getOne when the route is called directly
 // translates to /{root}/{get}/{id}
-        if (in_array($method, $this->routes, true)) {
-            $route = new Router($method, $this->secret_key);
+        if (in_array(
+            $method,
+            $this->routes,
+            true
+        )) {
+            $route = new Router(
+                $method,
+                $this->secret_key
+            );
 // Router::put_non_array_values_into_array($args);
 
             if (count($args) === 1 && is_integer($args[0])) {
 // no params, just one arg... the id
                 $args = [[],
                     [ Router::ID_KEY => $args[0] ] ];
-                return $route->__call('getOne', $args);
+                return $route->__call(
+                    'getOne',
+                    $args
+                );
             } elseif (count($args) === 2 && is_integer($args[0]) && is_array($args[1])) {
 // there are params, and just one arg... the id
                 $args = [$args[1],
                     [ Router::ID_KEY => $args[0] ] ];
-                return $route->__call('getOne', $args);
+                return $route->__call(
+                    'getOne',
+                    $args
+                );
             }
         }
 // Should never get here
@@ -116,8 +129,15 @@ class Paystack
      */
     public function __get($name)
     {
-        if (in_array($name, $this->routes, true)) {
-            return new Router($name, $this->secret_key);
+        if (in_array(
+            $name,
+            $this->routes,
+            true
+        )) {
+            return new Router(
+                $name,
+                $this->secret_key
+            );
         }
     }
 }

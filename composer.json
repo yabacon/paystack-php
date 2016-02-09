@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Eidetic\\Paystack\\": "src"
+            "Eidetic\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Eidetic\\Paystack\\Test\\": "tests"
+            "Eidetic\\Paystack\\Test\\": "tests/"
         }
     },
     "scripts": {
