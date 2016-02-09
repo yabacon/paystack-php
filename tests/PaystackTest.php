@@ -44,13 +44,13 @@ class Paystack
     {
         spl_autoload_register(
             function ($class_name) {
-            $file = dirname(__FILE__) . DIRECTORY_SEPARATOR;
-            $file .= str_replace(['Paystack\\',
+                $file = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+                $file .= str_replace(['Paystack\\',
                     '\\' ], ['',
                     DIRECTORY_SEPARATOR ], $class_name) . '.php';
             // die();
-            include_once $file;
-        }
+                    include_once $file;
+            }
         );
     }
 

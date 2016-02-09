@@ -50,8 +50,11 @@ class Route
             \curl_setopt($ch, \CURLOPT_POSTFIELDS, json_encode($payload));
         } else {
             //set the url
-            \curl_setopt($ch, \CURLOPT_URL,
-                Route::PAYSTACK_API_ROOT . $endpoint . '?' . http_build_query($payload));
+            \curl_setopt(
+                $ch,
+                \CURLOPT_URL,
+                Route::PAYSTACK_API_ROOT . $endpoint . '?' . http_build_query($payload)
+            );
         }
         //set the headers
         \curl_setopt($ch, \CURLOPT_HTTPHEADER, $headers);
@@ -100,8 +103,10 @@ class Route
                 $interface = call_user_func($this->route_class . '::' . $mtd);
                 // TODO: validate params and args against definitions
                 return $this->callViaCurl(
-                        $interface[RouteInterface::ENDPOINT_KEY],
-                        $interface[RouteInterface::METHOD_KEY], $params, $args
+                    $interface[RouteInterface::ENDPOINT_KEY],
+                    $interface[RouteInterface::METHOD_KEY],
+                    $params,
+                    $args
                 );
             };
             $this->methods[$mtd] = \Closure::bind($mtdFunc, $this, get_class());

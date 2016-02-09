@@ -13,30 +13,36 @@ A PHP API wrapper for [Paystack](https://paystack.co/).
 
 ## Install
 
-Via Composer
+### Via Composer
 
 ``` bash
 $ composer require yabacon/paystack-php
 ```
 
-Via download
+### Via download
 
-Download a release version from the [releases page](https://github.com/yabacon/paystack-php/releases). Extract, then:
+Download a release version from the [releases page](https://github.com/yabacon/paystack-php/releases). 
+Extract, then:
 ``` php
-require 'src/Paystack.php';
+require 'path/to/src/Paystack.php';
 \YabaCon\Paystack::registerAutoloader();
 ```
 
 ## Usage
 
+###Default: Uses curl for requests
 ``` php
 $paystack = new \YabaCon\Paystack('secret_key');
 
 // Make a call to the resource/method
-// paystack.{resource}.{method}
+// $paystack->{resource}->{method}(); 
+// for gets, use $paystack->{resource}(id)
+
+// $headers is an array of header values.
+// $body is an array created from json_decoding response
 list($headers, $body) = $paystack->customer(12);
 list($headers, $body) = $paystack->customer->list();
-list($headers, $body) = $paystack->customer->list(['perPage'=>5,'page'=>2]); // list 5 customers per page
+list($headers, $body) = $paystack->customer->list(['perPage'=>5,'page'=>2]); // list the second page at 5 customers per page
 
 list($headers, $body) = $paystack->customer->create([
                           'first_name'=>'Dafe', 
@@ -53,6 +59,48 @@ list($headers, $body) = $paystack->transaction->verify([
                           'reference'=>'refencecode'
                         ]);
 ```
+
+###Use Guzzle for requests
+Only available if project is managed using composer.
+
+Install Guzzle
+``` bash
+$ composer require guzzlehttp/guzzle
+```
+
+Make calls
+``` php
+// create a paystack object
+$paystack = new \YabaCon\Paystack('secret_key');
+// tell it to use guzzle if found
+$paystack->useGuzzle();
+
+// Make a call to the resource/method
+// $paystack->{resource}->{method}(); 
+// for gets, use $paystack->{resource}(id)
+
+// $response is a GuzzleHttp\Psr7\Response Object
+$response = $paystack->customer(12);
+$response = $paystack->customer->list();
+$response = $paystack->customer->list(['perPage'=>5,'page'=>2]); // list the second page at 5 customers per page
+
+$response = $paystack->customer->create([
+     'first_name'=>'Dafe', 
+     'last_name'=>'Aba', 
+     'email'=>"dafe@aba.c", 
+     'phone'=>'08012345678'
+   ]);
+$response = $paystack->transaction->initialize([
+     'reference'=>'unique_refencecode', 
+     'amount'=>'120000', 
+     'email'=>'dafe@aba.c'
+   ]);
+$response = $paystack->transaction->verify([
+     'reference'=>'refencecode'
+   ]);
+```
+
+Check [SAMPLES](SAMPLES.md) for more sample calls
 
 ## Change log
 
