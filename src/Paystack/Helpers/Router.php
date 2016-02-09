@@ -129,7 +129,6 @@ class Router
         }
     // Use Guzzle if found, else use Curl
         if ($this->use_guzzle && class_exists('\\GuzzleHttp\\Client') && class_exists('\\GuzzleHttp\\Psr7\\Request')) {
- 
             $request = new \GuzzleHttp\Psr7\Request(strtoupper($method), $endpoint, $headers, $body);
             $client = new \GuzzleHttp\Client(['http_errors' => false]);
             $response = $client->send($request);
