@@ -1,8 +1,8 @@
 <?php
 require dirname(__FILE__) . '/../src/Paystack.php';
-\Eidetic\Paystack::registerAutoloader();
+\YabaCon\Paystack::registerAutoloader();
 
-$paystack = new \Eidetic\Paystack('sk_test_40899660eac2be0a6a6915f6ba32f81bc8bac143');
+$paystack = new \YabaCon\Paystack('sk_test_40899660eac2be0a6a6915f6ba32f81bc8bac143');
 //if (true) {
 //    die();
 //}

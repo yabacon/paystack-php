@@ -16,21 +16,21 @@ A PHP API wrapper for [Paystack](https://paystack.co/).
 Via Composer
 
 ``` bash
-$ composer require eidetic-limited/paystack-php
+$ composer require yabacon/paystack-php
 ```
 
 Via download
 
-Download a release version from the [releases page](https://github.com/eidetic-limited/paystack-php/releases). Extract, then:
+Download a release version from the [releases page](https://github.com/yabacon/paystack-php/releases). Extract, then:
 ``` php
 require 'src/Paystack.php';
-\Eidetic\Paystack::registerAutoloader();
+\YabaCon\Paystack::registerAutoloader();
 ```
 
 ## Usage
 
 ``` php
-$paystack = new \Eidetic\Paystack('secret_key');
+$paystack = new \YabaCon\Paystack('secret_key');
 
 // Make a call to the resource/method
 // paystack.{resource}.{method}
@@ -70,11 +70,11 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details
 
 ## Security
 
-If you discover any security related issues, please email info@eidetic.ng instead of using the issue tracker.
+If you discover any security related issues, please email yabacon.valley@gmail.com instead of using the issue tracker.
 
 ## Credits
 
-- [Eidetic Limited][link-author]
+- [YabaCon][link-author]
 - [Issa Jubril](https://github.com/masterp4dev)
 - [Ibrahim Lawal](https://github.com/ibrahimlawal)
 - [Opeyemi Obembe](https://github.com/kehers) - followed the style he employed in creating the [NodeJS Wrapper](https://github.com/kehers/paystack)
@@ -84,17 +84,17 @@ If you discover any security related issues, please email info@eidetic.ng instea
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/eidetic-limited/paystack-php.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/yabacon/paystack-php.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/eidetic-limited/paystack-php/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/eidetic-limited/paystack-php.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/eidetic-limited/paystack-php.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/eidetic-limited/paystack-php.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/yabacon/paystack-php/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/yabacon/paystack-php.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/yabacon/paystack-php.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/yabacon/paystack-php.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/eidetic-limited/paystack-php
-[link-travis]: https://travis-ci.org/eidetic-limited/paystack-php
-[link-scrutinizer]: https://scrutinizer-ci.com/g/eidetic-limited/paystack-php/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/eidetic-limited/paystack-php
-[link-downloads]: https://packagist.org/packages/eidetic-limited/paystack-php
-[link-author]: https://github.com/eidetic-limited
+[link-packagist]: https://packagist.org/packages/yabacon/paystack-php
+[link-travis]: https://travis-ci.org/yabacon/paystack-php
+[link-scrutinizer]: https://scrutinizer-ci.com/g/yabacon/paystack-php/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/yabacon/paystack-php
+[link-downloads]: https://packagist.org/packages/yabacon/paystack-php
+[link-author]: https://github.com/yabacon
 [link-contributors]: ../../contributors

@@ -1,9 +1,9 @@
 <?php
 
-namespace Eidetic\Paystack\Helpers;
+namespace YabaCon\Paystack\Helpers;
 
 use \Closure;
-use \Eidetic\Paystack\Contracts\RouteInterface;
+use \YabaCon\Paystack\Contracts\RouteInterface;
 
 /**
  * Router
@@ -222,7 +222,7 @@ class Router
     public function __construct($route, $secret_key)
     {
         $this->route = strtolower($route);
-        $this->route_class = 'Eidetic\\Paystack\\Routes\\' . ucwords($route);
+        $this->route_class = 'YabaCon\\Paystack\\Routes\\' . ucwords($route);
         $this->secret_key = $secret_key;
 
         $mets = get_class_methods($this->route_class);

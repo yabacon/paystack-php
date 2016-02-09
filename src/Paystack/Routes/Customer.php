@@ -1,8 +1,8 @@
 <?php
 
-namespace Eidetic\Paystack\Routes;
+namespace YabaCon\Paystack\Routes;
 
-use Eidetic\Paystack\Contracts\RouteInterface;
+use YabaCon\Paystack\Contracts\RouteInterface;
 
 /**
  * Customer

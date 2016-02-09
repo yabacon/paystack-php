@@ -1,16 +1,16 @@
 {
-    "name": "eidetic-limited/paystack-php",
+    "name": "yabacon/paystack-php",
     "type": "library",
     "description": "helps makes your Paystack API calls",
     "keywords": [
-        "eidetic-limited",
+        "yabacon",
         "paystack-php"
     ],
-    "homepage": "https://github.com/eidetic-limited/paystack-php",
+    "homepage": "https://github.com/yabacon/paystack-php",
     "license": "MIT",
     "authors": [
         {
-            "name": "Eidetic Limited",
+            "name": "YabaCon",
             "email": "info@eidetic.ng",
             "homepage": "https://www.eidetic.ng",
             "role": "Developer"
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Eidetic\\": "src"
+            "YabaCon\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Eidetic\\Paystack\\Test\\": "tests/"
+            "YabaCon\\Paystack\\Test\\": "tests/"
         }
     },
     "scripts": {

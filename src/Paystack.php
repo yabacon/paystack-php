@@ -1,8 +1,8 @@
 <?php
 
-namespace Eidetic;
+namespace YabaCon;
 
-use \Eidetic\Paystack\Helpers\Router;
+use \YabaCon\Paystack\Helpers\Router;
 
 /**
  *
@@ -100,7 +100,7 @@ class Paystack
             function ($class_name) {
                 $file = dirname(__FILE__) . DIRECTORY_SEPARATOR;
                 $file .= str_replace(
-                    [ 'Eidetic\\',
+                    [ 'YabaCon\\',
                     '\\' ],
                     [
                     '',

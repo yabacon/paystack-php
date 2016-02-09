@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/eidetic-limited/paystack-php).
+We accept contributions via Pull Requests on [Github](https://github.com/yabacon/paystack-php).
 
 
 ## Pull Requests
