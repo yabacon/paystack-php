@@ -30,6 +30,8 @@ require 'path/to/src/Paystack.php';
 
 ## Usage
 
+Check [ibrahimlawal/paystack-php-sample](https://github.com/ibrahimlawal/paystack-php-sample) for a sample donation page that uses this library
+
 ###Default: Uses curl for requests
 ``` php
 $paystack = new \YabaCon\Paystack('secret_key');
@@ -101,8 +103,6 @@ $response = $paystack->transaction->verify([
 ```
 
 Check [SAMPLES](SAMPLES.md) for more sample calls
-
-Check [ibrahimlawal/paystack-php-sample](https://github.com/ibrahimlawal/paystack-php-sample) for a sample donation page that uses this library
 
 ## Change log
 

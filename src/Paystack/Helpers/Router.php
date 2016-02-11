@@ -166,10 +166,10 @@ class Router
                 return [[],[],0];
             }
 
-            $code = \curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $code = \curl_getinfo($ch, \CURLINFO_HTTP_CODE);
 
         // Then, after your \curl_exec call:
-            $header_size = \curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+            $header_size = \curl_getinfo($ch, \CURLINFO_HEADER_SIZE);
             $header = substr($response, 0, $header_size);
             $header = $this->headersFromLines(explode("\n", trim($header)));
             $body = substr($response, $header_size);
