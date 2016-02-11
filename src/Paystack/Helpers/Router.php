@@ -163,7 +163,7 @@ class Router
             if (\curl_errno($ch)) {   // should be 0
             // curl ended with an error
                 \curl_close($ch);
-                return [[],[]];
+                return [[],[],0];
             }
 
             $code = \curl_getinfo($ch, CURLINFO_HTTP_CODE);
