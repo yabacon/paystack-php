@@ -7,14 +7,15 @@ $dotenv = new Dotenv\Dotenv(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEP
 $dotenv->load();
 
 $paystack = new \YabaCon\Paystack(getenv("PAYSTACK_SECRET_KEY"));
-$paystack->useGuzzle();
-
+//$paystack->useGuzzle();
+    
 if (false) {
     print_r($paystack->customer(1));
     print_r($paystack->ff(3447));
     print_r($paystack->customer->dontlist());
     print_r($paystack->customer->update(['id'=>3447,'first_name'=>'Gopher']));
     print_r($paystack->transaction->list(['perPage'=>1,'page'=>1]));
+    print_r($paystack->customer->list(['perPage'=>1,'page'=>1]));
     print_r($paystack->customer->create([
       'first_name'=>'Dafe',
       'last_name'=>'Aba',

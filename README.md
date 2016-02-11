@@ -40,22 +40,22 @@ $paystack = new \YabaCon\Paystack('secret_key');
 
 // $headers is an array of header values.
 // $body is an array created from json_decoding response
-list($headers, $body) = $paystack->customer(12);
-list($headers, $body) = $paystack->customer->list();
-list($headers, $body) = $paystack->customer->list(['perPage'=>5,'page'=>2]); // list the second page at 5 customers per page
+list($headers, $body, $code) = $paystack->customer(12);
+list($headers, $body, $code) = $paystack->customer->list();
+list($headers, $body, $code) = $paystack->customer->list(['perPage'=>5,'page'=>2]); // list the second page at 5 customers per page
 
-list($headers, $body) = $paystack->customer->create([
+list($headers, $body, $code) = $paystack->customer->create([
                           'first_name'=>'Dafe', 
                           'last_name'=>'Aba', 
                           'email'=>"dafe@aba.c", 
                           'phone'=>'08012345678'
                         ]);
-list($headers, $body) = $paystack->transaction->initialize([
+list($headers, $body, $code) = $paystack->transaction->initialize([
                           'reference'=>'unique_refencecode', 
                           'amount'=>'120000', 
                           'email'=>'dafe@aba.c'
                         ]);
-list($headers, $body) = $paystack->transaction->verify([
+list($headers, $body, $code) = $paystack->transaction->verify([
                           'reference'=>'refencecode'
                         ]);
 ```
