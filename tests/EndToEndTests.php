@@ -3,11 +3,15 @@
 error_reporting(-1);
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$dotenv = new Dotenv\Dotenv(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
+$dotenv = new Dotenv\Dotenv(dirname(dirname(__FILE__)));
 $dotenv->load();
 
 $paystack = new \YabaCon\Paystack(getenv("PAYSTACK_SECRET_KEY"));
-//$paystack->useGuzzle();
+
+$paystack2 = new \YabaCon\Paystack(getenv("PAYSTACK_SECRET_KEY_FAKE"));
+$paystack2->useGuzzle();
+$k = $paystack2->customer->list();
+print_r(json_decode($k->getbody(), true));
     
 if (false) {
     print_r($paystack->customer(1));
