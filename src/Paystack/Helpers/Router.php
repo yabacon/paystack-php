@@ -134,12 +134,12 @@ class Router
         if ($this->use_guzzle && class_exists('\\GuzzleHttp\\Client') && class_exists('\\GuzzleHttp\\Psr7\\Request')) {
             $request = new \GuzzleHttp\Psr7\Request(strtoupper($method), $endpoint, $headers, $body);
             $client = new \GuzzleHttp\Client();
-            try{
+            try {
                 $response = $client->send($request);
-            }catch(\GuzzleHttp\Exception\RequestException $e){
-                if ($e->hasResponse()){
+            } catch (\GuzzleHttp\Exception\RequestException $e) {
+                if ($e->hasResponse()) {
                     $response = $e->getResponse();
-                }else{
+                } else {
                     $response = null;
                 }
             }
