@@ -5,3 +5,4 @@ vendor
 nbproject
 src/Routes/SkeletonClass.php
 .env
+.idea/
