@@ -65,16 +65,16 @@ list($headers, $body, $code) = $paystack->transaction->verify([
 ###Use Guzzle for requests
 Only available if project is managed using composer.
 
-Install Guzzle
+**Install Guzzle**
 ``` bash
 $ composer require guzzlehttp/guzzle
 ```
 
-Make calls
+**Make calls**
 ``` php
 // create a paystack object
 $paystack = new \YabaCon\Paystack('secret_key');
-// tell it to use guzzle if found
+/* IMPORTANT tell it to use guzzle if found (else installing Guzzle will not have had any effect) */
 $paystack->useGuzzle();
 
 // Make a call to the resource/method
