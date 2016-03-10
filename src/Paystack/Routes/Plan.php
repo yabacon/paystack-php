@@ -36,7 +36,6 @@ class Plan implements RouteInterface
      * create
      * Insert description here
      *
-     *
      * @return
      *
      * @access
@@ -69,7 +68,6 @@ class Plan implements RouteInterface
      * getOne
      * Insert description here
      *
-     *
      * @return
      *
      * @access
@@ -91,7 +89,6 @@ class Plan implements RouteInterface
      * getList
      * Insert description here
      *
-     *
      * @return
      *
      * @access
@@ -111,7 +108,6 @@ class Plan implements RouteInterface
     /**
      * update
      * Insert description here
-     *
      *
      * @return
      *

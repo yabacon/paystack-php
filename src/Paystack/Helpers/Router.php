@@ -35,7 +35,7 @@ class Router
     const HTTP_CODE_KEY = 'httpcode';
     const BODY_KEY = 'body';
 
- /**
+    /**
  * moveArgsToSentargs
  * Insert description here
  *
@@ -58,14 +58,14 @@ class Router
 
 
 
-    // check if interface supports args
+        // check if interface supports args
         if (array_key_exists(RouteInterface:: ARGS_KEY, $interface)) {
-        // to allow args to be specified in the payload, filter them out and put them in sentargs
+            // to allow args to be specified in the payload, filter them out and put them in sentargs
             $sentargs = (!$sentargs) ? [ ] : $sentargs; // Make sure $sentargs is not null
             $args = $interface[RouteInterface::ARGS_KEY];
             while (list($key, $value) = each($payload)) {
-            // check that a value was specified
-            // with a key that was expected as an arg
+                // check that a value was specified
+                // with a key that was expected as an arg
                 if (in_array($key, $args)) {
                     $sentargs[$key] = $value;
                     unset($payload[$key]);
@@ -74,7 +74,7 @@ class Router
         }
     }
 
- /**
+    /**
  * putArgsIntoEndpoint
  * Insert description here
  *
@@ -90,13 +90,13 @@ class Router
  */
     private function putArgsIntoEndpoint(&$endpoint, $sentargs)
     {
-    // substitute sentargs in endpoint
+        // substitute sentargs in endpoint
         while (list($key, $value) = each($sentargs)) {
             $endpoint = str_replace('{' . $key . '}', $value, $endpoint);
         }
     }
 
- /**
+    /**
  * callViaCurl
  * Insert description here
  *
@@ -123,14 +123,15 @@ class Router
  
         $headers = ["Authorization"=>"Bearer " . $this->secret_key ];
         $body = '';
-        if (($method === RouteInterface::POST_METHOD)||
-        ($method === RouteInterface::PUT_METHOD)) {
+        if (($method === RouteInterface::POST_METHOD)
+            || ($method === RouteInterface::PUT_METHOD)
+        ) {
             $headers["Content-Type"] = "application/json";
             $body = json_encode($payload);
         } elseif ($method === RouteInterface::GET_METHOD) {
             $endpoint = $endpoint . '?' . http_build_query($payload);
         }
-    // Use Guzzle if found, else use Curl
+        // Use Guzzle if found, else use Curl
         if ($this->use_guzzle && class_exists('\\GuzzleHttp\\Client') && class_exists('\\GuzzleHttp\\Psr7\\Request')) {
             $request = new \GuzzleHttp\Psr7\Request(strtoupper($method), $endpoint, $headers, $body);
             $client = new \GuzzleHttp\Client();
@@ -146,10 +147,10 @@ class Router
             return $response;
             
         } else {
-        //open connection
+            //open connection
         
             $ch = \curl_init();
-        // set url
+            // set url
             \curl_setopt($ch, \CURLOPT_URL, $endpoint);
  
             if ($method === RouteInterface::POST_METHOD || $method === RouteInterface::PUT_METHOD) {
@@ -158,7 +159,7 @@ class Router
 
                 \curl_setopt($ch, \CURLOPT_POSTFIELDS, $body);
             }
-        //flatten the headers
+            //flatten the headers
             $flattened_headers = [];
             while (list($key, $value) = each($headers)) {
                 $flattened_headers[] = $key . ": " . $value;
@@ -166,18 +167,27 @@ class Router
             \curl_setopt($ch, \CURLOPT_HTTPHEADER, $flattened_headers);
             \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
             \curl_setopt($ch, \CURLOPT_HEADER, 1);
+            
+            // Make sure CURL_SSLVERSION_TLSv1_2 is defined as 6
+            // Curl must be able to use TLSv1.2 to connect
+            // to Paystack servers
+            
+            if (!defined('CURL_SSLVERSION_TLSV1_2')) {
+                define('CURL_SSLVERSION_TLSV1_2', 6);
+            }
+            curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSV1_2);
 
             $response = \curl_exec($ch);
             
             if (\curl_errno($ch)) {   // should be 0
-            // curl ended with an error
+                // curl ended with an error
                 \curl_close($ch);
                 return [[],[],0];
             }
 
             $code = \curl_getinfo($ch, \CURLINFO_HTTP_CODE);
 
-        // Then, after your \curl_exec call:
+            // Then, after your \curl_exec call:
             $header_size = \curl_getinfo($ch, \CURLINFO_HEADER_SIZE);
             $header = substr($response, 0, $header_size);
             $header = $this->headersFromLines(explode("\n", trim($header)));
@@ -185,7 +195,7 @@ class Router
             $body = json_decode($body, true);
             
 
-        //close connection
+            //close connection
             \curl_close($ch);
 
             return [
@@ -208,7 +218,7 @@ class Router
         return $headers;
     }
 
- /**
+    /**
  * __call
  * Insert description here
  *
@@ -228,12 +238,12 @@ class Router
         if (array_key_exists($method, $this->methods) && is_callable($this->methods[$method])) {
             return call_user_func_array($this->methods[$method], $sentargs);
         } else {
-        // User attempted to call a function that does not exist
+            // User attempted to call a function that does not exist
             throw new \Exception('Function "' . $method . '" does not exist for "' . $this->route . "'.");
         }
     }
 
- /**
+    /**
  * A magic resource object that can make method calls to API
  *
  * @param $route
@@ -247,13 +257,13 @@ class Router
         $this->use_guzzle = $paystackObj->use_guzzle;
 
         $mets = get_class_methods($this->route_class);
-    // add methods to this object per method, except root
+        // add methods to this object per method, except root
         foreach ($mets as $mtd) {
             if ($mtd === 'root') {
-            // skip root method
+                // skip root method
                 continue;
             }
-        /**
+            /**
  * array
  * Insert description here
  *
@@ -273,7 +283,7 @@ class Router
                 array $sentargs = [ ]
             ) use ($mtd) {
                 $interface = call_user_func($this->route_class . '::' . $mtd);
-            // TODO: validate params and sentargs against definitions
+                // TODO: validate params and sentargs against definitions
                 return $this->callViaCurl($interface, $params, $sentargs);
             };
             $this->methods[$mtd] = \Closure::bind($mtdFunc, $this, get_class());

@@ -47,6 +47,7 @@ class Transaction implements RouteInterface
     }
     /**
      * Charge authorization
+     *
      * @static
      */
     public static function charge()
@@ -104,7 +105,6 @@ class Transaction implements RouteInterface
      * totals
      * Insert description here
      *
-     *
      * @return
      *
      * @access
@@ -124,7 +124,6 @@ class Transaction implements RouteInterface
     /**
      * verify
      * Insert description here
-     *
      *
      * @return
      *
