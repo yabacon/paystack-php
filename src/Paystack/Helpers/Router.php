@@ -166,6 +166,14 @@ class Router
             \curl_setopt($ch, \CURLOPT_HTTPHEADER, $flattened_headers);
             \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
             \curl_setopt($ch, \CURLOPT_HEADER, 1);
+            
+            // Make sure CURL_SSLVERSION_TLSv1_2 is defined as 6
+            // Curl must be able to use TLSv1.2 to connect 
+            // to Paystack servers
+            if(!defined('CURL_SSLVERSION_TLSv1_2')){
+                define('CURL_SSLVERSION_TLSv1_2', 6);
+            }
+            curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
 
             $response = \curl_exec($ch);
             

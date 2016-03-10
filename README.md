@@ -11,6 +11,11 @@ A PHP API wrapper for [Paystack](https://paystack.co/).
 
 [![Paystack](img/paystack.png?raw=true "Paystack")](https://paystack.co/)
 
+## Requirements
+- Curl 7.34.0 or more recent (Unless using Guzzle)
+- PHP 5.4.0 or more recent
+- OpenSSL v1.0.1 or more recent
+
 ## Install
 
 ### Via Composer
@@ -32,7 +37,7 @@ require 'path/to/src/Paystack.php';
 
 Check [ibrahimlawal/paystack-php-sample](https://github.com/ibrahimlawal/paystack-php-sample) for a sample donation page that uses this library
 
-###Default: Uses curl for requests
+### Default: Uses curl for requests
 ``` php
 $paystack = new \YabaCon\Paystack('secret_key');
 
