@@ -1,9 +1,9 @@
 <?php
 
-namespace YabaCon\Paystack\Helpers;
+namespace Yabacon\Paystack\Helpers;
 
 use \Closure;
-use \YabaCon\Paystack\Contracts\RouteInterface;
+use \Yabacon\Paystack\Contracts\RouteInterface;
 
 /**
  * Router
@@ -141,7 +141,6 @@ class Router
                 }
             }
             return $response;
-            
         } else {
             //open connection
         
@@ -224,16 +223,19 @@ class Router
  * A magic resource object that can make method calls to API
  *
  * @param $route
- * @param $paystackObj - A YabaCon\Paystack Object
+ * @param $paystackObj - A Yabacon\Paystack Object
  */
     public function __construct($route, $paystackObj)
     {
         $this->route = strtolower($route);
-        $this->route_class = 'YabaCon\\Paystack\\Routes\\' . ucwords($route);
+        $this->route_class = 'Yabacon\\Paystack\\Routes\\' . ucwords($route);
         $this->secret_key = $paystackObj->secret_key;
         $this->use_guzzle = $paystackObj->use_guzzle;
 
         $mets = get_class_methods($this->route_class);
+        if (empty($mets)) {
+            throw new \InvalidArgumentException('Class "' . $this->route . '" does not exist.');
+        }
         // add methods to this object per method, except root
         foreach ($mets as $mtd) {
             if ($mtd === 'root') {

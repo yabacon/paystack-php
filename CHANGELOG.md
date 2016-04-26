@@ -9,12 +9,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Changes
 - Calls will return an Object of stdClass or throw a Paystack API/cURL error instead of 
 an array as in version 1
+- Root namespace is now Yabacon instead of YabaCon
 
 ### Added
 - Pages
 - Subscriptions
 - Use ->fetch to get a single item or call singular form with id/code
-- use ->list to get a list of items or call plural form with paging parameters
+- Use ->list to get a list of items or call plural form with paging parameters
 
 ### Added usage of TLSv1.2
 CURL default SSL version TLSv1.2

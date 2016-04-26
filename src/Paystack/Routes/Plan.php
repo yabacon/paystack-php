@@ -1,8 +1,8 @@
 <?php
 
-namespace YabaCon\Paystack\Routes;
+namespace Yabacon\Paystack\Routes;
 
-use YabaCon\Paystack\Contracts\RouteInterface;
+use Yabacon\Paystack\Contracts\RouteInterface;
 
 /**
  * Plan

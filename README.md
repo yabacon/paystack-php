@@ -30,7 +30,7 @@ Download a release version from the [releases page](https://github.com/yabacon/p
 Extract, then:
 ``` php
 require 'path/to/src/Paystack.php';
-\YabaCon\Paystack::registerAutoloader();
+\Yabacon\Paystack::registerAutoloader();
 ```
 
 ## IMPORTANT
@@ -43,7 +43,7 @@ Check [ibrahimlawal/paystack-php-sample](https://github.com/ibrahimlawal/paystac
 
 ### Default: Uses curl for requests
 ``` php
-$paystack = new \YabaCon\Paystack('secret_key');
+$paystack = new \Yabacon\Paystack('secret_key');
 
 // Make a call to the resource/method
 // $paystack->{resource}->{method}();
@@ -87,7 +87,7 @@ $ composer require guzzlehttp/guzzle
 **Make calls**
 ``` php
 // create a paystack object
-$paystack = new \YabaCon\Paystack('secret_key');
+$paystack = new \Yabacon\Paystack('secret_key');
 /* IMPORTANT tell it to use guzzle if found (else installing Guzzle will not have had any effect) */
 $paystack->useGuzzle();
 
@@ -141,7 +141,7 @@ If you discover any security related issues, please email yabacon.valley@gmail.c
 
 ## Credits
 
-- [YabaCon][link-author]
+- [Yabacon][link-author]
 - [Issa Jubril](https://github.com/masterp4dev)
 - [Ibrahim Lawal](https://github.com/ibrahimlawal)
 - [Opeyemi Obembe](https://github.com/kehers) - followed the style he employed in creating the [NodeJS Wrapper](https://github.com/kehers/paystack)

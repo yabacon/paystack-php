@@ -6,9 +6,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = new Dotenv\Dotenv(dirname(dirname(__FILE__)));
 $dotenv->load();
 
-$paystack = new \YabaCon\Paystack(getenv("PAYSTACK_SECRET_KEY"));
+$paystack = new \Yabacon\Paystack(getenv("PAYSTACK_SECRET_KEY"));
 
-// $paystack2 = new \YabaCon\Paystack(getenv("PAYSTACK_SECRET_KEY_FAKE"));
+// $paystack2 = new \Yabacon\Paystack(getenv("PAYSTACK_SECRET_KEY_FAKE"));
 // $paystack2->useGuzzle();
 // $k = $paystack2->customer->list();
 // print_r(json_decode($k->getbody(), true));

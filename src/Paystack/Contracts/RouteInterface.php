@@ -3,7 +3,7 @@
  * A Route
  */
 
-namespace YabaCon\Paystack\Contracts;
+namespace Yabacon\Paystack\Contracts;
 
 interface RouteInterface
 {

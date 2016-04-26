@@ -1,8 +1,8 @@
 <?php
 
-namespace YabaCon;
+namespace Yabacon;
 
-use \YabaCon\Paystack\Helpers\Router;
+use \Yabacon\Paystack\Helpers\Router;
 
 /**
  *
@@ -25,7 +25,6 @@ class Paystack
         if (!is_string($secret_key) || !(substr($secret_key, 0, 3)==='sk_')) {
             // Should never get here
             throw new \InvalidArgumentException('A Valid Paystack Secret Key must start with \'sk_\'.');
-   
         }
          $this->secret_key = $secret_key;
          $this->routes = $this->definedRoutes();
@@ -41,14 +40,14 @@ class Paystack
 
     /**
  * definedRoutes
- * gets routes defined in the YabaCon\Paystack\Routes namespace
+ * gets routes defined in the Yabacon\Paystack\Routes namespace
  * since we are using PSR-4. It is safe to assume that all php
  * files in the folder are names of the classes.
  *
  * @return the list of defined Routes
  *
  * @access private
- * @see    YabaCon\Paystack\Routes\Router
+ * @see    Yabacon\Paystack\Routes\Router
  * @since  1.0
  */
     private function definedRoutes()
@@ -67,14 +66,14 @@ class Paystack
  * Magic Method for fetch on routes
  *
  * @param $method - a string whose title case is a class in the
- *                  YabaCon\Paystack\Routes namespace implementing
- *                  YabaCon\Paystack\Contracts\RouteInterface
+ *                  Yabacon\Paystack\Routes namespace implementing
+ *                  Yabacon\Paystack\Contracts\RouteInterface
  * @param $args - arguments sent to the magic method
  *
  * @return the result of calling /{route}/get on the api
  *
  * @access public
- * @see    YabaCon\Paystack\Routes\Router
+ * @see    Yabacon\Paystack\Routes\Router
  * @since  1.0
  */
     public function __call($method, $args)
@@ -124,7 +123,7 @@ class Paystack
             */
             function ($class_name) {
                 $file = dirname(__FILE__) . DIRECTORY_SEPARATOR;
-                $file .= str_replace([ 'YabaCon\\', '\\' ], ['', DIRECTORY_SEPARATOR ], $class_name) . '.php';
+                $file .= str_replace([ 'Yabacon\\', '\\' ], ['', DIRECTORY_SEPARATOR ], $class_name) . '.php';
                 include_once $file;
             }
         );
