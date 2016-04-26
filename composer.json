@@ -29,10 +29,10 @@
         "guzzlehttp/guzzle": "Guzzle is a PHP HTTP client that makes it easy to send HTTP requests and trivial to integrate with web services. While not required by Paystack-PHP, installing it will provide you a more object-oriented experience. Also note that when Guzzle is installed, the result from API calls will be a GuzzleHttp\\Psr7\\Response Object"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.*",
-        "scrutinizer/ocular": "~1.1",
+        "phpunit/phpunit": "^4.*",
+        "scrutinizer/ocular": "^1.1",
         "guzzlehttp/guzzle": "^6.1",
-        "squizlabs/php_codesniffer": "~2.3",
+        "squizlabs/php_codesniffer": "^2.3",
         "vlucas/phpdotenv": "^2.2"
     },
     "autoload": {
@@ -50,7 +50,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.8-dev"
+            "dev-master": "2.0.1-dev"
         }
     }
 }

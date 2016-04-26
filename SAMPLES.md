@@ -11,6 +11,8 @@ configured the $paystack object as you want. Check [README](README.md) for detai
 // customer
 $paystack->customer(12);
 $paystack->customer->list();
+$paystack->customer->fetch(12);
+$paystack->customers();
 $paystack->customer->create([
                 'first_name'=>'name',
                 'last_name'=>'name',
@@ -28,6 +30,8 @@ $paystack->customer->list(['perPage'=>5,'page'=>2]); // list the second page at 
 
 // plan
 $paystack->plan(12);
+$paystack->plans();
+$paystack->plan->fetch("PLNxxx");
 $paystack->plan->list();
 $paystack->plan->create([
                 'name'=>'name',
@@ -45,7 +49,7 @@ $paystack->plan->update([
                 'name'=>'name',
                 'description'=>'Describe at length',
                 'amount'=>1000, // in kobo
-                'interval'=>7,
+                'interval'=>'weekly',
                 'send_invoices'=>true,
                 'send_sms'=>true,
                 'hosted_page'=>'url',
@@ -53,7 +57,38 @@ $paystack->plan->update([
                 'hosted_page_summary'=>'details',
                 'currency'=>'NGN'
               ],['id'=>233]);
-$paystack->plan->list(['perPage'=>5,'page'=>2]); // list the second page at 5 plans per page
+$paystack->plan->list(['perPage'=>5,'page'=>2]); // list the second page at 5 per page
+
+// page
+$paystack->page(12);
+$paystack->pages();
+$paystack->page->fetch(12);
+$paystack->page->list();
+$paystack->page->create([
+                'name'=>'name',
+                'description'=>'Describe at length',
+                'amount'=>1000
+              ]);
+$paystack->page->update([
+                'name'=>'name',
+                'description'=>'Describe at length'],['id'=>233]);
+$paystack->page->list(['perPage'=>5,'page'=>2]); // list the second page at 5 per page
+
+// page
+$paystack->subscription(12);
+$paystack->subscription();
+$paystack->subscription->fetch(12);
+$paystack->subscription->list();
+$paystack->subscription->create([
+                'plan'=>'PLN_xxxx',
+                'customer'=>'CUS_xxxxx',
+                'authorization'=>'AUTH_xxx'
+              ]);
+$paystack->subscription->disable([
+                'code'=>'',
+                'token'=>''],['id'=>233]);
+$paystack->subscription->list(['perPage'=>5,'page'=>2]); // list the second page at 5 per page
+$paystack->subscriptions(['perPage'=>5,'page'=>2]); // list the second page at 5 per page
 
 // transaction
 $paystack->transaction(12);

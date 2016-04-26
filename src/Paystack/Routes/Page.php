@@ -5,7 +5,7 @@ namespace YabaCon\Paystack\Routes;
 use YabaCon\Paystack\Contracts\RouteInterface;
 
 /**
- * Plan
+ * Page
  * Insert description here
  *
  * @category
@@ -18,7 +18,7 @@ use YabaCon\Paystack\Contracts\RouteInterface;
  * @see
  * @since
  */
-class Plan implements RouteInterface
+class Page implements RouteInterface
 {
 
     /**
@@ -26,10 +26,10 @@ class Plan implements RouteInterface
      */
     public static function root()
     {
-        return '/plan';
+        return '/page';
     }
     /*
-      Create plan
+      Create page
      */
 
     /**
@@ -46,22 +46,15 @@ class Plan implements RouteInterface
     public static function create()
     {
         return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
-            RouteInterface::ENDPOINT_KEY => Plan::root(),
+            RouteInterface::ENDPOINT_KEY => Page::root(),
             RouteInterface::PARAMS_KEY   => [
                 'name',
                 'description',
-                'amount',
-                'interval',
-                'send_invoices',
-                'send_sms',
-                'hosted_page',
-                'hosted_page_url',
-                'hosted_page_summary',
-                'currency' ]
+                'amount' ]
         ];
     }
     /*
-      Get plan
+      Get page
      */
 
     /**
@@ -78,12 +71,12 @@ class Plan implements RouteInterface
     public static function fetch()
     {
         return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
-            RouteInterface::ENDPOINT_KEY => Plan::root() . '/{id}',
+            RouteInterface::ENDPOINT_KEY => Page::root() . '/{id}',
             RouteInterface::ARGS_KEY     => ['id' ] ];
     }
 
     /*
-      List plan
+      List page
      */
 
     /**
@@ -100,10 +93,10 @@ class Plan implements RouteInterface
     public static function getList()
     {
         return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
-            RouteInterface::ENDPOINT_KEY => Plan::root() ];
+            RouteInterface::ENDPOINT_KEY => Page::root() ];
     }
     /*
-      Update plan
+      Update page
      */
 
     /**
@@ -120,18 +113,10 @@ class Plan implements RouteInterface
     public static function update()
     {
         return [RouteInterface::METHOD_KEY   => RouteInterface::PUT_METHOD,
-            RouteInterface::ENDPOINT_KEY => Plan::root() . '/{id}',
+            RouteInterface::ENDPOINT_KEY => Page::root() . '/{id}',
             RouteInterface::PARAMS_KEY   => [
                 'name',
-                'description',
-                'amount',
-                'interval',
-                'send_invoices',
-                'send_sms',
-                'hosted_page',
-                'hosted_page_url',
-                'hosted_page_summary',
-                'currency' ],
+                'description' ],
             RouteInterface::ARGS_KEY     => ['id' ] ];
     }
 }

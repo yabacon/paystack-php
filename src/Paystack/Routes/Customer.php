@@ -54,9 +54,9 @@ class Customer implements RouteInterface
     }
 
     /**
-      Get customer
+      Get customer by ID or code
      */
-    public static function getOne()
+    public static function fetch()
     {
         return [
             RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,

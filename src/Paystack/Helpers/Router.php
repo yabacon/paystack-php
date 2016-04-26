@@ -3,7 +3,6 @@
 namespace YabaCon\Paystack\Helpers;
 
 use \Closure;
-use Guzzle\Http\Exception\RequestException;
 use \YabaCon\Paystack\Contracts\RouteInterface;
 
 /**
@@ -31,9 +30,6 @@ class Router
 
     const ID_KEY = 'id';
     const PAYSTACK_API_ROOT = 'https://api.paystack.co';
-    const HEADER_KEY = 'header';
-    const HTTP_CODE_KEY = 'httpcode';
-    const BODY_KEY = 'body';
 
     /**
  * moveArgsToSentargs
@@ -137,11 +133,11 @@ class Router
             $client = new \GuzzleHttp\Client();
             try {
                 $response = $client->send($request);
-            } catch (\GuzzleHttp\Exception\RequestException $e) {
+            } catch (\Exception $e) {
                 if ($e->hasResponse()) {
                     $response = $e->getResponse();
                 } else {
-                    $response = null;
+                    throw $e;
                 }
             }
             return $response;
@@ -166,8 +162,7 @@ class Router
             }
             \curl_setopt($ch, \CURLOPT_HTTPHEADER, $flattened_headers);
             \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
-            \curl_setopt($ch, \CURLOPT_HEADER, 1);
-            
+
             // Make sure CURL_SSLVERSION_TLSv1_2 is defined as 6
             // Curl must be able to use TLSv1.2 to connect
             // to Paystack servers
@@ -181,43 +176,25 @@ class Router
             
             if (\curl_errno($ch)) {   // should be 0
                 // curl ended with an error
+                $cerr = \curl_error($ch);
                 \curl_close($ch);
-                return [[],[],0];
+                throw new \Exception("Curl failed with response: '" . $cerr . "'.");
             }
 
-            $code = \curl_getinfo($ch, \CURLINFO_HTTP_CODE);
-
             // Then, after your \curl_exec call:
-            $header_size = \curl_getinfo($ch, \CURLINFO_HEADER_SIZE);
-            $header = substr($response, 0, $header_size);
-            $header = $this->headersFromLines(explode("\n", trim($header)));
-            $body = substr($response, $header_size);
-            $body = json_decode($body, true);
-            
-
+            $resp = json_decode($response);
             //close connection
             \curl_close($ch);
 
-            return [
-            0 => $header, 1 => $body, 2=> $code,
-            Router::HEADER_KEY => $header, Router::BODY_KEY => $body,
-            Router::HTTP_CODE_KEY=>$code];
+            if (!$resp->status) {
+                throw new \Exception("Paystack Request failed with response: '" . $resp->message . "'.");
+            }
+
+            return $resp;
         }
 
     }
     
-    private function headersFromLines($lines)
-    {
-        $headers = [];
-        foreach ($lines as $line) {
-            $parts = explode(':', $line, 2);
-            $headers[trim($parts[0])][] = isset($parts[1])
-            ? trim($parts[1])
-            : null;
-        }
-        return $headers;
-    }
-
     /**
  * __call
  * Insert description here
@@ -239,7 +216,7 @@ class Router
             return call_user_func_array($this->methods[$method], $sentargs);
         } else {
             // User attempted to call a function that does not exist
-            throw new \Exception('Function "' . $method . '" does not exist for "' . $this->route . "'.");
+            throw new \Exception('Function "' . $method . '" does not exist for "' . $this->route . '".');
         }
     }
 

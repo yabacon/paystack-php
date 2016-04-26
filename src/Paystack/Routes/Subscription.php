@@ -5,7 +5,7 @@ namespace YabaCon\Paystack\Routes;
 use YabaCon\Paystack\Contracts\RouteInterface;
 
 /**
- * Plan
+ * Subscription
  * Insert description here
  *
  * @category
@@ -18,7 +18,7 @@ use YabaCon\Paystack\Contracts\RouteInterface;
  * @see
  * @since
  */
-class Plan implements RouteInterface
+class Subscription implements RouteInterface
 {
 
     /**
@@ -26,10 +26,10 @@ class Plan implements RouteInterface
      */
     public static function root()
     {
-        return '/plan';
+        return '/subscription';
     }
     /*
-      Create plan
+      Create subscription
      */
 
     /**
@@ -46,22 +46,15 @@ class Plan implements RouteInterface
     public static function create()
     {
         return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
-            RouteInterface::ENDPOINT_KEY => Plan::root(),
+            RouteInterface::ENDPOINT_KEY => Subscription::root(),
             RouteInterface::PARAMS_KEY   => [
-                'name',
-                'description',
-                'amount',
-                'interval',
-                'send_invoices',
-                'send_sms',
-                'hosted_page',
-                'hosted_page_url',
-                'hosted_page_summary',
-                'currency' ]
+                'customer',
+                'plan',
+                'authorization' ]
         ];
     }
     /*
-      Get plan
+      Get subscription
      */
 
     /**
@@ -78,12 +71,12 @@ class Plan implements RouteInterface
     public static function fetch()
     {
         return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
-            RouteInterface::ENDPOINT_KEY => Plan::root() . '/{id}',
+            RouteInterface::ENDPOINT_KEY => Subscription::root() . '/{id}',
             RouteInterface::ARGS_KEY     => ['id' ] ];
     }
 
     /*
-      List plan
+      List subscription
      */
 
     /**
@@ -100,14 +93,14 @@ class Plan implements RouteInterface
     public static function getList()
     {
         return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
-            RouteInterface::ENDPOINT_KEY => Plan::root() ];
+            RouteInterface::ENDPOINT_KEY => Subscription::root() ];
     }
     /*
-      Update plan
+      Disable subscription
      */
 
     /**
-     * update
+     * disable
      * Insert description here
      *
      * @return
@@ -117,21 +110,36 @@ class Plan implements RouteInterface
      * @see
      * @since
      */
-    public static function update()
+    public static function disable()
     {
-        return [RouteInterface::METHOD_KEY   => RouteInterface::PUT_METHOD,
-            RouteInterface::ENDPOINT_KEY => Plan::root() . '/{id}',
+        return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
+            RouteInterface::ENDPOINT_KEY => Subscription::root(). '/disable',
             RouteInterface::PARAMS_KEY   => [
-                'name',
-                'description',
-                'amount',
-                'interval',
-                'send_invoices',
-                'send_sms',
-                'hosted_page',
-                'hosted_page_url',
-                'hosted_page_summary',
-                'currency' ],
-            RouteInterface::ARGS_KEY     => ['id' ] ];
+                'code',
+                'token'] ];
+    }
+    
+    /*
+      Enable subscription
+     */
+
+    /**
+     * enable
+     * Insert description here
+     *
+     * @return
+     *
+     * @access
+     * @static
+     * @see
+     * @since
+     */
+    public static function enable()
+    {
+        return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
+            RouteInterface::ENDPOINT_KEY => Subscription::root() . '/enable',
+            RouteInterface::PARAMS_KEY   => [
+                'code',
+                'token'] ];
     }
 }

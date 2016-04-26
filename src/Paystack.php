@@ -64,7 +64,7 @@ class Paystack
     }
     /**
  * __call
- * Magic Method for getOne on routes
+ * Magic Method for fetch on routes
  *
  * @param $method - a string whose title case is a class in the
  *                  YabaCon\Paystack\Routes namespace implementing
@@ -80,27 +80,34 @@ class Paystack
     public function __call($method, $args)
     {
         /*
-        attempt to call getOne when the route is called directly
+        attempt to call fetch when the route is called directly
         translates to /{root}/{get}/{id}
         */
-        if (in_array($method, $this->routes, true)) {
+        
+        if (in_array($method, $this->routes, true) && count($args) === 1) {
             $route = new Router($method, $this);
-    
-            if (count($args) === 1 && is_integer($args[0])) {
-                // no params, just one arg... the id
-                $args = [[], [ Router::ID_KEY => $args[0] ] ];
-                return $route->__call('getOne', $args);
-            } elseif (count($args) === 2 && is_integer($args[0]) && is_array($args[1])) {
-                // there are params, and just one arg... the id
-                $args = [$args[1], [ Router::ID_KEY => $args[0] ] ];
-                return $route->__call('getOne', $args);
+            // no params, just one arg... the id
+            $args = [[], [ Router::ID_KEY => $args[0] ] ];
+            return $route->__call('fetch', $args);
+        }
+
+        // Not found is it plural?
+        $is_plural = strripos($method, 's')===(strlen($method)-1);
+        $singular_form = substr($method, 0, strlen($method)-1);
+
+        if ($is_plural && in_array($singular_form, $this->routes, true)) {
+            $route = new Router($singular_form, $this);
+            if ((count($args) === 1 && is_array($args[0]))||(count($args) === 0)) {
+                return $route->__call('getList', $args);
             }
         }
+                
         // Should never get here
         throw new \InvalidArgumentException(
-            'Route "' .
-            $method .
-            '" only accepts an integer id and an optional array of paging arguments.'
+            'Route "' . $method . '" can only accept '.
+            ($is_plural ?
+                        'an optional array of paging arguments (perPage, page)'
+                        : 'an id or code') . '.'
         );
     }
 

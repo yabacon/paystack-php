@@ -33,6 +33,10 @@ require 'path/to/src/Paystack.php';
 \YabaCon\Paystack::registerAutoloader();
 ```
 
+## IMPORTANT
+Version 2 is not compatible with version 1 code! It throws an error if there's problem error in cURL
+or if the Paystack API gives a false status in the response body.
+
 ## Usage
 
 Check [ibrahimlawal/paystack-php-sample](https://github.com/ibrahimlawal/paystack-php-sample) for a sample donation page that uses this library
@@ -42,27 +46,32 @@ Check [ibrahimlawal/paystack-php-sample](https://github.com/ibrahimlawal/paystac
 $paystack = new \YabaCon\Paystack('secret_key');
 
 // Make a call to the resource/method
-// $paystack->{resource}->{method}(); 
+// $paystack->{resource}->{method}();
+
+// Shortcuts
 // for gets, use $paystack->{resource}(id)
+// for list, use $paystack->{resource}s()
 
 // $headers is an array of header values.
-// $body is an array created from json_decoding response
-list($headers, $body, $code) = $paystack->customer(12);
-list($headers, $body, $code) = $paystack->customer->list();
-list($headers, $body, $code) = $paystack->customer->list(['perPage'=>5,'page'=>2]); // list the second page at 5 customers per page
+// $response is an stdClass object created from json_decoding response
+$response = $paystack->customer(12);
+$response = $paystack->customer->fetch(12);
+$response = $paystack->customers();
+$response = $paystack->customer->list();
+$response = $paystack->customer->list(['perPage'=>5,'page'=>2]); // list the second page at 5 customers per page
 
-list($headers, $body, $code) = $paystack->customer->create([
+$response = $paystack->customer->create([
                           'first_name'=>'Dafe', 
                           'last_name'=>'Aba', 
                           'email'=>"dafe@aba.c", 
                           'phone'=>'08012345678'
                         ]);
-list($headers, $body, $code) = $paystack->transaction->initialize([
+$response = $paystack->transaction->initialize([
                           'reference'=>'unique_refencecode', 
                           'amount'=>'120000', 
                           'email'=>'dafe@aba.c'
                         ]);
-list($headers, $body, $code) = $paystack->transaction->verify([
+$response = $paystack->transaction->verify([
                           'reference'=>'refencecode'
                         ]);
 ```
@@ -84,7 +93,10 @@ $paystack->useGuzzle();
 
 // Make a call to the resource/method
 // $paystack->{resource}->{method}(); 
+
+// Shortcuts
 // for gets, use $paystack->{resource}(id)
+// for list, use $paystack->{resource}s()
 
 // $response is a GuzzleHttp\Psr7\Response Object
 $response = $paystack->customer(12);

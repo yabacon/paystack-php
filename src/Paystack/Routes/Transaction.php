@@ -78,7 +78,7 @@ class Transaction implements RouteInterface
      *
      * @static
      */
-    public static function getOne()
+    public static function fetch()
     {
         return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
             RouteInterface::ENDPOINT_KEY => Transaction::root() . '/{id}',
@@ -96,6 +96,18 @@ class Transaction implements RouteInterface
     {
         return [ RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
             RouteInterface::ENDPOINT_KEY => Transaction::root() ];
+    }
+    /**
+     * Export transactions
+     *
+     * @static
+     * @see
+     * @since
+     */
+    public static function export()
+    {
+        return [ RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
+            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/export' ];
     }
     /*
       Get totals
