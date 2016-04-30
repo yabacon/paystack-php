@@ -95,10 +95,7 @@ class Customer implements RouteInterface
                 'email',
                 'metadata',
                 'phone' ],
-            RouteInterface::ARGS_KEY     => ['id' ],
-            RouteInterface::REQUIRED_KEY => [
-                RouteInterface::ARGS_KEY   => ['id' ]
-            ]
+            RouteInterface::ARGS_KEY     => ['id' ]
         ];
     }
 }

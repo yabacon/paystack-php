@@ -45,11 +45,11 @@ class Page implements RouteInterface
      */
     public static function create()
     {
-        return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
+        return [
+            RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
             RouteInterface::ENDPOINT_KEY => Page::root(),
             RouteInterface::PARAMS_KEY   => [
-                'name',
-                'description',
+                'name', 'description', 
                 'amount' ]
         ];
     }
@@ -70,9 +70,11 @@ class Page implements RouteInterface
      */
     public static function fetch()
     {
-        return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
+        return [
+            RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
             RouteInterface::ENDPOINT_KEY => Page::root() . '/{id}',
-            RouteInterface::ARGS_KEY     => ['id' ] ];
+            RouteInterface::ARGS_KEY     => ['id' ]
+        ];
     }
 
     /*
@@ -112,11 +114,15 @@ class Page implements RouteInterface
      */
     public static function update()
     {
-        return [RouteInterface::METHOD_KEY   => RouteInterface::PUT_METHOD,
+        return [
+            RouteInterface::METHOD_KEY   => RouteInterface::PUT_METHOD,
             RouteInterface::ENDPOINT_KEY => Page::root() . '/{id}',
             RouteInterface::PARAMS_KEY   => [
                 'name',
-                'description' ],
-            RouteInterface::ARGS_KEY     => ['id' ] ];
+                'description',
+                'amount',
+                'active' ],
+            RouteInterface::ARGS_KEY     => ['id' ] 
+        ];
     }
 }
