@@ -17,3 +17,12 @@ checks:
         fix_identation_4spaces: true
         fix_doc_comments: true
 
+tools:
+    php_sim: true
+
+    # PHP Similarity Analyzer and Copy/paste Detector cannot be used at
+    # the same time right now. Make sure to either remove, or disable one.
+    php_cpd: false
+    external_code_coverage:
+        timeout: 600
+        runs: 1
