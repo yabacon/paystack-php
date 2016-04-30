@@ -44,6 +44,7 @@ class Customer implements RouteInterface
             RouteInterface::PARAMS_KEY   => ['first_name',
                 'last_name',
                 'email',
+                'metadata',
                 'phone' ],
             RouteInterface::REQUIRED_KEY => [
                 RouteInterface::PARAMS_KEY => ['first_name',
@@ -92,12 +93,11 @@ class Customer implements RouteInterface
             RouteInterface::PARAMS_KEY   => ['first_name',
                 'last_name',
                 'email',
+                'metadata',
                 'phone' ],
             RouteInterface::ARGS_KEY     => ['id' ],
             RouteInterface::REQUIRED_KEY => [
-                RouteInterface::ARGS_KEY   => ['id' ],
-                RouteInterface::PARAMS_KEY => ['first_name',
-                    'last_name' ]
+                RouteInterface::ARGS_KEY   => ['id' ]
             ]
         ];
     }

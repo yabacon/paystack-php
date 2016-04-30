@@ -15,6 +15,16 @@ $paystack = new \Yabacon\Paystack(getenv("PAYSTACK_SECRET_KEY"));
 // PLN_qs5x408lj9qkuvx
 // 
     
+// print_r($paystack->subscriptions());
+//     print_r($paystack->plan->create([
+//                 'name'=>'Daily 300',
+//                 'description'=>'Deduct 300 daily',
+//                 'amount'=>30000, // in kobo
+//                 'interval'=>'daily',
+//                 'send_invoices'=>true,
+//                 'send_sms'=>true,
+//                 'currency'=>'NGN'
+//               ]));
 if (false) {
     print_r($paystack->customer(18920));
     print_r($paystack->subscriptions());
