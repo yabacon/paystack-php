@@ -1,5 +1,5 @@
 filter:
-    excluded_paths: [tests/EndToEndTests.php]
+    excluded_paths: [tests/*]
 
 checks:
     php:
