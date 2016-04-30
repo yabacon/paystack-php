@@ -16,7 +16,7 @@ class Caller
         $this->use_guzzle = $paystackObj->use_guzzle;
     }
 
-    private function moveArgsToSentargs(
+    public function moveArgsToSentargs(
         $interface,
         &$payload,
         &$sentargs
@@ -37,7 +37,7 @@ class Caller
         }
     }
 
-    private function putArgsIntoEndpoint(&$endpoint, $sentargs)
+    public function putArgsIntoEndpoint(&$endpoint, $sentargs)
     {
         // substitute sentargs in endpoint
         while (list($key, $value) = each($sentargs)) {
