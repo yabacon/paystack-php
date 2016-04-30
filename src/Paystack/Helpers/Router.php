@@ -91,9 +91,43 @@ class Router
             $endpoint = str_replace('{' . $key . '}', $value, $endpoint);
         }
     }
+    
+    private function attemptGuzzle($method, $endpoint, $headers, $body)
+    {
+        if ($this->use_guzzle &&
+            class_exists('\\GuzzleHttp\\Exception\\BadResponseException') &&
+            class_exists('\\GuzzleHttp\\Exception\\ClientException') &&
+            class_exists('\\GuzzleHttp\\Exception\\ConnectException') &&
+            class_exists('\\GuzzleHttp\\Exception\\RequestException') &&
+            class_exists('\\GuzzleHttp\\Exception\\ServerException') &&
+            class_exists('\\GuzzleHttp\\Exception\\TooManyRedirectsException') &&
+            class_exists('\\GuzzleHttp\\Client') &&
+            class_exists('\\GuzzleHttp\\Psr7\\Request')) {
+            $request = new \GuzzleHttp\Psr7\Request(strtoupper($method), $endpoint, $headers, $body);
+            $client = new \GuzzleHttp\Client();
+            try {
+                $response = $client->send($request);
+            } catch (\Exception $e) {
+                if (($e instanceof \GuzzleHttp\Exception\BadResponseException
+                    || $e instanceof \GuzzleHttp\Exception\ClientException
+                    || $e instanceof \GuzzleHttp\Exception\ConnectException
+                    || $e instanceof \GuzzleHttp\Exception\RequestException
+                    || $e instanceof \GuzzleHttp\Exception\ServerException
+                    || $e instanceof \GuzzleHttp\Exception\TooManyRedirectsException
+                    ) && $e->hasResponse()) {
+                    $response = $e->getResponse();
+                } else {
+                    throw $e;
+                }
+            }
+            return $response;
+        } else {
+            return false;
+        }
+    }
 
     /**
- * callViaCurl
+ * callEndpoint
  * Insert description here
  *
  * @param $interface
@@ -107,10 +141,8 @@ class Router
  * @see
  * @since
  */
-    private function callViaCurl($interface, $payload = [ ], $sentargs = [ ])
+    private function callEndpoint($interface, $payload = [ ], $sentargs = [ ])
     {
- 
-
         $endpoint = Router::PAYSTACK_API_ROOT . $interface[RouteInterface::ENDPOINT_KEY];
         $method = $interface[RouteInterface::METHOD_KEY];
 
@@ -128,70 +160,54 @@ class Router
             $endpoint = $endpoint . '?' . http_build_query($payload);
         }
         // Use Guzzle if found, else use Curl
-        if ($this->use_guzzle && class_exists('\\GuzzleHttp\\Client') && class_exists('\\GuzzleHttp\\Psr7\\Request')) {
-            $request = new \GuzzleHttp\Psr7\Request(strtoupper($method), $endpoint, $headers, $body);
-            $client = new \GuzzleHttp\Client();
-            try {
-                $response = $client->send($request);
-            } catch (\Exception $e) {
-                if ($e->hasResponse()) {
-                    $response = $e->getResponse();
-                } else {
-                    throw $e;
-                }
-            }
-            return $response;
-        } else {
-            //open connection
+        $guzzleResponse = $this->attemptGuzzle($method, $endpoint, $headers, $body);
+        if ($guzzleResponse !== false) {
+            return $guzzleResponse;
+        }
         
-            $ch = \curl_init();
-            // set url
-            \curl_setopt($ch, \CURLOPT_URL, $endpoint);
- 
-            if ($method === RouteInterface::POST_METHOD || $method === RouteInterface::PUT_METHOD) {
-                ($method === RouteInterface:: POST_METHOD) && \curl_setopt($ch, \CURLOPT_POST, true);
-                ($method === RouteInterface ::PUT_METHOD) && \curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+        return $this->attemptCurl($method, $endpoint, $headers, $body);
+    }
 
-                \curl_setopt($ch, \CURLOPT_POSTFIELDS, $body);
-            }
-            //flatten the headers
-            $flattened_headers = [];
-            while (list($key, $value) = each($headers)) {
-                $flattened_headers[] = $key . ": " . $value;
-            }
-            \curl_setopt($ch, \CURLOPT_HTTPHEADER, $flattened_headers);
-            \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
+    private function attemptCurl($method, $endpoint, $headers, $body)
+    {
+        //open connection
+        $ch = \curl_init();
+        \curl_setopt($ch, \CURLOPT_URL, $endpoint);
 
-            // Make sure CURL_SSLVERSION_TLSv1_2 is defined as 6
-            // Curl must be able to use TLSv1.2 to connect
-            // to Paystack servers
-            
-            if (!defined('CURL_SSLVERSION_TLSV1_2')) {
-                define('CURL_SSLVERSION_TLSV1_2', 6);
-            }
-            curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSV1_2);
+        if ($method === RouteInterface::POST_METHOD || $method === RouteInterface::PUT_METHOD) {
+            ($method === RouteInterface:: POST_METHOD) && \curl_setopt($ch, \CURLOPT_POST, true);
+            ($method === RouteInterface ::PUT_METHOD) && \curl_setopt($ch, \CURLOPT_CUSTOMREQUEST, "PUT");
 
-            $response = \curl_exec($ch);
-            
-            if (\curl_errno($ch)) {   // should be 0
-                // curl ended with an error
-                $cerr = \curl_error($ch);
-                \curl_close($ch);
-                throw new \Exception("Curl failed with response: '" . $cerr . "'.");
-            }
+            \curl_setopt($ch, \CURLOPT_POSTFIELDS, $body);
+        }
+        //flatten the headers
+        $flattened_headers = [];
+        while (list($key, $value) = each($headers)) {
+            $flattened_headers[] = $key . ": " . $value;
+        }
+        \curl_setopt($ch, \CURLOPT_HTTPHEADER, $flattened_headers);
+        \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
+        \curl_setopt($ch, \CURLOPT_SSLVERSION, 6);
 
-            // Then, after your \curl_exec call:
-            $resp = json_decode($response);
-            //close connection
+        $response = \curl_exec($ch);
+        
+        if (\curl_errno($ch)) {   // should be 0
+            // curl ended with an error
+            $cerr = \curl_error($ch);
             \curl_close($ch);
-
-            if (!$resp->status) {
-                throw new \Exception("Paystack Request failed with response: '" . $resp->message . "'.");
-            }
-
-            return $resp;
+            throw new \Exception("Curl failed with response: '" . $cerr . "'.");
         }
 
+        // Decode JSON from Paystack:
+        $resp = \json_decode($response);
+        \curl_close($ch);
+
+        if (json_last_error() !== JSON_ERROR_NONE || !$resp->status) {
+            throw new \Exception("Paystack Request failed with response: '" .
+            ((json_last_error() === JSON_ERROR_NONE) ? $resp->message : $response) . "'.");
+        }
+
+        return $resp;
     }
     
     /**
@@ -263,7 +279,7 @@ class Router
             ) use ($mtd) {
                 $interface = call_user_func($this->route_class . '::' . $mtd);
                 // TODO: validate params and sentargs against definitions
-                return $this->callViaCurl($interface, $params, $sentargs);
+                return $this->callEndpoint($interface, $params, $sentargs);
             };
             $this->methods[$mtd] = \Closure::bind($mtdFunc, $this, get_class());
         }
