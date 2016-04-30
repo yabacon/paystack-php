@@ -49,7 +49,7 @@ class Page implements RouteInterface
             RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
             RouteInterface::ENDPOINT_KEY => Page::root(),
             RouteInterface::PARAMS_KEY   => [
-                'name', 'description', 
+                'name', 'description',
                 'amount' ]
         ];
     }
@@ -122,7 +122,7 @@ class Page implements RouteInterface
                 'description',
                 'amount',
                 'active' ],
-            RouteInterface::ARGS_KEY     => ['id' ] 
+            RouteInterface::ARGS_KEY     => ['id' ]
         ];
     }
 }
