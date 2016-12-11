@@ -4,10 +4,18 @@ All Notable changes to `paystack-php` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 2.0.3 - 2016-12-11
+
+### Changes
+- To do a direct register_autoload, include autoload.php
+
+### Deprecated
+- ~Paystack::registerAutoloader();~
+
 ## 2.0 - 2016-04-26
 
 ### Changes
-- Calls will return an Object of stdClass or throw a Paystack API/cURL error instead of 
+- Calls will return an Object of stdClass or throw a Paystack API/cURL error instead of
 an array as in version 1
 - Root namespace is now Yabacon instead of YabaCon
 

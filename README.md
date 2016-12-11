@@ -26,11 +26,10 @@ $ composer require yabacon/paystack-php
 
 ### Via download
 
-Download a release version from the [releases page](https://github.com/yabacon/paystack-php/releases). 
+Download a release version from the [releases page](https://github.com/yabacon/paystack-php/releases).
 Extract, then:
 ``` php
-require 'path/to/src/Paystack.php';
-\Yabacon\Paystack::registerAutoloader();
+require 'path/to/src/autoload.php';
 ```
 
 ## IMPORTANT
@@ -61,14 +60,14 @@ $response = $paystack->customer->list();
 $response = $paystack->customer->list(['perPage'=>5,'page'=>2]); // list the second page at 5 customers per page
 
 $response = $paystack->customer->create([
-                          'first_name'=>'Dafe', 
-                          'last_name'=>'Aba', 
-                          'email'=>"dafe@aba.c", 
+                          'first_name'=>'Dafe',
+                          'last_name'=>'Aba',
+                          'email'=>"dafe@aba.c",
                           'phone'=>'08012345678'
                         ]);
 $response = $paystack->transaction->initialize([
-                          'reference'=>'unique_refencecode', 
-                          'amount'=>'120000', 
+                          'reference'=>'unique_refencecode',
+                          'amount'=>'120000',
                           'email'=>'dafe@aba.c'
                         ]);
 $response = $paystack->transaction->verify([
@@ -92,7 +91,7 @@ $paystack = new \Yabacon\Paystack('secret_key');
 $paystack->useGuzzle();
 
 // Make a call to the resource/method
-// $paystack->{resource}->{method}(); 
+// $paystack->{resource}->{method}();
 
 // Shortcuts
 // for gets, use $paystack->{resource}(id)
@@ -104,14 +103,14 @@ $response = $paystack->customer->list();
 $response = $paystack->customer->list(['perPage'=>5,'page'=>2]); // list the second page at 5 customers per page
 
 $response = $paystack->customer->create([
-     'first_name'=>'Dafe', 
-     'last_name'=>'Aba', 
-     'email'=>"dafe@aba.c", 
+     'first_name'=>'Dafe',
+     'last_name'=>'Aba',
+     'email'=>"dafe@aba.c",
      'phone'=>'08012345678'
    ]);
 $response = $paystack->transaction->initialize([
-     'reference'=>'unique_refencecode', 
-     'amount'=>'120000', 
+     'reference'=>'unique_refencecode',
+     'amount'=>'120000',
      'email'=>'dafe@aba.c'
    ]);
 $response = $paystack->transaction->verify([
