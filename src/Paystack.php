@@ -87,9 +87,11 @@ class Paystack
     }
 
     /**
+     * @deprecated
      */
     public static function registerAutoloader()
     {
+        trigger_error('Include "src/autoload.php" instead', E_USER_NOTICE);
         spl_autoload_register(
             function ($class_name) {
                 $file = dirname(__FILE__) . DIRECTORY_SEPARATOR;
