@@ -1,8 +1,4 @@
 <?php
-/**
- * A Route
- */
-
 namespace Yabacon\Paystack\Contracts;
 
 interface RouteInterface
@@ -17,7 +13,5 @@ interface RouteInterface
     const PUT_METHOD = 'put';
     const GET_METHOD = 'get';
 
-    /**
-     */
     public static function root();
 }
