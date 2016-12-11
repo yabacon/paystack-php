@@ -1,20 +1,21 @@
 <?php
 // quick and dirty testing
 error_reporting(-1);
-require_once __DIR__ . '/../vendor/autoload.php';
+//require_once __DIR__ . '/../vendor/autoload.php';
 
-$dotenv = new Dotenv\Dotenv(dirname(dirname(__FILE__)));
-$dotenv->load();
+// $dotenv = new Dotenv\Dotenv(dirname(dirname(__FILE__)));
+// $dotenv->load();
 
-$paystack = new \Yabacon\Paystack(getenv("PAYSTACK_SECRET_KEY"));
+require_once dirname(__DIR__) . '/src/autoload.php';
+$paystack = new \Yabacon\Paystack(("sk_test_a89e7310342b8295dce0f239b55d7fe3545e1887"));
 
 // $paystack2 = new \Yabacon\Paystack(getenv("PAYSTACK_SECRET_KEY_FAKE"));
 // $paystack2->useGuzzle();
 // $k = $paystack2->customer->list();
 // print_r(json_decode($k->getbody(), true));
 // PLN_qs5x408lj9qkuvx
-// 
-    
+//
+
 // print_r($paystack->subscriptions());
 //     print_r($paystack->plan->create([
 //                 'name'=>'Daily 300',
