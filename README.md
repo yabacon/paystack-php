@@ -49,44 +49,22 @@ Confirm that your server can conclude a TLSv1.2 connection to Paystack's servers
 *Don't disable SSL peer verification!*
 
 ### 1. Prepare your parameters
-email and amount are the most common compulsory parameters. Do send a unique email per customer. If your customers do not provide a unique email, please devise a strategy to set one for each of them. Any of those below work fine. The amount we accept on all endpoint are in kobo and must be an integer value. For instance, to accept 456 naira, 78 kobo, please send 45678 as the amount.
+`email` and `amount` are the most common compulsory parameters. Do send a unique email per customer. If your customers do not provide a unique email, please devise a strategy to set one for each of them. Any of those below work fine. The amount we accept on all endpoint are in kobo and must be an integer value. For instance, to accept `456 naira, 78 kobo`, please send `45678` as the amount.
 
 ### 2. Initialize a transaction
 Initialize a transaction by calling our API.
 
 ```php
-<?php
-$curl = curl_init();
-
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://api.paystack.co/transaction/initialize",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => json_encode([
-    'amount'=>$amount,
-    'email'=>$email,
-  ]),
-  CURLOPT_HTTPHEADER => [
-    "accept: application/json",
-    "authorization: Bearer SECRET_KEY",
-    "cache-control: no-cache",
-    "content-type: application/json"
-  ],
-));
-
-$response = curl_exec($curl);
-$err = curl_error($curl);
-
-if($err){
-	// there was an error contacting the Paystack API
-  die('Curl returned error: ' . $err);
-}
-
-$tranx = json_decode($response);
-
-if(!$tranx->status){
-  // there was an error from the API
-  die('API returned error: ' . $tranx->message);
+$paystack = new Paystack(SECRET_KEY);
+try
+{
+  $tranx = $pasytack->transaction->initialize([
+    'amount'=>$amount,       // in kobo
+    'email'=>$email,         // unique to customers
+    'reference'=>$reference, // unique to transactions
+  ]);
+} catch(Exception $e) {
+  die($e->message);
 }
 
 // store transaction reference so we can query in case user never comes back
@@ -114,85 +92,67 @@ We will post a charge.success event to the webhook URL set for your transaction'
     - Do a test post to your URL and ensure the script gets the post body.
     - Publicly available url (http://localhost cannot receive!)
 ```php
-<?php
-// filename: handle-webhook.php
-
-// Retrieve the request's body
-$body = @file_get_contents("php://input");
-$signature = (isset($_SERVER['HTTP_X_PAYSTACK_SIGNATURE']) ? $_SERVER['HTTP_X_PAYSTACK_SIGNATURE'] : '');
-
-/* It is a good idea to log all events received. Add code *
- * here to log the signature and body to db or file       */
-
-if (!$signature) {
-    // only a post with paystack signature header gets our attention
-    exit();
-}
-
-define('PAYSTACK_SECRET_KEY','sk_xxxx_xxxxxx');
-// confirm the event's signature
-if( $signature !== hash_hmac('sha512', $body, PAYSTACK_SECRET_KEY) ){
-  // silently forget this ever happened
-  exit();
-}
-
+// Retrieve the request's body and parse it as JSON
+$event = new Paystack\Event();
+$event->capture();
 http_response_code(200);
-// parse event (which is json string) as object
+
+/* It is a important to log all events received. Add code *
+ * here to log the signature and body to db or file       */
+openlog('MyPaystackEvents', LOG_CONS | LOG_NDELAY | LOG_PID, LOG_USER | LOG_PERROR);
+syslog(LOG_INFO, $event->raw);
+closelog();
+
+/* Verify that the signature matches one of your keys*/
+$my_keys = [
+            'live'=>'sk_live_blah',
+            'test'=>'sk_test_blah',
+          ];
+$owner = $event->discoverOwner($my_keys);
+if(!$owner){
+    // None of the keys matched the event's signature
+    die();
+}
+
+// Do something with $event->obj
 // Give value to your customer but don't give any output
 // Remember that this is a call from Paystack's servers and 
 // Your customer is not seeing the response here at all
-$event = json_decode($body);
-switch($event->event){
+switch($event->obj->event){
     // charge.success
     case 'charge.success':
-        // TIP: you may still verify the transaction
-    		// before giving value.
+        if('status'==$event->obj->data->status){
+            // TIP: you may still verify the transaction
+            // via an API call before giving value.
+        }
         break;
 }
-exit();
 ```
 
 ### 4. Verify Transaction
 After we redirect to your callback url, please verify the transaction before giving value.
 
 ```php
-<?php
-// filename: callback.php
-
-$curl = curl_init();
 $reference = isset($_GET['reference']) ? $_GET['reference'] : '';
 if(!$reference){
   die('No reference supplied');
 }
 
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://api.paystack.co/transaction/verify/" . rawurlencode($reference),
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_HTTPHEADER => [
-    "accept: application/json",
-    "authorization: Bearer SECRET_KEY",
-    "cache-control: no-cache"
-  ],
-));
-
-$response = curl_exec($curl);
-$err = curl_error($curl);
-
-if($err){
-	// there was an error contacting the Paystack API
-  die('Curl returned error: ' . $err);
+// initiate the Library's Paystack Object
+$paystack = new Paystack(SECRET_KEY);
+try
+{
+  // verify using the library
+  $tranx = $pasytack->transaction->verify([
+    'reference'=>$reference, // unique to transactions
+  ]);
+} catch(Exception $e){
+  die($e->message);
 }
 
-$tranx = json_decode($response);
-
-if(!$tranx->status){
-  // there was an error from the API
-  die('API returned error: ' . $tranx->message);
-}
-
-if('success' == $tranx->data->status){
+if ('success' == $tranx->data->status) {
   // transaction was successful...
-  // please check otehr things like whether you already gave value for this ref
+  // please check other things like whether you already gave value for this ref
   // if the email matches the customer who owns the product etc
   // Give value
 }
