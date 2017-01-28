@@ -61,7 +61,8 @@ class FeeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1000000, $feeAfterReset->addFor(975000));
     }
 
-    public function testCalculateFor(){
+    public function testCalculateFor()
+    {
         $fee = new Fee();
         $this->assertEquals(150, $fee->calculateFor(10000));
         $this->assertEquals(24625, $fee->calculateFor(975000));

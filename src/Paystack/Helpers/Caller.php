@@ -47,15 +47,16 @@ class Caller
     
     private function attemptGuzzle($method, $endpoint, $headers, $body)
     {
-        if ($this->use_guzzle &&
-            class_exists('\\GuzzleHttp\\Exception\\BadResponseException') &&
-            class_exists('\\GuzzleHttp\\Exception\\ClientException') &&
-            class_exists('\\GuzzleHttp\\Exception\\ConnectException') &&
-            class_exists('\\GuzzleHttp\\Exception\\RequestException') &&
-            class_exists('\\GuzzleHttp\\Exception\\ServerException') &&
-            class_exists('\\GuzzleHttp\\Exception\\TooManyRedirectsException') &&
-            class_exists('\\GuzzleHttp\\Client') &&
-            class_exists('\\GuzzleHttp\\Psr7\\Request')) {
+        if ($this->use_guzzle 
+            && class_exists('\\GuzzleHttp\\Exception\\BadResponseException') 
+            && class_exists('\\GuzzleHttp\\Exception\\ClientException') 
+            && class_exists('\\GuzzleHttp\\Exception\\ConnectException') 
+            && class_exists('\\GuzzleHttp\\Exception\\RequestException') 
+            && class_exists('\\GuzzleHttp\\Exception\\ServerException') 
+            && class_exists('\\GuzzleHttp\\Exception\\TooManyRedirectsException') 
+            && class_exists('\\GuzzleHttp\\Client') 
+            && class_exists('\\GuzzleHttp\\Psr7\\Request')
+        ) {
             $request = new \GuzzleHttp\Psr7\Request(strtoupper($method), $endpoint, $headers, $body);
             $client = new \GuzzleHttp\Client();
             try {
@@ -66,8 +67,8 @@ class Caller
                     || $e instanceof \GuzzleHttp\Exception\ConnectException
                     || $e instanceof \GuzzleHttp\Exception\RequestException
                     || $e instanceof \GuzzleHttp\Exception\ServerException
-                    || $e instanceof \GuzzleHttp\Exception\TooManyRedirectsException
-                    ) && $e->hasResponse()) {
+                    || $e instanceof \GuzzleHttp\Exception\TooManyRedirectsException) && $e->hasResponse()
+                ) {
                     $response = $e->getResponse();
                 } else {
                     throw $e;
@@ -141,8 +142,10 @@ class Caller
         \curl_close($ch);
 
         if (json_last_error() !== JSON_ERROR_NONE || !$resp->status) {
-            throw new \Exception("Paystack Request failed with response: '" .
-            ((json_last_error() === JSON_ERROR_NONE) ? $resp->message : $response) . "'.");
+            throw new \Exception(
+                "Paystack Request failed with response: '" .
+                ((json_last_error() === JSON_ERROR_NONE) ? $resp->message : $response) . "'."
+            );
         }
 
         return $resp;
