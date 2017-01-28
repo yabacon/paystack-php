@@ -18,9 +18,9 @@ class Fee
     private $threshold;
     private $cap;
 
-    private $charge_divider;
+    private $chargeDivider;
     private $crossover;
-    private $flatline_plus_charge;
+    private $flatlinePlusCharge;
     private $flatline;
 
     public function __construct()
@@ -66,30 +66,30 @@ class Fee
 
     private function __setup()
     {
-        $this->charge_divider = $this->__charge_divider();
+        $this->chargeDivider = $this->__chargeDivider();
         $this->crossover = $this->__crossover();
-        $this->flatline_plus_charge = $this->__flatline_plus_charge();
+        $this->flatlinePlusCharge = $this->__flatlinePlusCharge();
         $this->flatline = $this->__flatline();
     }
 
-    private function __charge_divider()
+    private function __chargeDivider()
     {
         return 1 - $this->percentage;
     }
 
     private function __crossover()
     {
-        return ($this->threshold * $this->charge_divider) - $this->additional_charge;
+        return ($this->threshold * $this->chargeDivider) - $this->additional_charge;
     }
 
-    private function __flatline_plus_charge()
+    private function __flatlinePlusCharge()
     {
         return ($this->cap - $this->additional_charge) / $this->percentage;
     }
 
     private function __flatline()
     {
-        return $this->flatline_plus_charge - $this->cap;
+        return $this->flatlinePlusCharge - $this->cap;
     }
 
     public function addFor($amountinkobo)
@@ -97,19 +97,19 @@ class Fee
         if ($amountinkobo > $this->flatline) {
             return intval(ceil($amountinkobo + $this->cap));
         } elseif ($amountinkobo > $this->crossover) {
-            return intval(ceil(($amountinkobo + $this->additional_charge) / $this->charge_divider));
+            return intval(ceil(($amountinkobo + $this->additional_charge) / $this->chargeDivider));
         } else {
-            return intval(ceil($amountinkobo / $this->charge_divider));
+            return intval(ceil($amountinkobo / $this->chargeDivider));
         }
     }
 
     public function calculateFor($amountinkobo)
     {
         $fee = $this->percentage * $amountinkobo;
-        if($amountinkobo >= $this->threshold) {
+        if ($amountinkobo >= $this->threshold) {
             $fee += $this->additional_charge;
         }
-        if($fee > $this->cap) {
+        if ($fee > $this->cap) {
             $fee = $this->cap;
         }
         return intval(ceil($fee));

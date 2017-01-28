@@ -44,17 +44,17 @@ class Caller
             $endpoint = str_replace('{' . $key . '}', $value, $endpoint);
         }
     }
-    
+
     private function attemptGuzzle($method, $endpoint, $headers, $body)
     {
-        if ($this->use_guzzle 
-            && class_exists('\\GuzzleHttp\\Exception\\BadResponseException') 
-            && class_exists('\\GuzzleHttp\\Exception\\ClientException') 
-            && class_exists('\\GuzzleHttp\\Exception\\ConnectException') 
-            && class_exists('\\GuzzleHttp\\Exception\\RequestException') 
-            && class_exists('\\GuzzleHttp\\Exception\\ServerException') 
-            && class_exists('\\GuzzleHttp\\Exception\\TooManyRedirectsException') 
-            && class_exists('\\GuzzleHttp\\Client') 
+        if ($this->use_guzzle
+            && class_exists('\\GuzzleHttp\\Exception\\BadResponseException')
+            && class_exists('\\GuzzleHttp\\Exception\\ClientException')
+            && class_exists('\\GuzzleHttp\\Exception\\ConnectException')
+            && class_exists('\\GuzzleHttp\\Exception\\RequestException')
+            && class_exists('\\GuzzleHttp\\Exception\\ServerException')
+            && class_exists('\\GuzzleHttp\\Exception\\TooManyRedirectsException')
+            && class_exists('\\GuzzleHttp\\Client')
             && class_exists('\\GuzzleHttp\\Psr7\\Request')
         ) {
             $request = new \GuzzleHttp\Psr7\Request(strtoupper($method), $endpoint, $headers, $body);
@@ -87,7 +87,7 @@ class Caller
 
         $this->moveArgsToSentargs($interface, $payload, $sentargs);
         $this->putArgsIntoEndpoint($endpoint, $sentargs);
- 
+
         $headers = ["Authorization"=>"Bearer " . $this->secret_key ];
         $body = '';
         if (($method === RouteInterface::POST_METHOD)
@@ -103,7 +103,7 @@ class Caller
         if ($guzzleResponse !== false) {
             return $guzzleResponse;
         }
-        
+
         return $this->attemptCurl($method, $endpoint, $headers, $body);
     }
 
@@ -129,7 +129,7 @@ class Caller
         \curl_setopt($ch, \CURLOPT_SSLVERSION, 6);
 
         $response = \curl_exec($ch);
-        
+
         if (\curl_errno($ch)) {   // should be 0
             // curl ended with an error
             $cerr = \curl_error($ch);
