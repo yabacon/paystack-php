@@ -55,7 +55,7 @@ Confirm that your server can conclude a TLSv1.2 connection to Paystack's servers
 Initialize a transaction by calling our API.
 
 ```php
-$paystack = new Paystack(SECRET_KEY);
+$paystack = new Yabacon\Paystack(SECRET_KEY);
 try
 {
   $tranx = $pasytack->transaction->initialize([
@@ -88,13 +88,13 @@ Before you give value to the customer, please make a server-side call to our ver
 ### 3. Handle charge.success Event
 We will post a charge.success event to the webhook URL set for your transaction's domain. If it was a live transaction, we will post to your live webhook url and vice-versa.
 
-    - if using .htaccess, remember to add the trailing / to the url you set.
-    - Do a test post to your URL and ensure the script gets the post body.
-    - Publicly available url (http://localhost cannot receive!)
+- if using .htaccess, remember to add the trailing / to the url you set.
+- Do a test post to your URL and ensure the script gets the post body.
+- Publicly available url (http://localhost cannot receive!)
+
 ```php
 // Retrieve the request's body and parse it as JSON
-$event = new Paystack\Event();
-$event->capture();
+$event = Yabacon\Paystack\Event::capture();
 http_response_code(200);
 
 /* It is a important to log all events received. Add code *
