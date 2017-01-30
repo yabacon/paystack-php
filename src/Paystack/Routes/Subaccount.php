@@ -126,7 +126,7 @@ class Subaccount implements RouteInterface
                 'account_number','percentage_charge',
                 'primary_contact_email','primary_contact_name',
                 'primary_contact_phone',
-                'metadata','settlement_schedule' 
+                'metadata','settlement_schedule'
             ],
             RouteInterface::ARGS_KEY     => ['id' ]
         ];
