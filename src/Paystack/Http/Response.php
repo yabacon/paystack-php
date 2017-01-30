@@ -36,12 +36,12 @@ class Response
             return $this->parsePaystackResponse();
         }
         if (!$this->okay && $this->forApi) {
-            throw new Exception($this->implodedMessages());
+            throw new \Exception($this->implodedMessages());
         }
         if ($this->okay) {
-            error_log($this->implodedMessages());
             return $this->body;
         }
+        error_log($this->implodedMessages());
         return false;
     }
 }
