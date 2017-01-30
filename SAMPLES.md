@@ -1,12 +1,13 @@
-#Sample calls 
+#Sample calls
 
-Assumes that you already installed and configured Yabacon\Paystack. And that you have created and 
+Assumes that you already installed and configured Yabacon\Paystack. And that you have created and
 configured the $paystack object as you want. Check [README](README.md) for details.
 
 ``` php
 // Make a call to the resource/method
-// $paystack->{resource}->{method}(); 
+// $paystack->{resource}->{method}();
 // for gets, use $paystack->{resource}(id)
+// for lists, use $paystack->{resource}s()
 
 // customer
 $paystack->customer(12);
@@ -96,7 +97,7 @@ $paystack->transaction->list();
 $paystack->transaction->initialize([
                 'reference'=>'unique',
                 'amount'=>19000, // in kobo
-                'email'=>'e@ma.il', 
+                'email'=>'e@ma.il',
                 'plan'=>1 // optional, don't include unless it has a value
               ]);
 $paystack->transaction->charge([

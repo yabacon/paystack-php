@@ -4,6 +4,16 @@ All Notable changes to `paystack-php` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 2.1.3 - 2017-01-30
+
+### Changes
+- Spread logic into several classes for improved Unit Testing
+
+### Added
+- Event
+- Fees
+- Subaccount Route
+
 ## 2.0.3 - 2016-12-11
 
 ### Changes

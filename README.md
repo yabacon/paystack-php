@@ -158,6 +158,15 @@ if ('success' == $tranx->data->status) {
 }
 ```
 
+## 5. Closing Notes
+
+Generally, to make an API request after constructing a paystack object, Make a call
+ to the resource/method thus: `$paystack->{resource}->{method}()`; for gets,
+  use `$paystack->{resource}(id)` and to list resources: `$paystack->{resource}s()`.
+
+Currently, we support: 'customer', 'page', 'plan', 'subscription', 'transaction' and 'subaccount'. Check
+our API reference([link-paystack-api-reference][link-paystack-api-reference]) for the methods supported. To specify parameters, send as an array.
+
 Check [SAMPLES](SAMPLES.md) for more sample calls
 
 ## Change log
@@ -248,6 +257,7 @@ If you discover any security related issues, please email yabacon.valley@gmail.c
 
 - [Yabacon][link-author]
 - [Issa Jubril](https://github.com/masterp4dev)
+- [Akachukwu Okafor](https://github.com/kasoprecede47)
 - [Ibrahim Lawal](https://github.com/ibrahimlawal)
 - [Opeyemi Obembe](https://github.com/kehers) - followed the style he employed in creating the [NodeJS Wrapper](https://github.com/kehers/paystack)
 - [All Contributors][link-contributors]
@@ -270,3 +280,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-downloads]: https://packagist.org/packages/yabacon/paystack-php
 [link-author]: https://github.com/yabacon
 [link-contributors]: ../../contributors
+[link-paystack-api-reference]: https://developers.paystack.co/reference
