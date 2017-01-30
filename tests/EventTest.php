@@ -22,7 +22,6 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($evt);
         $this->assertEmpty($evt->raw);
         $this->assertEmpty($evt->obj);
-        $evt->forwardTo('http://localhost');
     }
 
     public function testPackage()
