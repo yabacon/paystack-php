@@ -11,13 +11,14 @@ class Router
     private $route;
     private $route_class;
     private $methods;
-    const ROUTES = ['customer', 'page', 'plan', 'subscription', 'transaction'];
+    const ROUTES = ['customer', 'page', 'plan', 'subscription', 'transaction', 'subaccount'];
     const ROUTE_SINGULAR_LOOKUP = [
         'customers'=>'customer',
         'pages'=>'page',
         'plans'=>'plan',
         'subscriptions'=>'subscription',
-        'transactions'=>'transaction'
+        'transactions'=>'transaction',
+        'subaccounts'=>'subaccount',
     ];
 
     const ID_KEY = 'id';
