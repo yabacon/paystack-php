@@ -207,7 +207,7 @@ $chargeOn7000naira = $fee->calculateFor(700000);
 
 To know what to send to the API when you want to be settled a particular amount
 ```php
-$iWant400Naira = $fee->addFor(10000);
+$iWant100Naira = $fee->addFor(10000);
 $iWant4000Naira = $fee->addFor(400000);
 ```
 
