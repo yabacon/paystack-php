@@ -48,24 +48,23 @@ class Event
         return false;
     }
 
-    public function package()
+    public function package(array $additional_headers=[], $method='POST')
     {
         $pack = new Request();
-        $pack->method = "POST";
-        $pack->headers = [
-            "X-Paystack-Signature: ". $this->signature,
-            "Content-Type: application/json",
-        ];
+        $pack->method = $method;
+        $pack->headers = $additional_headers;
+        $pack->headers["X-Paystack-Signature"] = $this->signature;
+        $pack->headers["Content-Type"] = "application/json";
         $pack->body = $this->raw;
         return $pack;
     }
 
-    public function forwardTo($url)
+    public function forwardTo($url, array $additional_headers=[], $method='POST')
     {
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
             return false;
         }
-        $packed = $this->package();
+        $packed = $this->package($additional_headers, $method);
         $packed->endpoint = $url;
         return $packed->send()->wrapUp();
     }
