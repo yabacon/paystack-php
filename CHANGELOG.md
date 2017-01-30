@@ -25,6 +25,15 @@ an array as in version 1
 - Use ->fetch to get a single item or call singular form with id/code
 - Use ->list to get a list of items or call plural form with paging parameters
 
+## 2.0.3 - 2016-12-11
+
+### Changes
+- Spread logic into several classes for improved Unit Testing
+
+### Added
+- Event
+- Fees
+
 ### Added usage of TLSv1.2
 CURL default SSL version TLSv1.2
 Update Requirements for Curl, OpenSSL and PHP

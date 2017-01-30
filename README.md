@@ -116,7 +116,7 @@ if(!$owner){
 
 // Do something with $event->obj
 // Give value to your customer but don't give any output
-// Remember that this is a call from Paystack's servers and 
+// Remember that this is a call from Paystack's servers and
 // Your customer is not seeing the response here at all
 switch($event->obj->event){
     // charge.success
@@ -168,6 +168,72 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 
 ``` bash
 $ composer test
+```
+
+## Extras
+
+There are classes that should help with some tasks developers need to do on Paystack often:
+
+### Fee
+
+This class works with an amount and your Paystack fees. To use, create a new Fee object
+
+```php
+$fee = new Yabacon\Paystack\Fee();
+```
+Configure it:
+
+```php
+$fee->withPercentage(0.015);        // 1.5%
+$fee->withAdditionalCharge(10000);  // plus 100 NGN
+$fee->withThreshold(250000);        // when total is above 2,500 NGN
+$fee->withCap(200000);              // capped at 2000
+```
+
+Calculate fees
+```php
+$chargeOn300naira = $fee->calculateFor(30000);
+$chargeOn7000naira = $fee->calculateFor(700000);
+```
+
+To know what to send to the API when you want to be settled a particular amount
+```php
+$iWant400Naira = $fee->addFor(10000);
+$iWant4000Naira = $fee->addFor(400000);
+```
+
+### Event
+
+This class helps you capture and our events:
+```php
+$event = Yabacon\Paystack\Event::capture();
+```
+
+Verify it against a key:
+```php
+if($event->validFor($mySecretKey))
+{
+    // awesome
+}
+```
+
+Discover the key that owns it (IN case same webhook receives for several integrations). This can
+come in handy for multi-tenant systems. Or simply if you want to have same test and live webhook url.
+```php
+$my_keys = [
+            'live'=>'sk_live_blah',
+            'test'=>'sk_test_blah',
+          ];
+$owner = $event->discoverOwner($my_keys);
+if(!$owner){
+    // None of my keys matched the event's signature
+    die();
+}
+```
+
+To forward the event to another url. In case you want other systems to be notified of exact same event.
+```php
+$evt->forwardTo('http://another-webhook.url');
 ```
 
 ## Contributing
