@@ -4,12 +4,21 @@ namespace Yabacon\Paystack\Helpers;
 
 use \Closure;
 use \Yabacon\Paystack\Contracts\RouteInterface;
+use \Yabacon\Paystack\Exception\ValidationException;
 
 class Router
 {
     private $route;
     private $route_class;
     private $methods;
+    const ROUTES = ['customer', 'page', 'plan', 'subscription', 'transaction'];
+    const ROUTE_SINGULAR_LOOKUP = [
+        'customers'=>'customer',
+        'pages'=>'page',
+        'plans'=>'plan',
+        'subscriptions'=>'subscription',
+        'transactions'=>'transaction'
+    ];
 
     const ID_KEY = 'id';
     const PAYSTACK_API_ROOT = 'https://api.paystack.co';
@@ -20,13 +29,27 @@ class Router
         if (array_key_exists($method, $this->methods) && is_callable($this->methods[$method])) {
             return call_user_func_array($this->methods[$method], $sentargs);
         } else {
-            // User attempted to call a function that does not exist
             throw new \Exception('Function "' . $method . '" does not exist for "' . $this->route . '".');
         }
     }
 
+    public static function singularFor($method)
+    {
+        return (
+            array_key_exists($method, Router::ROUTE_SINGULAR_LOOKUP) ?
+                Router::ROUTE_SINGULAR_LOOKUP[$method] :
+                null
+            );
+    }
+
     public function __construct($route, $paystackObj)
     {
+        if (!in_array($route, Router::ROUTES)) {
+            throw new ValidationException(
+                "Route '{$route}' does not exist."
+            );
+        }
+
         $this->route = strtolower($route);
         $this->route_class = 'Yabacon\\Paystack\\Routes\\' . ucwords($route);
 
@@ -37,7 +60,6 @@ class Router
         // add methods to this object per method, except root
         foreach ($mets as $mtd) {
             if ($mtd === 'root') {
-                // skip root method
                 continue;
             }
             $mtdFunc = function (
@@ -46,7 +68,7 @@ class Router
             ) use (
                 $mtd,
                 $paystackObj
-) {
+            ) {
                 $interface = call_user_func($this->route_class . '::' . $mtd);
                 // TODO: validate params and sentargs against definitions
                 $caller = new Caller($paystackObj);
