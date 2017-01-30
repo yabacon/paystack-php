@@ -75,16 +75,15 @@ class Request
                 $this->response->body = $psr7response->getBody()->getContents();
                 $this->response->okay = true;
             } catch (\Exception $e) {
-                if ($e->hasResponse()) {
-                    $psr7response = $e->getResponse();
-                    $this->response->body = $psr7response->getBody()->getContents();
-                }
                 if (($e instanceof \GuzzleHttp\Exception\BadResponseException
                     || $e instanceof \GuzzleHttp\Exception\ClientException
                     || $e instanceof \GuzzleHttp\Exception\ConnectException
                     || $e instanceof \GuzzleHttp\Exception\RequestException
                     || $e instanceof \GuzzleHttp\Exception\ServerException)
                 ) {
+                    if ($e->hasResponse()) {
+                        $this->response->body = $e->getResponse()->getBody()->getContents();
+                    }
                     $this->response->okay = true;
                 }
                 $this->response->messages[] = $e->getMessage();
