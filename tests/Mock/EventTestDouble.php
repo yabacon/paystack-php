@@ -29,7 +29,7 @@ class EventTestDouble extends \Yabacon\Paystack\Event
         return $evt;
     }
 
-    public function forwardTo($url, array $additional_headers = [], $method='POST')
+    public function forwardTo($url, array $additional_headers = [], $method = 'POST')
     {
         $packed = $this->package();
         $packed->endpoint = $url;

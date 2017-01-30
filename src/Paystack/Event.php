@@ -48,7 +48,7 @@ class Event
         return false;
     }
 
-    public function package(array $additional_headers=[], $method='POST')
+    public function package(array $additional_headers = [], $method = 'POST')
     {
         $pack = new Request();
         $pack->method = $method;
@@ -59,7 +59,7 @@ class Event
         return $pack;
     }
 
-    public function forwardTo($url, array $additional_headers=[], $method='POST')
+    public function forwardTo($url, array $additional_headers = [], $method = 'POST')
     {
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
             return false;
