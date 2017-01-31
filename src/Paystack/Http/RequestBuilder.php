@@ -37,9 +37,9 @@ class RequestBuilder
     public function packagePayload()
     {
         if ($this->request->method === RouteInterface::GET_METHOD) {
-            $this->request->body = json_encode($this->payload);
-        } else {
             $this->request->endpoint = $this->request->endpoint . '?' . http_build_query($this->payload);
+        } else {
+            $this->request->body = json_encode($this->payload);
         }
     }
 

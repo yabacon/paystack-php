@@ -9,7 +9,7 @@ error_reporting(-1);
 require_once dirname(__DIR__) . '/src/autoload.php';
 $paystack = new \Yabacon\Paystack(("sk_test_a89e7310342b8295dce0f239b55d7fe3545e1887"));
 
-$evt = Yabacon\Paystack\Event::capture();
+//$evt = Yabacon\Paystack\Event::capture();
 
 // print_r($evt->forwardTo('http://localhost'));
 // $paystack2 = new \Yabacon\Paystack(getenv("PAYSTACK_SECRET_KEY_FAKE"));
@@ -19,16 +19,8 @@ $evt = Yabacon\Paystack\Event::capture();
 // PLN_qs5x408lj9qkuvx
 //
 
-print_r($paystack->customer('CUS_j18angz96uaepmd'));
-//     print_r($paystack->plan->create([
-//                 'name'=>'Daily 300',
-//                 'description'=>'Deduct 300 daily',
-//                 'amount'=>30000, // in kobo
-//                 'interval'=>'daily',
-//                 'send_invoices'=>true,
-//                 'send_sms'=>true,
-//                 'currency'=>'NGN'
-//               ]));
+//print_r($paystack->customer('CUS_j18angz96uaepmd'));
+    print_r($paystack->customer->create(array('email' => 'osascott78@gmail.com', 'lastname' => 'SCOTT', 'firstname' => 'IYEN', 'phone' => '08039371358')));
 if (false) {
     print_r($paystack->customer(18920));
     print_r($paystack->subscriptions());
