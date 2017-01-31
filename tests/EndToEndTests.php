@@ -20,7 +20,6 @@ $paystack = new \Yabacon\Paystack(("sk_test_a89e7310342b8295dce0f239b55d7fe3545e
 //
 
 //print_r($paystack->customer('CUS_j18angz96uaepmd'));
-    print_r($paystack->customer->create(array('email' => 'osascott78@gmail.com', 'lastname' => 'SCOTT', 'firstname' => 'IYEN', 'phone' => '08039371358')));
 if (false) {
     print_r($paystack->customer(18920));
     print_r($paystack->subscriptions());
