@@ -26,13 +26,14 @@ class Response
         return $resp;
     }
 
-    private function messageFromApiJson($resp){
+    private function messageFromApiJson($resp)
+    {
         $message = $this->body;
-        if(json_last_error() === JSON_ERROR_NONE){
-            if(property_exists($resp, 'message')){
+        if (json_last_error() === JSON_ERROR_NONE) {
+            if (property_exists($resp, 'message')) {
                 $message = $resp->message;
             }
-            if(property_exists($resp, 'errors') && ($resp->errors instanceof \stdClass)){
+            if (property_exists($resp, 'errors') && ($resp->errors instanceof \stdClass)) {
                 $message .= "\nErrors:\n";
                 foreach ($resp->errors as $field => $errors) {
                     $message .= "\t" . $field . ":\n";

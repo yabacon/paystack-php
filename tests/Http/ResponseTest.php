@@ -17,9 +17,12 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $r = new Response();
         $r->okay = true;
         $r->forApi = true;
-        $r->body = '{"message": "A validation error has occured","errors": {"email": [{"rule": "required","message": "Email is required"},{"rule": "email","message": "Email must be valid"}],"name": [{"rule": "required","message": "Name is required"}]}}';
+        $r->body = '{"message": "A validation error has occured","errors": {"email"';
+        $r->body .= ': [{"rule": "required","message": "Email is required"},{"rule"';
+        $r->body .= ': "email","message": "Email must be valid"}],"name": [{"rule":';
+        $r->body .= ' "required","message": "Name is required"}]}}';
 
-        try{
+        try {
             $resp = $r->wrapUp();
         } catch (\Exception $e) {
             $this->assertInstanceOf(ApiException::class, $e);
@@ -56,7 +59,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $r->forApi = true;
         $r->body = '{"message":"I failed on Api"}';
 
-        try{
+        try {
             $resp = $r->wrapUp();
         } catch (\Exception $e) {
             $this->assertInstanceOf(ApiException::class, $e);
@@ -71,11 +74,12 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $r->forApi = true;
         $r->body = '{"errors":"I failed on Api"}';
 
-        try{
+        try {
             $resp = $r->wrapUp();
         } catch (\Exception $e) {
             $this->assertInstanceOf(ApiException::class, $e);
-            $this->assertEquals("Paystack Request failed with response: '{\"errors\":\"I failed on Api\"}'", $e->getMessage());
+            $expectedResponse = "Paystack Request failed with response: '{\"errors\":\"I failed on Api\"}'";
+            $this->assertEquals($expectedResponse, $e->getMessage());
         }
     }
 
