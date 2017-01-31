@@ -18,11 +18,32 @@ class Response
         if (json_last_error() !== JSON_ERROR_NONE || !property_exists($resp, 'status') || !$resp->status) {
             throw new ApiException(
                 "Paystack Request failed with response: '" .
-                (((json_last_error() === JSON_ERROR_NONE) && property_exists($resp, 'message')) ? $resp->message : $this->body) . "'."
+                $this->messageFromApiJson($resp)."'",
+                $resp
             );
         }
 
         return $resp;
+    }
+
+    private function messageFromApiJson($resp){
+        $message = $this->body;
+        if(json_last_error() === JSON_ERROR_NONE){
+            if(property_exists($resp, 'message')){
+                $message = $resp->message;
+            }
+            if(property_exists($resp, 'errors') && ($resp->errors instanceof \stdClass)){
+                $message .= "\nErrors:\n";
+                foreach ($resp->errors as $field => $errors) {
+                    $message .= "\t" . $field . ":\n";
+                    foreach ($errors as $_unused => $error) {
+                        $message .= "\t\t" . $error->rule . ": ";
+                        $message .= $error->message . "\n";
+                    }
+                }
+            }
+        }
+        return $message;
     }
 
     private function implodedMessages()

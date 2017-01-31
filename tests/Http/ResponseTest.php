@@ -12,6 +12,21 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($r);
     }
 
+    public function testWrapUpForApiOkayNoStatusWithErrors()
+    {
+        $r = new Response();
+        $r->okay = true;
+        $r->forApi = true;
+        $r->body = '{"message": "A validation error has occured","errors": {"email": [{"rule": "required","message": "Email is required"},{"rule": "email","message": "Email must be valid"}],"name": [{"rule": "required","message": "Name is required"}]}}';
+
+        try{
+            $resp = $r->wrapUp();
+        } catch (\Exception $e) {
+            $this->assertInstanceOf(ApiException::class, $e);
+            $this->assertInstanceOf(\stdClass::class, $e->getResponseObject()->errors);
+        }
+    }
+
     public function testWrapUpForApiOkay()
     {
         $r = new Response();
@@ -28,11 +43,40 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $r = new Response();
         $r->okay = true;
         $r->forApi = true;
-        $r->body = '{"status":"0","message":"I failed on Api","data":{"status":"okay"}}';
+        $r->body = '{"status":"0","message":"I failed on Api"}';
 
         $this->expectException(ApiException::class);
         $resp = $r->wrapUp();
-        $this->assertEquals('I failed on Api', $resp->message);
+    }
+
+    public function testWrapUpForApiOkayNoStatus()
+    {
+        $r = new Response();
+        $r->okay = true;
+        $r->forApi = true;
+        $r->body = '{"message":"I failed on Api"}';
+
+        try{
+            $resp = $r->wrapUp();
+        } catch (\Exception $e) {
+            $this->assertInstanceOf(ApiException::class, $e);
+            $this->assertEquals("Paystack Request failed with response: 'I failed on Api'", $e->getMessage());
+        }
+    }
+
+    public function testWrapUpForApiOkayNoStatusNoMessage()
+    {
+        $r = new Response();
+        $r->okay = true;
+        $r->forApi = true;
+        $r->body = '{"errors":"I failed on Api"}';
+
+        try{
+            $resp = $r->wrapUp();
+        } catch (\Exception $e) {
+            $this->assertInstanceOf(ApiException::class, $e);
+            $this->assertEquals("Paystack Request failed with response: '{\"errors\":\"I failed on Api\"}'", $e->getMessage());
+        }
     }
 
     public function testWrapUpForApiOkayBadJSON()
