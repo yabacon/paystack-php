@@ -63,8 +63,9 @@ try
     'email'=>$email,         // unique to customers
     'reference'=>$reference, // unique to transactions
   ]);
-} catch(Exception $e) {
-  die($e->message);
+} catch(\Yabacon\Paystack\Exception\ApiException $e){
+  print_r($e->getResponseObject());
+  die($e->getMessage());
 }
 
 // store transaction reference so we can query in case user never comes back
@@ -146,8 +147,9 @@ try
   $tranx = $pasytack->transaction->verify([
     'reference'=>$reference, // unique to transactions
   ]);
-} catch(Exception $e){
-  die($e->message);
+} catch(\Yabacon\Paystack\Exception\ApiException $e){
+  print_r($e->getResponseObject());
+  die($e->getMessage());
 }
 
 if ('success' == $tranx->data->status) {
