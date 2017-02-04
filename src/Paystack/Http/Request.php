@@ -28,7 +28,7 @@ class Request
         return $this->response;
     }
 
-    protected function flattenedHeaders()
+    public function flattenedHeaders()
     {
         $_ = [];
         foreach ($this->headers as $key => $value) {
