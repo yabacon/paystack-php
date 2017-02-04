@@ -28,16 +28,31 @@ class PaystackTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($r->nonexistent);
     }
 
-    public function testFetchWithInvalidParams()
+    public function testListInvalidResource()
     {
         $r = new Paystack('sk_');
         $this->expectException(\InvalidArgumentException::class);
-        $this->assertNull($r->nonexistent());
+        $this->assertNull($r->nonexistents());
+    }
+
+    public function testFetchInvalidResource()
+    {
+        $r = new Paystack('sk_');
         $this->expectException(ValidationException::class);
         $this->assertNull($r->nonexistent(1));
-        $this->expectException(ValidationException::class);
+    }
+
+    public function testFetchWithInvalidParams2()
+    {
+        $r = new Paystack('sk_');
+        $this->expectException(\InvalidArgumentException::class);
         $this->assertNull($r->customer());
-        $this->expectException(ValidationException::class);
+    }
+
+    public function testFetchWithInvalidParams3()
+    {
+        $r = new Paystack('sk_');
+        $this->expectException(\InvalidArgumentException::class);
         $this->assertNull($r->customers(1));
     }
 }

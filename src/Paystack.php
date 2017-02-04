@@ -26,9 +26,9 @@ class Paystack
     public function __call($method, $args)
     {
         if ($singular_form = Router::singularFor($method)) {
-            $this->handlePlural($singular_form, $method, $args);
+            return $this->handlePlural($singular_form, $method, $args);
         }
-        $this->handleSingular($method, $args);
+        return $this->handleSingular($method, $args);
     }
 
     private function handlePlural($singular_form, $method, $args)
