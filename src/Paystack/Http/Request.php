@@ -51,7 +51,7 @@ class Request
 
     public function attemptGuzzle()
     {
-        if (!isset($this->paystackObj) || !$this->paystackObj->use_guzzle) {
+        if (isset($this->paystackObj) && !$this->paystackObj->use_guzzle) {
             $this->response->okay = false;
             return;
         }
