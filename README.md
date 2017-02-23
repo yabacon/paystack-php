@@ -140,7 +140,7 @@ if(!$reference){
 }
 
 // initiate the Library's Paystack Object
-$paystack = new Paystack(SECRET_KEY);
+$paystack = new Yabacon\Paystack(SECRET_KEY);
 try
 {
   // verify using the library
