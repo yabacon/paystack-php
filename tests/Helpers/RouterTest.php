@@ -35,7 +35,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testAllAvailableRoutesAreListed()
     {
         $available = $this->availableRoutes();
-        $listed = Router::ROUTES;
+        $listed = Router::$ROUTES;
 
         sort($available);
         sort($listed);
@@ -46,7 +46,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testAllSingularsAreValidRoutes()
     {
         $available = $this->availableRoutes();
-        $singulars = array_values(Router::ROUTE_SINGULAR_LOOKUP);
+        $singulars = array_values(Router::$ROUTE_SINGULAR_LOOKUP);
 
         sort($available);
         sort($singulars);

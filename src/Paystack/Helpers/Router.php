@@ -11,8 +11,8 @@ class Router
     private $route;
     private $route_class;
     private $methods;
-    const ROUTES = ['customer', 'page', 'plan', 'subscription', 'transaction', 'subaccount'];
-    const ROUTE_SINGULAR_LOOKUP = [
+    public static $ROUTES = ['customer', 'page', 'plan', 'subscription', 'transaction', 'subaccount'];
+    public static $ROUTE_SINGULAR_LOOKUP = [
         'customers'=>'customer',
         'pages'=>'page',
         'plans'=>'plan',
@@ -37,15 +37,15 @@ class Router
     public static function singularFor($method)
     {
         return (
-            array_key_exists($method, Router::ROUTE_SINGULAR_LOOKUP) ?
-                Router::ROUTE_SINGULAR_LOOKUP[$method] :
+            array_key_exists($method, Router::$ROUTE_SINGULAR_LOOKUP) ?
+                Router::$ROUTE_SINGULAR_LOOKUP[$method] :
                 null
             );
     }
 
     public function __construct($route, $paystackObj)
     {
-        if (!in_array($route, Router::ROUTES)) {
+        if (!in_array($route, Router::$ROUTES)) {
             throw new ValidationException(
                 "Route '{$route}' does not exist."
             );
