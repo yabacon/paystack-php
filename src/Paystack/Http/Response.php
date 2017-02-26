@@ -15,7 +15,7 @@ class Response
     {
         $resp = \json_decode($this->body);
 
-        if (json_last_error() !== JSON_ERROR_NONE || !property_exists($resp, 'status') || !$resp->status) {
+        if ($resp === null || !property_exists($resp, 'status') || !$resp->status) {
             throw new ApiException(
                 "Paystack Request failed with response: '" .
                 $this->messageFromApiJson($resp)."'",
@@ -29,7 +29,7 @@ class Response
     private function messageFromApiJson($resp)
     {
         $message = $this->body;
-        if (json_last_error() === JSON_ERROR_NONE) {
+        if ($resp !== null) {
             if (property_exists($resp, 'message')) {
                 $message = $resp->message;
             }
