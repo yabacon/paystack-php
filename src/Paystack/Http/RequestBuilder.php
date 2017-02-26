@@ -4,6 +4,7 @@ namespace Yabacon\Paystack\Http;
 
 use \Yabacon\Paystack\Contracts\RouteInterface;
 use \Yabacon\Paystack\Helpers\Router;
+use \Yabacon\Paystack;
 
 class RequestBuilder
 {
@@ -26,6 +27,7 @@ class RequestBuilder
     public function build()
     {
         $this->request->headers["Authorization"] = "Bearer " . $this->paystackObj->secret_key;
+        $this->request->headers["User-Agent"] = "Paystack/v1 PhpBindings/" . Paystack::VERSION;
         $this->request->endpoint = Router::PAYSTACK_API_ROOT . $this->interface[RouteInterface::ENDPOINT_KEY];
         $this->request->method = $this->interface[RouteInterface::METHOD_KEY];
         $this->moveArgsToSentargs();
