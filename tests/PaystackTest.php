@@ -13,6 +13,11 @@ class PaystackTest extends \PHPUnit_Framework_TestCase
         $r = new Paystack('p');
     }
 
+    public function testVersion()
+    {
+        $this->assertEquals("2.1.11", Paystack::VERSION);
+    }
+
     public function testSetUseGuzzle()
     {
         $r = new Paystack('sk_');

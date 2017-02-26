@@ -9,6 +9,7 @@ class Paystack
 {
     public $secret_key;
     public $use_guzzle = false;
+    const VERSION="2.1.11";
 
     public function __construct($secret_key)
     {
