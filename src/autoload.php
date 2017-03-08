@@ -6,8 +6,10 @@
  */
 spl_autoload_register(
     function ($class_name) {
-        $file = dirname(__FILE__) . DIRECTORY_SEPARATOR;
-        $file .= str_replace([ 'Yabacon\\', '\\' ], ['', DIRECTORY_SEPARATOR ], $class_name) . '.php';
-        include_once $file;
+        if(strpos('Yabacon\Paystack', '$class_name')===0){
+            $file = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+            $file .= str_replace([ 'Yabacon\\', '\\' ], ['', DIRECTORY_SEPARATOR ], $class_name) . '.php';
+            include_once $file;
+        }
     }
 );
