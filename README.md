@@ -122,7 +122,7 @@ if(!$owner){
 switch($event->obj->event){
     // charge.success
     case 'charge.success':
-        if('status'==$event->obj->data->status){
+        if('success' === $event->obj->data->status){
             // TIP: you may still verify the transaction
             // via an API call before giving value.
         }
@@ -152,7 +152,7 @@ try
   die($e->getMessage());
 }
 
-if ('success' == $tranx->data->status) {
+if ('success' === $tranx->data->status) {
   // transaction was successful...
   // please check other things like whether you already gave value for this ref
   // if the email matches the customer who owns the product etc
