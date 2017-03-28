@@ -250,7 +250,7 @@ Add MetaData by calling the `withKeyName` magic function (These will not be show
 Do not use `CustomFields` as a KeyName
 
 ```php
-    $builder->withQuoteId(10); // will add as quote_id: 10 unless you turn auto_camel_case off
+    $builder->withQuoteId(10); // will add as quote_id: 10 unless you turn auto_snake_case off
     $builder->withMobileNumber(08012345678); // will add as mobile_number: 08012345678
     $builder->withCSRF('dontacceptpaymentunlessthismatches');
 ```
@@ -269,7 +269,7 @@ Add Custom Fields by calling the `withCustomField` function (These will shown on
 
 ```php
     $builder->withCustomField('Mobile Number', '080123456789');
-    $builder->withCustomField('See Me', 'I\'m Visible on yoru Dashboard');
+    $builder->withCustomField('See Me', 'I\'m Visible on your Dashboard');
 ```
 
 #### Build JSON
