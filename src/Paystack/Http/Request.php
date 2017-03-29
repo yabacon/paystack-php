@@ -3,6 +3,7 @@
 namespace Yabacon\Paystack\Http;
 
 use \Yabacon\Paystack\Contracts\RouteInterface;
+use \Yabacon\Paystack;
 
 class Request
 {
@@ -93,6 +94,9 @@ class Request
 
     public function attemptFileGetContents()
     {
+        if (!Paystack::$fallback_to_file_get_contents) {
+            return;
+        }
         $context = stream_context_create(
             [
                 'http'=>array(

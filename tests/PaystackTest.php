@@ -15,7 +15,7 @@ class PaystackTest extends \PHPUnit_Framework_TestCase
 
     public function testVersion()
     {
-        $this->assertEquals("2.1.11", Paystack::VERSION);
+        $this->assertEquals("2.1.15", Paystack::VERSION);
     }
 
     public function testSetUseGuzzle()

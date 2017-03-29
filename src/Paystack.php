@@ -9,7 +9,8 @@ class Paystack
 {
     public $secret_key;
     public $use_guzzle = false;
-    const VERSION="2.1.11";
+    public $fallback_to_file_get_contents = true;
+    const VERSION="2.1.15";
 
     public function __construct($secret_key)
     {
@@ -22,6 +23,16 @@ class Paystack
     public function useGuzzle()
     {
         $this->use_guzzle = true;
+    }
+
+    public static function disableFileGetContentsFallback()
+    {
+        Paystack::$fallback_to_file_get_contents = false;
+    }
+
+    public static function enableFileGetContentsFallback()
+    {
+        Paystack::$fallback_to_file_get_contents = true;
     }
 
     public function __call($method, $args)
