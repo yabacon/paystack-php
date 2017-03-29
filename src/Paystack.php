@@ -9,8 +9,8 @@ class Paystack
 {
     public $secret_key;
     public $use_guzzle = false;
-    public $fallback_to_file_get_contents = true;
-    const VERSION="2.1.15";
+    public static $fallback_to_file_get_contents = true;
+    const VERSION="2.1.16";
 
     public function __construct($secret_key)
     {
