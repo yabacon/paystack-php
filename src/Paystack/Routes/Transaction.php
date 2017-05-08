@@ -79,4 +79,11 @@ class Transaction implements RouteInterface
             RouteInterface::ENDPOINT_KEY => Transaction::root() . '/verify/{reference}',
             RouteInterface::ARGS_KEY     => ['reference' ] ];
     }
+
+    public static function verifyAccessCode()
+    {
+        return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
+            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/verify_access_code/{access_code}',
+            RouteInterface::ARGS_KEY     => ['access_code' ] ];
+    }
 }

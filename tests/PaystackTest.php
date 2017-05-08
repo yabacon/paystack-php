@@ -15,7 +15,7 @@ class PaystackTest extends \PHPUnit_Framework_TestCase
 
     public function testVersion()
     {
-        $this->assertEquals("2.1.16", Paystack::VERSION);
+        $this->assertEquals("2.1.17", Paystack::VERSION);
     }
 
     public function testDisableFileGetContentsFallback()

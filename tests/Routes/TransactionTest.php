@@ -15,6 +15,10 @@ class TransactionTest extends \PHPUnit_Framework_TestCase
     public function testEndpoints()
     {
         $r = new Transaction();
+        $this->assertEquals(
+            '/transaction/verify_access_code/{access_code}',
+            $r->verifyAccessCode()[RouteInterface::ENDPOINT_KEY]
+        );
         $this->assertEquals('/transaction/verify/{reference}', $r->verify()[RouteInterface::ENDPOINT_KEY]);
         $this->assertEquals('/transaction', $r->getList()[RouteInterface::ENDPOINT_KEY]);
         $this->assertEquals('/transaction/{id}', $r->fetch()[RouteInterface::ENDPOINT_KEY]);
@@ -28,6 +32,7 @@ class TransactionTest extends \PHPUnit_Framework_TestCase
     public function testMethods()
     {
         $r = new Transaction();
+        $this->assertEquals(RouteInterface::GET_METHOD, $r->verifyAccessCode()[RouteInterface::METHOD_KEY]);
         $this->assertEquals(RouteInterface::GET_METHOD, $r->verify()[RouteInterface::METHOD_KEY]);
         $this->assertEquals(RouteInterface::GET_METHOD, $r->getList()[RouteInterface::METHOD_KEY]);
         $this->assertEquals(RouteInterface::GET_METHOD, $r->fetch()[RouteInterface::METHOD_KEY]);
