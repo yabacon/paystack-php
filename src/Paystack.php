@@ -10,7 +10,7 @@ class Paystack
     public $secret_key;
     public $use_guzzle = false;
     public static $fallback_to_file_get_contents = true;
-    const VERSION="2.1.17";
+    const VERSION="2.1.19";
 
     public function __construct($secret_key)
     {
