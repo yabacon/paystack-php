@@ -11,14 +11,21 @@ class Router
     private $route;
     private $route_class;
     private $methods;
-    public static $ROUTES = ['customer', 'page', 'plan', 'subscription', 'transaction', 'subaccount'];
+    public static $ROUTES = [
+        'customer', 'page', 'plan', 'subscription', 'transaction', 'subaccount',
+        'balance', 'bank', 'decision', 'integration', 'settlement',
+        'transfer', 'transferrecipient'
+    ];
     public static $ROUTE_SINGULAR_LOOKUP = [
         'customers'=>'customer',
         'pages'=>'page',
         'plans'=>'plan',
         'subscriptions'=>'subscription',
         'transactions'=>'transaction',
-        'subaccounts'=>'subaccount',
+        'banks'=>'bank',
+        'settlements'=>'settlement',
+        'transfers'=>'transfer',
+        'transferrecipients'=>'transferrecipient',
     ];
 
     const ID_KEY = 'id';
