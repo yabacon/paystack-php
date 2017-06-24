@@ -58,7 +58,7 @@ Initialize a transaction by calling our API.
     $paystack = new Yabacon\Paystack(SECRET_KEY);
     try
     {
-      $tranx = $pasytack->transaction->initialize([
+      $tranx = $paystack->transaction->initialize([
         'amount'=>$amount,       // in kobo
         'email'=>$email,         // unique to customers
         'reference'=>$reference, // unique to transactions
