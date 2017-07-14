@@ -34,8 +34,23 @@ class Transaction implements RouteInterface
                 'amount' ] ];
     }
 
+    public static function checkAuthorization()
+    {
+        return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
+            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/check_authorization',
+            RouteInterface::PARAMS_KEY   => ['authorization_code',
+                'email',
+                'amount' ] ];
+    }
+
+    public static function chargeAuthorization()
+    {
+        return Transaction::charge();
+    }
+
     public static function chargeToken()
     {
+        trigger_error('This endpoint is deprecated!', E_USER_NOTICE);
         return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
             RouteInterface::ENDPOINT_KEY => Transaction::root() . '/charge_token',
             RouteInterface::PARAMS_KEY   => ['reference',
