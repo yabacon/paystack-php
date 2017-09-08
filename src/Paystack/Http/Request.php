@@ -17,6 +17,7 @@ class Request
     public function __construct($paystackObj = null)
     {
         $this->response = new Response();
+        $this->response->setRequestObject($this);
         $this->paystackObj = $paystackObj;
         $this->response->forApi = !is_null($paystackObj);
         if ($this->response->forApi) {
