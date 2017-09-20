@@ -144,7 +144,7 @@ After we redirect to your callback url, please verify the transaction before giv
     try
     {
       // verify using the library
-      $tranx = $pasytack->transaction->verify([
+      $tranx = $paystack->transaction->verify([
         'reference'=>$reference, // unique to transactions
       ]);
     } catch(\Yabacon\Paystack\Exception\ApiException $e){
