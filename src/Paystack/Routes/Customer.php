@@ -4,38 +4,14 @@ namespace Yabacon\Paystack\Routes;
 
 use Yabacon\Paystack\Contracts\RouteInterface;
 
-/**
- * Customer
- * Insert description here
- *
- * @category
- * @package
- * @author
- * @copyright
- * @license
- * @version
- * @link
- * @see
- * @since
- */
 class Customer implements RouteInterface
 {
 
-    /**
-      Root
-     *
-      @param=> first_name, last_name, email, phone
-     */
     public static function root()
     {
         return '/customer';
     }
 
-    /**
-      Create customer
-     *
-      @param=> first_name, last_name, email, phone
-     */
     public static function create()
     {
         return [
@@ -54,9 +30,6 @@ class Customer implements RouteInterface
         ];
     }
 
-    /**
-      Get customer by ID or code
-     */
     public static function fetch()
     {
         return [
@@ -67,9 +40,6 @@ class Customer implements RouteInterface
         ];
     }
 
-    /**
-      List customers
-     */
     public static function getList()
     {
         return [
@@ -80,11 +50,6 @@ class Customer implements RouteInterface
         ];
     }
 
-    /**
-      Update customer
-     *
-      @param=> first_name, last_name, email, phone
-     */
     public static function update()
     {
         return [

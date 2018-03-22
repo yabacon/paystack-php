@@ -3,6 +3,6 @@ composer.lock
 docs
 vendor
 nbproject
-src/Routes/SkeletonClass.php
 .env
 .idea/
+tests/EndToEndTests.php
