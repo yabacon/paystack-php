@@ -17,7 +17,7 @@ $paystack->invoices();
 $paystack->invoice->create([
     'customer' => 'FShsjksl',
     'amount' => 5000,
-    'due_date' => 'T2018-08-26Z13:02:45'
+    'due_date' => '2018-08-26'
 ]);
 
 // customer
