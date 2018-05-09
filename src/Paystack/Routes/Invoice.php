@@ -30,15 +30,24 @@
                             'currency',
                             'has_invoice',
                             'invoice_number'
+                        ],
+                        RouteInterface::REQUIRED_KEY => [
+                        RouteInterface::PARAMS_KEY => ['customer',
+                            'amount',
+                            'due_date' ]
                         ]
                     ];
             }
                             
-            public static function fetch()
+            public static function view()
             {
                     return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
                     RouteInterface::ENDPOINT_KEY => Invoice::root() . '/{invoice_id_or_code}',
-                    RouteInterface::ARGS_KEY     => ['invoice_id_or_code' ] ];
+                    RouteInterface::ARGS_KEY     => ['invoice_id_or_code' ],
+                    RouteInterface::REQUIRED_KEY => [
+                        RouteInterface::ARGS_KEY => [ ['invoice_id_or_code'] ] 
+                    ]
+                   ];
             }
         
             public static function getList()
@@ -52,7 +61,10 @@
             
                     return [ RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
                     RouteInterface::ENDPOINT_KEY => Invoice::root() . '/verify/{invoice_id_or_code}',
-                    RouteInterface::ARGS_KEY     => ['invoice_id_or_code' ]
+                    RouteInterface::ARGS_KEY     => ['invoice_id_or_code' ],
+                    RouteInterface::REQUIRED_KEY => [
+                        RouteInterface::ARGS_KEY => [ ['invoice_id_or_code'] ] 
+                    ]
                    ];
             }
         
@@ -71,7 +83,11 @@
             public static function finalize(){
             
                     return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
-                    RouteInterface::ENDPOINT_KEY => Invoice::root() . 'finalize/{invoice_id_or_code}' ];
+                    RouteInterface::ENDPOINT_KEY => Invoice::root() . 'finalize/{invoice_id_or_code}'
+                    RouteInterface::REQUIRED_KEY => [
+                        RouteInterface::ID_KEY => [ ['invoice_id_or_code'] ] 
+                    ]        
+                   ];
             }
         
             public static function update(){
