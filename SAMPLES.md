@@ -12,7 +12,7 @@ configured the $paystack object as you want. Check [README](README.md) for detai
 // invoice
 $paystack->invoice(12);
 $paystack->invoice->list();
-$paystack->invoice->view("FShsjksl");
+$paystack->invoice->fetch("FShsjksl");
 $paystack->invoices();
 $paystack->invoice->create([
     'customer' => 'FShsjksl',
