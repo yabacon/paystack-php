@@ -47,7 +47,7 @@ class Invoice implements RouteInterface
             RouteInterface::REQUIRED_KEY => [
                 RouteInterface::ARGS_KEY => [ ['invoice_id_or_code'] ]
             ]
-           ];
+            ];
     }
 
     public static function getList()
@@ -57,7 +57,7 @@ class Invoice implements RouteInterface
             RouteInterface::ENDPOINT_KEY => Invoice::root(),
             RouteInterface::PARAMS_KEY   => ['currency',
                 'customer', 'status', 'paid', 'include_archive' ]
-           ];
+            ];
     }
 
     public static function verify()
@@ -67,9 +67,9 @@ class Invoice implements RouteInterface
             RouteInterface::ENDPOINT_KEY => Invoice::root() . '/verify/{invoice_id_or_code}',
             RouteInterface::ARGS_KEY     => ['invoice_id_or_code' ],
             RouteInterface::REQUIRED_KEY => [
-                RouteInterface::ARGS_KEY => [ ['invoice_id_or_code'] ] 
+                RouteInterface::ARGS_KEY => [ ['invoice_id_or_code'] ]
             ]
-           ];
+            ];
     }
 
     public static function notify()
@@ -93,8 +93,8 @@ class Invoice implements RouteInterface
                     RouteInterface::ENDPOINT_KEY => Invoice::root() . '/finalize/{invoice_id_or_code}'
                     RouteInterface::REQUIRED_KEY => [
                         RouteInterface::ARGS_KEY => [ ['invoice_id_or_code'] ]
-                    ]        
-           ];
+                    ]
+            ];
     }
 
     public static function update()
@@ -113,7 +113,7 @@ class Invoice implements RouteInterface
                     'metadata',
                     'currency'
                 ]
-           ];
+            ];
     }
 
     public static function archive()
