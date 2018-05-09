@@ -74,7 +74,7 @@
             public static function notify(){
             
                     return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
-                    RouteInterface::ENDPOINT_KEY => Invoice::root() . 'notify/{invoice_id_or_code}' ];
+                    RouteInterface::ENDPOINT_KEY => Invoice::root() . '/notify/{invoice_id_or_code}' ];
             }
         
             public static function metrics(){
@@ -86,7 +86,7 @@
             public static function finalize(){
             
                     return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
-                    RouteInterface::ENDPOINT_KEY => Invoice::root() . 'finalize/{invoice_id_or_code}'
+                    RouteInterface::ENDPOINT_KEY => Invoice::root() . '/finalize/{invoice_id_or_code}'
                     RouteInterface::REQUIRED_KEY => [
                         RouteInterface::ARGS_KEY => [ ['invoice_id_or_code'] ] 
                     ]        
@@ -96,7 +96,7 @@
             public static function update(){
             
                     return [RouteInterface::METHOD_KEY   => RouteInterface::PUT_METHOD,
-                    RouteInterface::ENDPOINT_KEY => Invoice::root() . 'update/{invoice_id_or_code}',
+                    RouteInterface::ENDPOINT_KEY => Invoice::root() . '/update/{invoice_id_or_code}',
                     RouteInterface::PARAMS_KEY   => [
                             'line_items',
                             'description',
@@ -114,7 +114,7 @@
             public static function archive(){
             
                     return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
-                    RouteInterface::ENDPOINT_KEY => Invoice::root() . 'archive/{invoice_id_or_code}' ];
+                    RouteInterface::ENDPOINT_KEY => Invoice::root() . '/archive/{invoice_id_or_code}' ];
             }
     }
 
