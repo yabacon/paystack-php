@@ -36,7 +36,9 @@
                             
             public static function fetch()
             {
-                
+                    return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
+                    RouteInterface::ENDPOINT_KEY => Invoice::root() . '/{invoice_id_or_code}',
+                    RouteInterface::ARGS_KEY     => ['invoice_id_or_code' ] ];
             }
         
             public static function getList()
