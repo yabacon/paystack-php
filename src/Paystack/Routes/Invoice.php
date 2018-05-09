@@ -54,7 +54,10 @@
             {
             
                     return [ RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
-                    RouteInterface::ENDPOINT_KEY => Invoice::root() ];
+                    RouteInterface::ENDPOINT_KEY => Invoice::root(),
+                    RouteInterface::PARAMS_KEY   => ['currency',
+                        'customer', 'status', 'paid', 'include_archive' ]        
+                   ];
             }
         
             public static function verify(){
@@ -85,7 +88,7 @@
                     return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
                     RouteInterface::ENDPOINT_KEY => Invoice::root() . 'finalize/{invoice_id_or_code}'
                     RouteInterface::REQUIRED_KEY => [
-                        RouteInterface::ID_KEY => [ ['invoice_id_or_code'] ] 
+                        RouteInterface::ARGS_KEY => [ ['invoice_id_or_code'] ] 
                     ]        
                    ];
             }
