@@ -39,7 +39,7 @@
                     ];
             }
                             
-            public static function view()
+            public static function fetch()
             {
                     return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
                     RouteInterface::ENDPOINT_KEY => Invoice::root() . '/{invoice_id_or_code}',
