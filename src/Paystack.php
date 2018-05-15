@@ -70,14 +70,8 @@ class Paystack
      */
     public static function registerAutoloader()
     {
-        trigger_error('Include "src/autoload.php" instead', E_USER_NOTICE);
-        spl_autoload_register(
-            function ($class_name) {
-                $file = dirname(__FILE__) . DIRECTORY_SEPARATOR;
-                $file .= str_replace([ 'Yabacon\\', '\\' ], ['', DIRECTORY_SEPARATOR ], $class_name) . '.php';
-                include_once $file;
-            }
-        );
+        trigger_error('Include "src/autoload.php" instead', E_DEPRECATED | E_USER_NOTICE);
+        require_once(__DIR__ . '/../src/autoload.php');
     }
 
     public function __get($name)
