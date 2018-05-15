@@ -14,7 +14,9 @@ class Settlement implements RouteInterface
 
     public static function getList()
     {
-        return [ RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
-            RouteInterface::ENDPOINT_KEY => Settlement::root() ];
+        return [
+            RouteInterface::METHOD_KEY => RouteInterface::GET_METHOD,
+            RouteInterface::ENDPOINT_KEY => Settlement::root(),
+        ];
     }
 }

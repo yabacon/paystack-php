@@ -23,7 +23,7 @@ class Integration implements RouteInterface
     {
         return [
             RouteInterface::METHOD_KEY   => RouteInterface::PUT_METHOD,
-            RouteInterface::ENDPOINT_KEY => Customer::root() . '/payment_session_timeout',
+            RouteInterface::ENDPOINT_KEY => Integration::root() . '/payment_session_timeout',
             RouteInterface::PARAMS_KEY   => ['timeout'],
         ];
     }

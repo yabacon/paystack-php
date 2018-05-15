@@ -1,8 +1,8 @@
 <?php
 namespace Yabacon\Paystack\Tests\Routes;
 
-use Yabacon\Paystack\Routes\Subscription;
 use Yabacon\Paystack\Contracts\RouteInterface;
+use Yabacon\Paystack\Routes\Subscription;
 
 class SubscriptionTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +21,7 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/subscription/enable', $r->enable()[RouteInterface::ENDPOINT_KEY]);
         $this->assertEquals('/subscription/disable', $r->disable()[RouteInterface::ENDPOINT_KEY]);
     }
-    
+
     public function testMethods()
     {
         $r = new Subscription();

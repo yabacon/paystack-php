@@ -1,8 +1,8 @@
 <?php
 namespace Yabacon\Paystack\Tests\Routes;
 
-use Yabacon\Paystack\Routes\Subaccount;
 use Yabacon\Paystack\Contracts\RouteInterface;
+use Yabacon\Paystack\Routes\Subaccount;
 
 class SubaccountTest extends \PHPUnit_Framework_TestCase
 {

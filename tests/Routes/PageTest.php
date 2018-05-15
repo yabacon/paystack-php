@@ -1,8 +1,8 @@
 <?php
 namespace Yabacon\Paystack\Tests\Routes;
 
-use Yabacon\Paystack\Routes\Page;
 use Yabacon\Paystack\Contracts\RouteInterface;
+use Yabacon\Paystack\Routes\Page;
 
 class PageTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,7 +20,7 @@ class PageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/page/{id}', $r->fetch()[RouteInterface::ENDPOINT_KEY]);
         $this->assertEquals('/page/{id}', $r->update()[RouteInterface::ENDPOINT_KEY]);
     }
-    
+
     public function testMethods()
     {
         $r = new Page();

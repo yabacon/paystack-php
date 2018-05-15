@@ -1,8 +1,8 @@
 <?php
 namespace Yabacon\Paystack\Tests\Routes;
 
-use Yabacon\Paystack\Routes\Customer;
 use Yabacon\Paystack\Contracts\RouteInterface;
+use Yabacon\Paystack\Routes\Customer;
 
 class CustomerTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,7 +20,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/customer/{id}', $r->fetch()[RouteInterface::ENDPOINT_KEY]);
         $this->assertEquals('/customer/{id}', $r->update()[RouteInterface::ENDPOINT_KEY]);
     }
-    
+
     public function testMethods()
     {
         $r = new Customer();

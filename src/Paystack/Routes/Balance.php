@@ -14,7 +14,9 @@ class Balance implements RouteInterface
 
     public static function getList()
     {
-        return [ RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
-            RouteInterface::ENDPOINT_KEY => Balance::root() ];
+        return [
+            RouteInterface::METHOD_KEY => RouteInterface::GET_METHOD,
+            RouteInterface::ENDPOINT_KEY => Balance::root(),
+        ];
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace Yabacon\Paystack\Tests\Routes;
 
-use Yabacon\Paystack\Routes\Transaction;
 use Yabacon\Paystack\Contracts\RouteInterface;
+use Yabacon\Paystack\Routes\Transaction;
 
 class TransactionTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,7 +33,7 @@ class TransactionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/transaction/totals', $r->totals()[RouteInterface::ENDPOINT_KEY]);
         $this->assertEquals('/transaction/export', $r->export()[RouteInterface::ENDPOINT_KEY]);
     }
-    
+
     public function testMethods()
     {
         $r = new Transaction();

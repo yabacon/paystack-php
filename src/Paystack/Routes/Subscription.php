@@ -14,43 +14,55 @@ class Subscription implements RouteInterface
 
     public static function create()
     {
-        return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
+        return [
+            RouteInterface::METHOD_KEY => RouteInterface::POST_METHOD,
             RouteInterface::ENDPOINT_KEY => Subscription::root(),
-            RouteInterface::PARAMS_KEY   => [
+            RouteInterface::PARAMS_KEY => [
                 'customer',
                 'plan',
-                'authorization' ]
+                'authorization',
+            ],
         ];
     }
 
     public static function fetch()
     {
-        return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
+        return [
+            RouteInterface::METHOD_KEY => RouteInterface::GET_METHOD,
             RouteInterface::ENDPOINT_KEY => Subscription::root() . '/{id}',
-            RouteInterface::ARGS_KEY     => ['id' ] ];
+            RouteInterface::ARGS_KEY => ['id'],
+        ];
     }
 
     public static function getList()
     {
-        return [RouteInterface::METHOD_KEY   => RouteInterface::GET_METHOD,
-            RouteInterface::ENDPOINT_KEY => Subscription::root() ];
+        return [
+            RouteInterface::METHOD_KEY => RouteInterface::GET_METHOD,
+            RouteInterface::ENDPOINT_KEY => Subscription::root(),
+        ];
     }
 
     public static function disable()
     {
-        return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
-            RouteInterface::ENDPOINT_KEY => Subscription::root(). '/disable',
-            RouteInterface::PARAMS_KEY   => [
+        return [
+            RouteInterface::METHOD_KEY => RouteInterface::POST_METHOD,
+            RouteInterface::ENDPOINT_KEY => Subscription::root() . '/disable',
+            RouteInterface::PARAMS_KEY => [
                 'code',
-                'token'] ];
+                'token',
+            ],
+        ];
     }
 
     public static function enable()
     {
-        return [RouteInterface::METHOD_KEY   => RouteInterface::POST_METHOD,
+        return [
+            RouteInterface::METHOD_KEY => RouteInterface::POST_METHOD,
             RouteInterface::ENDPOINT_KEY => Subscription::root() . '/enable',
-            RouteInterface::PARAMS_KEY   => [
+            RouteInterface::PARAMS_KEY => [
                 'code',
-                'token'] ];
+                'token',
+            ],
+        ];
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace Yabacon\Paystack\Tests\Routes;
 
-use Yabacon\Paystack\Routes\Plan;
 use Yabacon\Paystack\Contracts\RouteInterface;
+use Yabacon\Paystack\Routes\Plan;
 
 class PlanTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,7 +20,7 @@ class PlanTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/plan/{id}', $r->fetch()[RouteInterface::ENDPOINT_KEY]);
         $this->assertEquals('/plan/{id}', $r->update()[RouteInterface::ENDPOINT_KEY]);
     }
-    
+
     public function testMethods()
     {
         $r = new Plan();
