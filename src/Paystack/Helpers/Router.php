@@ -14,10 +14,11 @@ class Router
     public static $ROUTES = [
         'customer', 'page', 'plan', 'subscription', 'transaction', 'subaccount',
         'balance', 'bank', 'decision', 'integration', 'settlement',
-        'transfer', 'transferrecipient'
+        'transfer', 'transferrecipient', 'invoice'
     ];
     public static $ROUTE_SINGULAR_LOOKUP = [
         'customers'=>'customer',
+        'invoices'=>'invoice',
         'pages'=>'page',
         'plans'=>'plan',
         'subscriptions'=>'subscription',

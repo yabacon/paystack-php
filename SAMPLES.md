@@ -9,6 +9,17 @@ configured the $paystack object as you want. Check [README](README.md) for detai
 // for gets, use $paystack->{resource}(id)
 // for lists, use $paystack->{resource}s()
 
+// invoice
+$paystack->invoice(12);
+$paystack->invoice->list();
+$paystack->invoice->fetch("FShsjksl");
+$paystack->invoices();
+$paystack->invoice->create([
+    'customer' => 'FShsjksl',
+    'amount' => 5000,
+    'due_date' => '2018-08-26'
+]);
+
 // customer
 $paystack->customer(12);
 $paystack->customer->list();
