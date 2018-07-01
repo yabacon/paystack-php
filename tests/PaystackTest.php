@@ -15,8 +15,21 @@ class PaystackTest extends \PHPUnit_Framework_TestCase
 
     public function testVersion()
     {
-        $this->assertEquals("2.1.11", Paystack::VERSION);
+        $this->assertEquals("2.1.19", Paystack::VERSION);
     }
+
+    public function testDisableFileGetContentsFallback()
+    {
+        Paystack::disableFileGetContentsFallback();
+        $this->assertFalse(Paystack::$fallback_to_file_get_contents);
+    }
+
+    public function testEnableFileGetContentsFallback()
+    {
+        Paystack::enableFileGetContentsFallback();
+        $this->assertTrue(Paystack::$fallback_to_file_get_contents);
+    }
+
 
     public function testSetUseGuzzle()
     {

@@ -11,6 +11,18 @@ class Response
     public $forApi;
     public $messages = [];
 
+    private $requestObject;
+
+    public function setRequestObject($requestObject)
+    {
+        $this->requestObject = $requestObject;
+    }
+
+    public function getRequestObject()
+    {
+        return $this->requestObject;
+    }
+
     private function parsePaystackResponse()
     {
         $resp = \json_decode($this->body);
@@ -19,7 +31,8 @@ class Response
             throw new ApiException(
                 "Paystack Request failed with response: '" .
                 $this->messageFromApiJson($resp)."'",
-                $resp
+                $resp,
+                $this->requestObject
             );
         }
 

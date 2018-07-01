@@ -8,8 +8,9 @@ class ApiExceptionTest extends \PHPUnit_Framework_TestCase
 {
     public function testInitialize()
     {
-        $e = new ApiException('message', new \stdClass());
+        $e = new ApiException('message', new \stdClass(), new \stdClass());
         $this->assertNotNull($e);
         $this->assertNotNull($e->getResponseObject());
+        $this->assertNotNull($e->getRequestObject());
     }
 }
