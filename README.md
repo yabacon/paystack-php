@@ -276,6 +276,53 @@ Add Custom Fields by calling the `withCustomField` function (These will shown on
 
 Finally call `build()` to get your JSON metadata string.
 
+### Using Custom Routes
+
+You can add your custom routes by calling the `useRoutes` method on the paystack object.  
+
+```php
+    $paystack = new Yabacon\Paystack(SECRET_KEY);
+    $paystack->useRoutes(["charge" => Charge::class]);
+
+    $paystack->charge->chargeMobileMoney([
+          'email' => 'hey@example.com',
+          'reference' => 'trnx_ref',
+          'amount' => 50 * 100,
+          'currency' => 'GHS',
+          'mobile_money' => [
+            'phone' => '5533467',
+            'provider' => 'MTN'
+          ]
+    ]);
+```
+Your custom routes should implement the ```Yabacon\Paystack\Contracts\RouteInterface``` contract  
+
+```php
+    class Charge implements RouteInterface
+    {
+
+        public static function root()
+        {
+            return '/charge';
+        }
+
+        public static function chargeMobileMoney()
+        {
+            return [
+                RouteInterface::METHOD_KEY => RouteInterface::POST_METHOD,
+                RouteInterface::ENDPOINT_KEY => Charge::root(),
+                RouteInterface::PARAMS_KEY => [
+                    'email',
+                    'reference',
+                    'amount',
+                    'currency',
+                    'mobile_money',
+                ],
+            ];
+        }
+    }
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.

@@ -1,8 +1,9 @@
 <?php
 namespace Yabacon\Paystack\Tests\Helpers;
 
-use Yabacon\Paystack\Helpers\Router;
 use Yabacon\Paystack;
+use Yabacon\Paystack\Helpers\Router;
+use Yabacon\Paystack\Test\Mock\CustomRoute;
 use Yabacon\Paystack\Contracts\RouteInterface;
 use Yabacon\Paystack\Exception\ValidationException;
 
@@ -52,5 +53,37 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         sort($singulars);
 
         $this->assertEmpty(array_diff($singulars, $available));
+    }
+
+    public function testThatCustomRouteCanBeCalled()
+    {
+        $custom_route = ['charge' => CustomRoute::class];
+        $p = new Paystack('sk_');
+
+        $p->useRoutes($custom_route);
+
+        $r = $p->charge;
+        $reflection_property = new \ReflectionProperty($r, "methods");
+        $reflection_property->setAccessible(true);
+        $methods = $reflection_property->getValue($r);
+
+        $this->assertTrue(in_array("test_route", array_keys($methods)));
+        $this->assertTrue(is_callable($methods["test_route"]));
+    }
+
+    public function testThatOriginalRoutesCanBeCalledWhenCustomRouteIsSet()
+    {
+        $custom_route = ['charge' => CustomRoute::class];
+        $p = new Paystack('sk_');
+
+        $p->useRoutes($custom_route);
+
+        $r = $p->balance;
+        $reflection_property = new \ReflectionProperty($r, "methods");
+        $reflection_property->setAccessible(true);
+        $methods = $reflection_property->getValue($r);
+
+        $this->assertTrue(in_array("getList", array_keys($methods)));
+        $this->assertTrue(is_callable($methods["getList"]));
     }
 }
