@@ -101,4 +101,13 @@ class PaystackTest extends \PHPUnit_Framework_TestCase
         $r->useRoutes($custom_routes);
         $this->assertNull($r->custom_routes);
     }
+
+    public function testUseRoutesWithInvalidParams3()
+    {
+        $custom_routes = ['balance' => CustomRoute::class];
+        $r = new Paystack('sk_');
+        $this->expectException(\InvalidArgumentException::class);
+        $r->useRoutes($custom_routes);
+        $this->assertNull($r->custom_routes);
+    }
 }

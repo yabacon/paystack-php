@@ -3,7 +3,7 @@
 namespace Yabacon;
 
 use \Yabacon\Paystack\Helpers\Router;
-use Yabacon\Paystack\Contracts\RouteInterface;
+use \Yabacon\Paystack\Contracts\RouteInterface;
 use \Yabacon\Paystack\Exception\ValidationException;
 
 class Paystack
@@ -33,6 +33,12 @@ class Paystack
             if (! is_string($route)) {
                 throw new \InvalidArgumentException(
                     'Custom routes should map to a route class'
+                );
+            }
+
+            if (in_array($route, Router::$ROUTES)) {
+                throw new \InvalidArgumentException(
+                    $route . ' is already an existing defined route'
                 );
             }
 
