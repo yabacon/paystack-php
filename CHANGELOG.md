@@ -4,6 +4,11 @@ All Notable changes to `paystack-php` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 2.2.0 - 2020-05-04
+
+### Added
+- Ability to load custom routes
+
 ## 2.1.22 - 2018-05-15
 
 ### Added
