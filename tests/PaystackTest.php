@@ -3,6 +3,7 @@ namespace Yabacon\Paystack\Tests;
 
 use Yabacon\Paystack;
 use Yabacon\Paystack\Helpers\Router;
+use Yabacon\Paystack\Test\Mock\CustomRoute;
 use \Yabacon\Paystack\Exception\ValidationException;
 
 class PaystackTest extends \PHPUnit_Framework_TestCase
@@ -72,5 +73,41 @@ class PaystackTest extends \PHPUnit_Framework_TestCase
         $r = new Paystack('sk_');
         $this->expectException(\InvalidArgumentException::class);
         $this->assertNull($r->customers(1));
+    }
+
+    public function testUseRoutes()
+    {
+        $custom_routes = ['custom_route' => CustomRoute::class];
+
+        $r = new Paystack('sk_');
+        $r->useRoutes($custom_routes);
+        $this->assertTrue($r->custom_routes == $custom_routes);
+    }
+
+    public function testUseRoutesWithInvalidParams1()
+    {
+        $custom_routes = ['custom_route'];
+        $r = new Paystack('sk_');
+        $this->expectException(\InvalidArgumentException::class);
+        $r->useRoutes($custom_routes);
+        $this->assertNull($r->custom_routes);
+    }
+
+    public function testUseRoutesWithInvalidParams2()
+    {
+        $custom_routes = ['custom_route' => Paystack::class];
+        $r = new Paystack('sk_');
+        $this->expectException(\InvalidArgumentException::class);
+        $r->useRoutes($custom_routes);
+        $this->assertNull($r->custom_routes);
+    }
+
+    public function testUseRoutesWithInvalidParams3()
+    {
+        $custom_routes = ['balance' => CustomRoute::class];
+        $r = new Paystack('sk_');
+        $this->expectException(\InvalidArgumentException::class);
+        $r->useRoutes($custom_routes);
+        $this->assertNull($r->custom_routes);
     }
 }

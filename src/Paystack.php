@@ -3,12 +3,14 @@
 namespace Yabacon;
 
 use \Yabacon\Paystack\Helpers\Router;
+use \Yabacon\Paystack\Contracts\RouteInterface;
 use \Yabacon\Paystack\Exception\ValidationException;
 
 class Paystack
 {
     public $secret_key;
     public $use_guzzle = false;
+    public $custom_routes = [];
     public static $fallback_to_file_get_contents = true;
     const VERSION="2.1.19";
 
@@ -23,6 +25,31 @@ class Paystack
     public function useGuzzle()
     {
         $this->use_guzzle = true;
+    }
+
+    public function useRoutes(array $routes)
+    {
+        foreach ($routes as $route => $class) {
+            if (! is_string($route)) {
+                throw new \InvalidArgumentException(
+                    'Custom routes should map to a route class'
+                );
+            }
+
+            if (in_array($route, Router::$ROUTES)) {
+                throw new \InvalidArgumentException(
+                    $route . ' is already an existing defined route'
+                );
+            }
+
+            if (! in_array(RouteInterface::class, class_implements($class))) {
+                throw new \InvalidArgumentException(
+                    'Custom route class ' . $class . 'should implement ' . RouteInterface::class
+                );
+            }
+        }
+        
+        $this->custom_routes = $routes;
     }
 
     public static function disableFileGetContentsFallback()
