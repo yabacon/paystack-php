@@ -96,10 +96,10 @@ class Router
 
     private function getRouteClass($paystackObj)
     {
-        try {
+        if (isset($paystackObj->custom_routes[$this->route])) {
             return $paystackObj->custom_routes[$this->route];
-        } catch (\Exception $execption) {
-            return 'Yabacon\\Paystack\\Routes\\' . ucwords($this->route);
         }
+
+        return 'Yabacon\\Paystack\\Routes\\' . ucwords($this->route);
     }
 }
